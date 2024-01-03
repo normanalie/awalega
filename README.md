@@ -1,2 +1,2 @@
-# awal-ga
-Projet algo - Jeu avalé
+# awaléga
+Projet algo - Jeu awalé
