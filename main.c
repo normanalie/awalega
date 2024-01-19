@@ -7,8 +7,8 @@ int main(void)
 {
     graphic_init();
     create_window(640, 480, "Awaléga");
-    char c;
-    scanf("%c", &c);
+    draw_rect(20, 20, 100, 150);
+    blocking_delay();
     destroy_window();
     return 0;
 }
