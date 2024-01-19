@@ -35,20 +35,30 @@ void destroy_window()
     SDL_Quit();
 }
 
-void draw_rect(int topX, int topY, int w, int h)
+void draw_rect(Rect rectangle)
 {
     SDL_Rect r;
-    r.x = topX;
-    r.y = topY;
-    r.w = w;
-    r.h = h;
+    r.x = rectangle.topleft.x;
+    r.y = rectangle.topleft.y;
+    r.w = rectangle.w;
+    r.h = rectangle.h;
 
-    SDL_SetRenderDrawColor(pRenderer, 255, 255, 255, 255);
+    Color c = hex_to_rgb(rectangle.color);
+
+    SDL_SetRenderDrawColor(pRenderer, c.r, c.g, c.b, 255);
     SDL_RenderFillRect(pRenderer, &r);
     SDL_RenderPresent(pRenderer);
 }
 
-void blocking_delay()
+void blocking_delay(Uint32_t ms)
 {
-    SDL_Delay(5000);
+    const Uint32 startMs = SDL_GetTicks();
+    while (SDL_GetTicks() - startMs < ms)
+    {
+        SDL_WaitEvent();
+        SDL_RenderSetLogicalSize(pRenderer, 640, 480);
+        SDL_RenderClear(pRenderer);
+
+        SDL_RenderPresent(pRenderer);
+    }
 }
