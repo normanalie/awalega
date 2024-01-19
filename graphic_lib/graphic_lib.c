@@ -50,15 +50,5 @@ void draw_rect(int topX, int topY, int w, int h)
 
 void blocking_delay()
 {
-    const Uint32 startMs = SDL_GetTicks();
-    while (SDL_GetTicks() - startMs < 5000)
-    {
-        SDL_WaitEvent();
-        SDL_PollEvent();
-        SDL_PumpEvents();
-        SDL_RenderSetLogicalSize(pRenderer, 640, 480);
-        SDL_RenderClear(pRenderer);
-
-        SDL_RenderPresent(pRenderer);
-    }
+    SDL_Delay(5000);
 }

@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "shapes.h"
+
 int graphic_init();
 void create_window(int W, int H, const char *name);
 void destroy_window();
