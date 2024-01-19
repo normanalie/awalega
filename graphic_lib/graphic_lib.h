@@ -16,5 +16,5 @@ void draw_rect(Rect rectangle);
 // is_mouse_in()
 // draw_img()
 
-void blocking_delay();
+void blocking_delay(uint32_t ms);
 #endif

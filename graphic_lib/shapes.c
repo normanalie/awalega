@@ -7,7 +7,7 @@ Rect rect_by_center(Point center, int w, int h, Color color)
     r.topleft.y = center.y - (h / 2);
     r.w = w;
     r.h = h;
-    r.color = color;
+    r.fill = color;
     return r;
 }
 

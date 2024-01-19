@@ -2,12 +2,13 @@
 #define COLORSH
 
 #include <stdlib.h>
+#include <stdint.h>
 #include <string.h>
 
-typedef Uint32_t Color;
+typedef uint32_t Color;
 typedef struct color_rgb
 {
-    int r, g, b
+    int r, g, b;
 } ColorRGB;
 
 Color rgb_to_hex(ColorRGB rgb);

@@ -43,19 +43,20 @@ void draw_rect(Rect rectangle)
     r.w = rectangle.w;
     r.h = rectangle.h;
 
-    Color c = hex_to_rgb(rectangle.color);
+    ColorRGB c = hex_to_rgb(rectangle.fill);
 
     SDL_SetRenderDrawColor(pRenderer, c.r, c.g, c.b, 255);
+    // SDL_SetRenderDrawBMP(pRenderer, SurfaceBMP);
     SDL_RenderFillRect(pRenderer, &r);
     SDL_RenderPresent(pRenderer);
 }
 
-void blocking_delay(Uint32_t ms)
+void blocking_delay(uint32_t ms)
 {
     const Uint32 startMs = SDL_GetTicks();
     while (SDL_GetTicks() - startMs < ms)
     {
-        SDL_WaitEvent();
+        SDL_PumpEvents();
         SDL_RenderSetLogicalSize(pRenderer, 640, 480);
         SDL_RenderClear(pRenderer);
 

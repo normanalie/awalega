@@ -1,11 +1,13 @@
 #include "colors.h"
 
+// JALBY & KEvin je vous aime <3
+
 Color rgb_to_hex(ColorRGB rgb)
 {
     rgb.r = (rgb.r < 0) ? 0 : ((rgb.r > 255) ? 255 : rgb.r);
     rgb.g = (rgb.g < 0) ? 0 : ((rgb.g > 255) ? 255 : rgb.g);
     rgb.b = (rgb.b < 0) ? 0 : ((rgb.b > 255) ? 255 : rgb.b);
-    Color hex = ((Uint32_t)rgb.r << 16) | ((Uint32_t)rgb.g << 8) | (Uint32_t)rgb.b;
+    Color hex = ((uint32_t)rgb.r << 16) | ((uint32_t)rgb.g << 8) | (uint32_t)rgb.b;
 
     return hex;
 }

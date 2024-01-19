@@ -5,14 +5,13 @@
 
 int main(void)
 {
+    graphic_init();
+    create_window(480, 600, "Awaléga");
 
-    Point center;
-    center.x = 100;
-    center.y = 100;
-    Rect r = rect_by_center(center, 50, 50);
-    Point calculatedCenter = center_of_rect(r);
-    printf("<Rectangle: x=%d, y=%d, w=%d, h=%d>\n", r.topleft.x, r.topleft.y, r.w, r.h);
-    printf("<Point: x=%d, y=%d>\n", calculatedCenter.x, calculatedCenter.y);
+    blocking_delay(5000);
+    SDL_Delay(5000);
+
+    destroy_window();
 
     return 0;
 }

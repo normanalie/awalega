@@ -20,14 +20,17 @@ typedef struct rectangle
     Point topleft;
     int w;
     int h;
-    Color color;
+    Color outline;
+    Color fill;
 } Rect;
 
 typedef struct circle
 {
     Point center;
     int r;
-    Color color;
+    // Sprite sprite;
+    Color outline;
+    Color fill;
 } Circle;
 
 Rect rect_by_center(Point center, int w, int h, Color color);
