@@ -3,6 +3,7 @@
 SDL_Window *pWindow = NULL;
 SDL_Renderer *pRenderer = NULL;
 SDL_Surface *pSurface = NULL;
+SDL_GLContext pContext;
 
 int graphic_init()
 {
@@ -21,12 +22,17 @@ void create_window(int W, int H, const char *name)
                                W,
                                H,
                                SDL_WINDOW_SHOWN);
+    pContext = SDL_GL_CreateContext(pWindow);
     pRenderer = SDL_CreateRenderer(pWindow, -1, SDL_RENDERER_ACCELERATED);
     pSurface = SDL_GetWindowSurface(pWindow);
 
-    SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255);
-    SDL_RenderClear(pRenderer);
-    SDL_RenderPresent(pRenderer);
+    // Fill background
+    Color background = Black;
+    SDL_FillRect(pSurface, NULL, background);
+    SDL_UpdateWindowSurface(pWindow);
+
+    // SDL_RenderClear(pRenderer);
+    // SDL_RenderPresent(pRenderer);
 }
 
 void destroy_window()
@@ -43,23 +49,19 @@ void draw_rect(Rect rectangle)
     r.w = rectangle.w;
     r.h = rectangle.h;
 
-    ColorRGB c = hex_to_rgb(rectangle.fill);
-
-    SDL_SetRenderDrawColor(pRenderer, c.r, c.g, c.b, 255);
-    // SDL_SetRenderDrawBMP(pRenderer, SurfaceBMP);
-    SDL_RenderFillRect(pRenderer, &r);
-    SDL_RenderPresent(pRenderer);
+    //   SDL_SetRenderDrawBMP(pRenderer, SurfaceBMP);
+    SDL_FillRect(pSurface, &r, rectangle.fill);
+    SDL_UpdateWindowSurface(pWindow);
 }
 
-void blocking_delay(uint32_t ms)
+void graphic_update()
 {
-    const Uint32 startMs = SDL_GetTicks();
-    while (SDL_GetTicks() - startMs < ms)
-    {
-        SDL_PumpEvents();
-        SDL_RenderSetLogicalSize(pRenderer, 640, 480);
-        SDL_RenderClear(pRenderer);
+    SDL_UpdateWindowSurface(pWindow);
+}
 
-        SDL_RenderPresent(pRenderer);
-    }
+SDL_Event graphic_get_event()
+{
+    SDL_Event e;
+    SDL_PollEvent(&e);
+    return e;
 }
