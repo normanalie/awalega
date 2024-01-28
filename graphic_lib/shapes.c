@@ -8,6 +8,8 @@ Rect rect_by_center(Point center, int w, int h, Color color)
     r.w = w;
     r.h = h;
     r.fill = color;
+    r.outline = 0;
+    r.pImage = NULL;
     return r;
 }
 

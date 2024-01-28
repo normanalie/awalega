@@ -1,6 +1,8 @@
 #ifndef SHAPESH
 #define SHAPESH
 
+#include <SDL2/SDL.h>
+
 #include "colors.h"
 
 typedef struct point
@@ -22,6 +24,7 @@ typedef struct rectangle
     int h;
     Color outline;
     Color fill;
+    SDL_Texture *pImage;
 } Rect;
 
 typedef struct circle

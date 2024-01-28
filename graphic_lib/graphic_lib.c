@@ -31,8 +31,8 @@ void create_window(int W, int H, const char *name)
     SDL_FillRect(pSurface, NULL, background);
     SDL_UpdateWindowSurface(pWindow);
 
-    // SDL_RenderClear(pRenderer);
-    // SDL_RenderPresent(pRenderer);
+    SDL_RenderClear(pRenderer);
+    SDL_RenderPresent(pRenderer);
 }
 
 void destroy_window()
@@ -49,9 +49,29 @@ void draw_rect(Rect rectangle)
     r.w = rectangle.w;
     r.h = rectangle.h;
 
-    //   SDL_SetRenderDrawBMP(pRenderer, SurfaceBMP);
-    SDL_FillRect(pSurface, &r, rectangle.fill);
-    SDL_UpdateWindowSurface(pWindow);
+    if (rectangle.pImage)
+    {
+        printf("Image \n");
+        present_image(rectangle.pImage, rectangle);
+    }
+
+    if (rectangle.outline)
+    {
+        printf("Outline \n");
+        ColorRGB c = hex_to_rgb(rectangle.outline);
+        SDL_SetRenderDrawColor(pRenderer, c.r, c.g, c.b, 255);
+        SDL_RenderDrawRect(pRenderer, &r);
+    }
+
+    if (rectangle.fill)
+    {
+        printf("fill\n");
+        ColorRGB c = hex_to_rgb(rectangle.fill);
+        SDL_SetRenderDrawColor(pRenderer, c.r, c.g, c.b, 255);
+        SDL_RenderFillRect(pRenderer, &r);
+    }
+    // SDL_UpdateWindowSurface(pWindow);
+    SDL_RenderPresent(pRenderer);
 }
 
 void graphic_update()
@@ -64,4 +84,33 @@ SDL_Event graphic_get_event()
     SDL_Event e;
     SDL_PollEvent(&e);
     return e;
+}
+
+SDL_Texture *loadImage(const char path[])
+{
+    SDL_Surface *tmp = NULL;
+    SDL_Texture *texture = NULL;
+    tmp = SDL_LoadBMP(path);
+    if (NULL == tmp)
+    {
+        fprintf(stderr, "Erreur SDL_LoadBMP : %s", SDL_GetError());
+        return NULL;
+    }
+    texture = SDL_CreateTextureFromSurface(pRenderer, tmp);
+    SDL_FreeSurface(tmp);
+    if (NULL == texture)
+    {
+        fprintf(stderr, "Erreur SDL_CreateTextureFromSurface : %s", SDL_GetError());
+        return NULL;
+    }
+    return texture;
+}
+
+void present_image(SDL_Texture *image, Rect destination)
+{
+    SDL_Rect src = {0, 0, 0, 0};
+    SDL_Rect dst = {destination.topleft.x, destination.topleft.y, destination.w, destination.h};
+    SDL_QueryTexture(image, NULL, NULL, &src.w, &src.h);
+    SDL_RenderCopy(pRenderer, image, &src, &dst);
+    SDL_RenderPresent(pRenderer);
 }
