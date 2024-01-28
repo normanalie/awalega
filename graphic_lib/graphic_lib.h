@@ -5,6 +5,7 @@
 #include <SDL2/SDL_opengl.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "shapes.h"
 

@@ -20,3 +20,14 @@ Point center_of_rect(Rect rectangle)
     p.y = rectangle.topleft.y + (rectangle.h / 2);
     return p;
 }
+
+Bool is_in(Point point, Rect rectangle)
+{
+    Point topleft = rectangle.topleft;
+    Point bottomright = {rectangle.topleft.x + rectangle.w, rectangle.topleft.y + rectangle.h};
+    if (point.x >= topleft.x && point.x <= bottomright.x && point.y >= topleft.y && point.y <= bottomright.y)
+    {
+        return true;
+    }
+    return false;
+}

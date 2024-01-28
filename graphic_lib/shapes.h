@@ -38,5 +38,6 @@ typedef struct circle
 
 Rect rect_by_center(Point center, int w, int h, Color color);
 Point center_of_rect(Rect rectangle);
+Bool is_in(Point point, Rect rectangle);
 
 #endif
