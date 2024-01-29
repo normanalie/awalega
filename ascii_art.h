@@ -7,9 +7,9 @@
 #include "score_handler.h"
 
 void showMenu(void);
-void showGameTable(PlayerInfo P1, PlayerInfo P2, int totalMoves, int moveCountdown);
+void showGameTable(PlayerInfo P1, PlayerInfo P2, GameStatusVar GameStatus);
 void showScore(void);
-void showScoreSectionMenuSelection(int * isGameJustEnded, int * selectedMenu);   // Donner la bonne sélection de choix possible lorsquon est sur l'écran des scores ( (Rejouer OU Menu) OU Menu)
+void showScoreSectionMenuSelection(GameStatusVar * GameStatus);   // Donner la bonne sélection de choix possible lorsquon est sur l'écran des scores ( (Rejouer OU Menu) OU Menu)
 void showAboutGame(void);
 void showByeBye(void);
 

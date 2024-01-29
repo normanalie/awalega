@@ -34,6 +34,18 @@
 #define ENDGAME_FORCED 99                // Abandon d'une partie
 
 
+// Variable de status du jeu
+typedef struct {
+    int selectedMenu;      // Menu dans lequel on se trouve
+    int isGameJustEnded;   // Utile quand on a besoin de savoir si dans le menu des scores, on vient de sortir d'une partie ou non pour avoir la possibilité d'en relancer une 
+    int gameMode;          // Mode de jeu dans lequel on se trouve
+    int playerTurn;        // Tour actuel du joueur
+    int selectedHole;      // Trou sélectionné à jouer
+    int endgameType;       // Voir Macros "Endgame Types"
+    int totalMoves;        // Nombre de coup totaux
+    int moveCountdown;      // Décompte le nombre de coup avant l'arrêt du jeu
+} GameStatusVar;
+
 // Info Joueur
 typedef struct {
     char name[5];

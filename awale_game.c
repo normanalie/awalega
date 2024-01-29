@@ -30,23 +30,23 @@ int menuSelector(void) {
 //  Game Init
 int gameModeSelector (void) {
 
-    char gameMode;
+    int gameMode;
 
     do {
         printf("Select what you want :\n      - 1. PvBot\n      - 2. PvP\n");
-        scanf(" %c", &gameMode);
-    } while (gameMode != '1' && gameMode != '2');
+        scanf(" %d", &gameMode);
+    } while (gameMode != 1 && gameMode != 2);
 
     return gameMode;
 }
 
 
-void initPlayers (PlayerInfo * P1, PlayerInfo * P2, int gameMode) {
+void initPlayers (PlayerInfo * P1, PlayerInfo * P2, GameStatusVar GameStatus) {
 
     char userAnswer;
     char playerName[500];
 
-    if (gameMode == '1') {  // PvBot
+    if (GameStatus.gameMode == 1) {  // PvBot
                 
         // Joueur 1
         do {
@@ -110,21 +110,21 @@ void initPlayers (PlayerInfo * P1, PlayerInfo * P2, int gameMode) {
 
 
 // Game
-void switchPlayer(int * playerTurn) {
+void switchPlayer(GameStatusVar * GameStatus) {
 
-    if (*playerTurn == 1) {
-        *playerTurn = 2;
+    if (GameStatus->playerTurn == 1) {
+        GameStatus->playerTurn = 2;
     } else {
-        *playerTurn = 1;
+        GameStatus->playerTurn = 1;
     }
 
     return;
 }
 
 
-void waitBeforeBotPlay(PlayerInfo P2, int playerTurn) {
+void waitBeforeBotPlay(PlayerInfo P2, GameStatusVar GameStatus) {
 
-    if (P2.isBot && playerTurn == 2) {
+    if (P2.isBot && GameStatus.playerTurn == 2) {
         sleep(WAIT_UNTIL_BOT_PLAYS);
     }
 
@@ -132,11 +132,11 @@ void waitBeforeBotPlay(PlayerInfo P2, int playerTurn) {
 }
 
 
-int holeSelector(PlayerInfo P1, PlayerInfo P2, int playerTurn) {
+void holeSelector(PlayerInfo P1, PlayerInfo P2, GameStatusVar * GameStatus) {
 
     int selectedHole;
 
-    if (playerTurn == 1) {   // Si c'est J1
+    if (GameStatus->playerTurn == 1) {   // Si c'est J1
         do {
             printf("\n> [%s] Choisi une case que tu veux jouer :\n", P1.name);
             scanf(" %d", &selectedHole);
@@ -161,7 +161,9 @@ int holeSelector(PlayerInfo P1, PlayerInfo P2, int playerTurn) {
         }
     }
 
-    return selectedHole;
+    GameStatus->selectedHole = selectedHole;
+
+    return;
 }
 
 
@@ -186,16 +188,17 @@ int isActionValid(PlayerInfo Player, int selectedHole) {
 }
 
 
-void sowAndHarvestSeeds(PlayerInfo * P1, PlayerInfo * P2, int playerTurn, int originalHole) {
+void sowAndHarvestSeeds(PlayerInfo * P1, PlayerInfo * P2, GameStatusVar GameStatus) {
 
     PlayerInfo * currentPlayer;
 
-    if (playerTurn == 1) {
+    if (GameStatus.playerTurn == 1) {
         currentPlayer = P1;
     } else {
         currentPlayer = P2;
     }
 
+    int originalHole = GameStatus.selectedHole-1;
     int seedsToSow = currentPlayer->seeds[originalHole];
     PlayerInfo * seedOwner = currentPlayer;
     int currentHole = originalHole;
@@ -314,7 +317,7 @@ int canPlayerFillEmptyHoles(PlayerInfo Player, int playerTurn, int validHoles[])
 }
 
 
-void forcePlayerToPlay(PlayerInfo Player, int validHoles[], int * holeToUse) {   // Retourne le trou choisi pour jouer
+void forcePlayerToPlay(PlayerInfo Player, int validHoles[], GameStatusVar * GameStatus) {   // Retourne le trou choisi pour jouer
 
     int selectedHole;
 
@@ -332,9 +335,8 @@ void forcePlayerToPlay(PlayerInfo Player, int validHoles[], int * holeToUse) {  
             } while (isForcedActionValid(Player, selectedHole, validHoles) == 0);
         }
     }
-    
 
-    *holeToUse = selectedHole;
+    GameStatus->selectedHole = selectedHole;
 
     return;
 }
@@ -362,28 +364,28 @@ int isForcedActionValid(PlayerInfo Player, int selectedHole, int validHoles[]) {
 
 
 
-void endgameManager(int endgameType, PlayerInfo endingPlayer, int* selectedMenu) {
+void endgameManager(GameStatusVar * GameStatus, PlayerInfo endingPlayer) {
 
-    switch (endgameType) {
+    switch (GameStatus->endgameType) {
         
         case ENDGAME_SEED_COUNT:           // Un jouer à ramassé assez de graine pour gagner
             printf("[END 1] Le joueur \"%s\" a gagné!\n", endingPlayer.name);
-            *selectedMenu = SECTION_SCORE;
+            GameStatus->selectedMenu = SECTION_SCORE;
         break;
 
         case ENDGAME_MOVE_LIMIT:           // Pas de récolte sur les 20 derniers coups
             printf("[END 2] Pas de récolte faite sur les %d derniers coups!\n", MOVES_BEFORE_STOP);
-            *selectedMenu = SECTION_SCORE;
+            GameStatus->selectedMenu = SECTION_SCORE;
         break;
 
         case ENDGAME_NO_SEEDS_TO_MOVE:     // Un joueur ne peux pas remplir les cases vides d'un joueur adverse
             printf("[END 3] Le joueur \"%s\" ne peux pas remplir les cases vides du joueur adverse!\n", endingPlayer.name);
-            *selectedMenu = SECTION_SCORE;
+            GameStatus->selectedMenu = SECTION_SCORE;
         break;
 
         case ENDGAME_FORCED:               // Fin de partie forcée
             printf("[END 99] Fin de partie forcée!\n");
-            *selectedMenu = SECTION_HOME;
+            GameStatus->selectedMenu = SECTION_HOME;
         break;
 
     }

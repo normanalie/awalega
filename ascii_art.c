@@ -28,11 +28,11 @@ void showMenu(void) {
 }
 
 
-void showScoreSectionMenuSelection(int * isGameJustEnded, int * selectedMenu) {
+void showScoreSectionMenuSelection(GameStatusVar * GameStatus) {
 
     char answer = 0;
 
-    if (*isGameJustEnded) {   // Si une partie vient de finir, donner la possibilité de revenir au menu ou relancer une partie
+    if (GameStatus->isGameJustEnded) {   // Si une partie vient de finir, donner la possibilité de revenir au menu ou relancer une partie
 
         do {
             printf("What do you wanna do ?\n");
@@ -40,12 +40,12 @@ void showScoreSectionMenuSelection(int * isGameJustEnded, int * selectedMenu) {
         } while (answer != 'x' && answer != 'r');
 
         if (answer == 'x') {
-            *selectedMenu = SECTION_HOME;
+            GameStatus->selectedMenu = SECTION_HOME;
         } else {
-            *selectedMenu = SECTION_GAME;
+            GameStatus->selectedMenu  = SECTION_GAME;
         }
 
-        *isGameJustEnded = 0;
+        GameStatus->isGameJustEnded = 0;
 
     } else {
 
@@ -54,14 +54,14 @@ void showScoreSectionMenuSelection(int * isGameJustEnded, int * selectedMenu) {
             scanf(" %c", &answer);
         } while (answer != 'x');
 
-        *selectedMenu = SECTION_HOME;  // Seule possibilité = Retour au menu
+        GameStatus->selectedMenu = SECTION_HOME;  // Seule possibilité = Retour au menu
     }
 
     return;
 }
 
 
-void showGameTable(PlayerInfo P1, PlayerInfo P2, int totalMoves, int moveCountdown) {
+void showGameTable(PlayerInfo P1, PlayerInfo P2, GameStatusVar GameStatus) {
 
     int i;
 
@@ -112,8 +112,8 @@ void showGameTable(PlayerInfo P1, PlayerInfo P2, int totalMoves, int moveCountdo
     
     printf("\n");
 
-    printf("Nbr de coups total : %d\n", totalMoves);
-    printf("Coups avant arrêt : %d\n", moveCountdown);
+    printf("Nbr de coups total : %d\n", GameStatus.totalMoves);
+    printf("Coups avant arrêt : %d\n", GameStatus.moveCountdown);
     printf("[%s] Graines ramassees: %.2d | Nbr de coups: %.3d  {#}  [%s] Graines ramassees: %.2d | Nbr de coups: %.3d\n", P1.name, P1.harvestedSeeds, P1.moves, P2.name, P2.harvestedSeeds, P2.moves);
 
     return;
