@@ -20,7 +20,7 @@ int main (void) {
     PlayerInfo P1;
     PlayerInfo P2;
 
-    refreshTerminal();
+    refreshTerminal();    // Init GUI (SDL)
 
     do {
         
@@ -66,7 +66,7 @@ int main (void) {
                 // Attendre quelques instants pour donner le temps à J1 de voir le résultat lorsqu'il joue contre le bot
                 waitBeforeBotPlay(P2, playerTurn);
 
-                // Sélection du trou à jouer & Vérification de la légalité {FCT() holeSelector}
+                // Sélection du trou à jouer & Vérification de la légalité
                 selectedHole = holeSelector(P1, P2, playerTurn);
 
                 totalMoves++;
