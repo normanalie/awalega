@@ -21,7 +21,7 @@ Point center_of_rect(Rect rectangle)
     return p;
 }
 
-Bool is_in(Point point, Rect rectangle)
+bool is_in(Point point, Rect rectangle)
 {
     Point topleft = rectangle.topleft;
     Point bottomright = {rectangle.topleft.x + rectangle.w, rectangle.topleft.y + rectangle.h};

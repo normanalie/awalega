@@ -12,12 +12,6 @@ typedef struct point
     int y;
 } Point;
 
-typedef struct vect
-{
-    int xstart, ystart;
-    int xend, yend
-}
-
 typedef struct vector
 {
     Point start;
@@ -45,7 +39,8 @@ typedef struct circle
 
 Rect rect_by_center(Point center, int w, int h, Color color);
 Point center_of_rect(Rect rectangle);
-Bool is_in(Point point, Rect rectangle);
+bool is_in(Point point, Rect rectangle);
+/*
 void rect_destroy(Rect r)
 {
     free(r.pImage);
@@ -57,13 +52,13 @@ float distance(Point a, Point b)
     return sqrt((abs(b.x - a.x) * abs(b.x - a.x) + abs(b.y - a.y) * abs(b.y - a.y)));
 }
 
-Bool is_in_circle(Point point, Circle c)
+bool is_in_circle(Point point, Circle c)
 {
     if (distance(point, c.center) < c.r)
     {
         return true;
     }
     return false;
-}
+}*/
 
 #endif

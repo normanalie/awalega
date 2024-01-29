@@ -12,6 +12,11 @@ int graphic_init()
         printf("Échec de l'initialisation de la SDL (%s)\n", SDL_GetError());
         return -1;
     }
+    if (TTF_Init() < 0)
+    {
+        printf("Echec de l'initialisation de SDL/TTF\n");
+        return -1;
+    }
     return 0;
 }
 
@@ -111,4 +116,39 @@ void present_image(SDL_Texture *image, Rect destination)
     SDL_QueryTexture(image, NULL, NULL, &src.w, &src.h);
     SDL_RenderCopy(pRenderer, image, &src, &dst);
     SDL_RenderPresent(pRenderer);
+}
+
+void draw_text(const char *text, Point topleft, int fontsize, Color textcolor)
+{
+    if (!fontsize)
+    {
+
+        fontsize = 12;
+    }
+    if (!textcolor)
+    {
+        textcolor = White;
+    }
+    TTF_Font *font = TTF_OpenFont("fonts/PUSAB.ttf", fontsize);
+
+    ColorRGB c = hex_to_rgb(textcolor);
+    SDL_Color color = {c.r, c.g, c.b, 255};
+
+    SDL_Surface *surfaceMessage =
+        TTF_RenderText_Solid(font, text, color);
+
+    SDL_Texture *Message = SDL_CreateTextureFromSurface(pRenderer, surfaceMessage);
+
+    SDL_Rect Message_rect;
+    Message_rect.x = topleft.x;
+    Message_rect.y = topleft.y;
+    Message_rect.w = 100;
+    Message_rect.h = 100;
+
+    SDL_RenderCopy(pRenderer, Message, NULL, &Message_rect);
+    SDL_RenderPresent(pRenderer);
+
+    SDL_FreeSurface(surfaceMessage);
+    SDL_DestroyTexture(Message);
+    return;
 }

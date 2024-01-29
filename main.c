@@ -9,7 +9,6 @@ int main(void)
     create_window(480, 600, "Awaléga");
     Point center = {100, 100};
     Rect r = rect_by_center(center, 100, 200, Lavender);
-    r.pImage = load_image('./images/boutonstart.bmp');
 
     draw_rect(r);
 
@@ -28,7 +27,6 @@ int main(void)
         }
     }
 
-    rect_destroy(r);
     destroy_window();
 
     return 0;
