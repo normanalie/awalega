@@ -3,11 +3,11 @@ CFLAGS=-Wall
 
 
 
-all: clean game awaleGame 
+all: clean bin awaleGame 
 
 # Compilation de l'exécutable
 awaleGame: build sourceFiles
-	$(CC) $(CFLAGS) build/*.o -o game/$@
+	$(CC) $(CFLAGS) build/*.o -o bin/$@
 
 sourceFiles: utilities.o  score_handler.o  ascii_art.o  awale_game.o  main.o
 
@@ -17,8 +17,8 @@ sourceFiles: utilities.o  score_handler.o  ascii_art.o  awale_game.o  main.o
 build:
 	mkdir -p build
 	
-game:
-	mkdir -p game
+bin:
+	mkdir -p bin
 
 
 
@@ -47,4 +47,4 @@ awale_game.o: awale_game.c awale_game.h awale_game_macros_structs.h
 # Nettoyage
 clean:
 	rm -rf build
-	rm -rf game
+	rm -rf bin
