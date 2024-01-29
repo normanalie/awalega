@@ -20,6 +20,7 @@ SDL_Texture *loadImage(const char path[]);
 void present_image(SDL_Texture *image, Rect destination);
 void init_Images(Image *Images);
 void destroy_Images(Image *Images);
+void init_Rectangle(Rectangle *Rectangles);
 //  void draw_rect_by_center(int cx, int cy, int w, int h);
 
 // is_mouse_in()

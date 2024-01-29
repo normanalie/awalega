@@ -121,6 +121,14 @@ void init_Images(Image *Images){
     Images->misc.pvp=loadImage("images/pvp.bmp");
 }
 
+void init_Rectangle(Rectangle *Rectangles){
+    Rectangles->bg.menu.topleft.x=0; Rectangles->bg.menu.topleft.y=0; Rectangles->bg.menu.w=1280; Rectangles->bg.menu.h=720;
+    Rectangles->button.play.topleft.x=560; Rectangles->button.play.topleft.y=300; Rectangles->button.play.w=180; Rectangles->button.play.h=60;
+    Rectangles->button.leaderboard.topleft.x=560; Rectangles->button.leaderboard.topleft.y=345; Rectangles->button.leaderboard.w=180; Rectangles->button.leaderboard.h=60;
+    Rectangles->button.about.topleft.x=560; Rectangles->button.about.topleft.y=390; Rectangles->button.about.w=180; Rectangles->button.about.h=60;
+    Rectangles->button.leave.topleft.x =1100; Rectangles->button.leave.topleft.y=660; Rectangles->button.leave.w=180; Rectangles->button.leave.h= 60;
+}
+
 void destroy_Images(Image *Images){
     SDL_DestroyTexture(Images->background.menu);
     SDL_DestroyTexture(Images->background.game);

@@ -11,12 +11,15 @@ int main(void)
 
     Image Images;
     init_Images(&Images);
+
+    Rectangle Rectangles;
+    init_Rectangle(&Rectangles);
     
-    Rect menu_rect; Rect play_rect;
-    menu_rect.topleft.x=0; menu_rect.topleft.y=0; menu_rect.w=1280; menu_rect.h=720;
-    play_rect.topleft.x=400; play_rect.topleft.y=300; play_rect.w=500; play_rect.h=200;
-    present_image(Images.background.menu,menu_rect);
-    present_image(Images.button.play,play_rect);
+    present_image(Images.background.menu,Rectangles.bg.menu);
+    present_image(Images.button.play,Rectangles.button.play);
+    present_image(Images.button.leaderboard,Rectangles.button.leaderboard);
+    present_image(Images.button.about,Rectangles.button.about);
+    present_image(Images.button.leave,Rectangles.button.leave);
 
     char quit = 0;
     SDL_Event event;
