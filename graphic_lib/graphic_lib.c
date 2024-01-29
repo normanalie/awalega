@@ -78,7 +78,7 @@ void draw_rect(Rect rectangle)
 
 void graphic_update()
 {
-    SDL_UpdateWindowSurface(pWindow);
+    // SDL_UpdateWindowSurface(pWindow);
     SDL_RenderPresent(pRenderer);
 }
 
@@ -129,7 +129,12 @@ void draw_text(const char *text, Point topleft, int fontsize, Color textcolor)
     {
         textcolor = White;
     }
-    TTF_Font *font = TTF_OpenFont("fonts/PUSAB.ttf", fontsize);
+    TTF_Font *font = TTF_OpenFont("./fonts/PUSAB.ttf", fontsize);
+    if (!font)
+    {
+        printf("[Graphic Lib] - Can't load font\n");
+        return;
+    }
 
     ColorRGB c = hex_to_rgb(textcolor);
     SDL_Color color = {c.r, c.g, c.b, 255};
@@ -139,11 +144,16 @@ void draw_text(const char *text, Point topleft, int fontsize, Color textcolor)
 
     SDL_Texture *Message = SDL_CreateTextureFromSurface(pRenderer, surfaceMessage);
 
+    // Obtenir les dimensions du texte rendu
+    int textWidth, textHeight;
+    TTF_SizeText(font, text, &textWidth, &textHeight);
+
+    // Ajuster le rectangle contenant le texte en fonction de ses dimensions
     SDL_Rect Message_rect;
     Message_rect.x = topleft.x;
     Message_rect.y = topleft.y;
-    Message_rect.w = 100;
-    Message_rect.h = 100;
+    Message_rect.w = textWidth;
+    Message_rect.h = textHeight;
 
     SDL_RenderCopy(pRenderer, Message, NULL, &Message_rect);
     SDL_RenderPresent(pRenderer);
