@@ -15,7 +15,7 @@ typedef struct {
     int moves;
 } PlayerScore;
 
-void readScores(PlayerScore recordedScores[]);     // Ouvre le fichier qui contient les scores et enrigistre ses valeurs dans un tableau
+void readScores(PlayerScore RecordedScores[]);     // Ouvre le fichier qui contient les scores et enrigistre ses valeurs dans un tableau
 void saveScores (PlayerInfo P1, PlayerInfo P2);    // Prend les nouveau scores après une fin de partie, trie les scores puis l'enregistre dans le fichier
 
 

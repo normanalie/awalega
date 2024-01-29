@@ -122,8 +122,8 @@ void showGameTable(PlayerInfo P1, PlayerInfo P2, int totalMoves, int moveCountdo
 
 void showScore(void) {
 
-    PlayerScore recordedScores[5];
-    readScores(recordedScores);
+    PlayerScore RecordedScores[5];
+    readScores(RecordedScores);
 
     int i;
 
@@ -138,14 +138,14 @@ void showScore(void) {
 
     for (i=0; i < 5; i++) {
 
-        if (strlen(recordedScores[i].name) < 5) {
+        if (strlen(RecordedScores[i].name) < 5) {
             do {
-                strcat(recordedScores[i].name, " ");
-            } while (strlen(recordedScores[i].name) < 5);
+                strcat(RecordedScores[i].name, " ");
+            } while (strlen(RecordedScores[i].name) < 5);
         }
 
         printf("*                                                      *\n");
-        printf("*   #%d %s             %.5d              %.5d      *\n", i+1, recordedScores[i].name, recordedScores[i].score, recordedScores[i].moves);
+        printf("*   #%d %s             %.5d              %.5d      *\n", i+1, RecordedScores[i].name, RecordedScores[i].score, RecordedScores[i].moves);
     }
 
     printf("*                                                      *\n");
