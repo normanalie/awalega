@@ -21,7 +21,18 @@ Point center_of_rect(Rect rectangle)
     return p;
 }
 
-Bool is_in(Point point, Rect rectangle)
+void rect_destroy(Rect r)
+{
+    free(r.pImage);
+    return;
+}
+
+/*float distance(Point a, Point b)
+{
+    return sqrt((abs(b.x - a.x) * abs(b.x - a.x) + abs(b.y - a.y) * abs(b.y - a.y)));
+}*/
+
+/*Bool is_in(Point point, Rect rectangle)
 {
     Point topleft = rectangle.topleft;
     Point bottomright = {rectangle.topleft.x + rectangle.w, rectangle.topleft.y + rectangle.h};
@@ -30,4 +41,4 @@ Bool is_in(Point point, Rect rectangle)
         return true;
     }
     return false;
-}
+}*/

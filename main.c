@@ -2,16 +2,20 @@
 #include <stdlib.h>
 
 #include "graphic_lib/graphic_lib.h"
+#include "graphic_lib/shapes.h"
 
 int main(void)
 {
     graphic_init();
-    create_window(480, 600, "Awaléga");
-    Point center = {100, 100};
-    Rect r = rect_by_center(center, 100, 200, Lavender);
-    r.pImage = load_image('./images/boutonstart.bmp');
+    create_window(1280, 720, "Awaléga");
 
-    draw_rect(r);
+    Background background;
+
+    background.menu_background=NULL;
+    background.menu_background=loadImage("images/fondecran.bmp");
+    Rect menu_back;
+    menu_back.topleft.x=0; menu_back.topleft.y=0; menu_back.w=1280; menu_back.h=720;
+    present_image(background.menu_background,menu_back);
 
     char quit = 0;
     SDL_Event event;
@@ -28,7 +32,7 @@ int main(void)
         }
     }
 
-    rect_destroy(r);
+    SDL_DestroyTexture(background.menu_background);
     destroy_window();
 
     return 0;

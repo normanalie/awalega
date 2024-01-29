@@ -37,6 +37,7 @@ void create_window(int W, int H, const char *name)
 
 void destroy_window()
 {
+    SDL_DestroyRenderer(pRenderer);
     SDL_DestroyWindow(pWindow);
     SDL_Quit();
 }
@@ -73,8 +74,8 @@ void draw_rect(Rect rectangle)
 
 void graphic_update()
 {
-    SDL_UpdateWindowSurface(pWindow);
     SDL_RenderPresent(pRenderer);
+    //SDL_UpdateWindowSurface(pWindow); 
 }
 
 SDL_Event graphic_get_event()

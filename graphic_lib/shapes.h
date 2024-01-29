@@ -15,8 +15,8 @@ typedef struct point
 typedef struct vect
 {
     int xstart, ystart;
-    int xend, yend
-}
+    int xend, yend;
+}v;
 
 typedef struct vector
 {
@@ -43,27 +43,21 @@ typedef struct circle
     Color fill;
 } Circle;
 
-Rect rect_by_center(Point center, int w, int h, Color color);
-Point center_of_rect(Rect rectangle);
-Bool is_in(Point point, Rect rectangle);
-void rect_destroy(Rect r)
-{
-    free(r.pImage);
-    return;
-}
+typedef struct background{
+    SDL_Texture *menu_background;
+    
+} Background;
 
-float distance(Point a, Point b)
-{
-    return sqrt((abs(b.x - a.x) * abs(b.x - a.x) + abs(b.y - a.y) * abs(b.y - a.y)));
-}
 
-Bool is_in_circle(Point point, Circle c)
+//Bool is_in(Point point, Rect rectangle);
+
+/*Bool is_in_circle(Point point, Circle c)
 {
     if (distance(point, c.center) < c.r)
     {
         return true;
     }
     return false;
-}
+}*/
 
 #endif
