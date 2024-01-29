@@ -2,6 +2,7 @@
 #define SHAPESH
 
 #include <SDL2/SDL.h>
+#include <stdbool.h>
 
 #include "colors.h"
 
@@ -10,6 +11,12 @@ typedef struct point
     int x;
     int y;
 } Point;
+
+typedef struct vect
+{
+    int xstart, ystart;
+    int xend, yend
+}
 
 typedef struct vector
 {
@@ -39,5 +46,24 @@ typedef struct circle
 Rect rect_by_center(Point center, int w, int h, Color color);
 Point center_of_rect(Rect rectangle);
 Bool is_in(Point point, Rect rectangle);
+void rect_destroy(Rect r)
+{
+    free(r.pImage);
+    return;
+}
+
+float distance(Point a, Point b)
+{
+    return sqrt((abs(b.x - a.x) * abs(b.x - a.x) + abs(b.y - a.y) * abs(b.y - a.y)));
+}
+
+Bool is_in_circle(Point point, Circle c)
+{
+    if (distance(point, c.center) < c.r)
+    {
+        return true;
+    }
+    return false;
+}
 
 #endif

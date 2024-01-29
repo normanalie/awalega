@@ -49,15 +49,8 @@ void draw_rect(Rect rectangle)
     r.w = rectangle.w;
     r.h = rectangle.h;
 
-    if (rectangle.pImage)
-    {
-        printf("Image \n");
-        present_image(rectangle.pImage, rectangle);
-    }
-
     if (rectangle.outline)
     {
-        printf("Outline \n");
         ColorRGB c = hex_to_rgb(rectangle.outline);
         SDL_SetRenderDrawColor(pRenderer, c.r, c.g, c.b, 255);
         SDL_RenderDrawRect(pRenderer, &r);
@@ -65,10 +58,14 @@ void draw_rect(Rect rectangle)
 
     if (rectangle.fill)
     {
-        printf("fill\n");
         ColorRGB c = hex_to_rgb(rectangle.fill);
         SDL_SetRenderDrawColor(pRenderer, c.r, c.g, c.b, 255);
         SDL_RenderFillRect(pRenderer, &r);
+    }
+
+    if (rectangle.pImage)
+    {
+        present_image(rectangle.pImage, rectangle);
     }
     // SDL_UpdateWindowSurface(pWindow);
     SDL_RenderPresent(pRenderer);
@@ -77,6 +74,7 @@ void draw_rect(Rect rectangle)
 void graphic_update()
 {
     SDL_UpdateWindowSurface(pWindow);
+    SDL_RenderPresent(pRenderer);
 }
 
 SDL_Event graphic_get_event()
