@@ -9,13 +9,14 @@ int main(void)
     graphic_init();
     create_window(1280, 720, "Awaléga");
 
-    Background background;
+    Image Menu;
 
-    background.menu_background=NULL;
-    background.menu_background=loadImage("images/fondecran.bmp");
-    Rect menu_back;
-    menu_back.topleft.x=0; menu_back.topleft.y=0; menu_back.w=1280; menu_back.h=720;
-    present_image(background.menu_background,menu_back);
+    Menu.background=NULL;
+    Menu.background=loadImage("images/fondecran.bmp");
+
+    Rect menu_rect;
+    menu_rect.topleft.x=0; menu_rect.topleft.y=0; menu_rect.w=1280; menu_rect.h=720;
+    present_image(Menu.background,menu_rect);
 
     char quit = 0;
     SDL_Event event;
@@ -32,7 +33,7 @@ int main(void)
         }
     }
 
-    SDL_DestroyTexture(background.menu_background);
+    SDL_DestroyTexture(Menu.background);
     destroy_window();
 
     return 0;

@@ -43,11 +43,10 @@ typedef struct circle
     Color fill;
 } Circle;
 
-typedef struct background{
-    SDL_Texture *menu_background;
-    
-} Background;
-
+typedef struct image{
+    SDL_Texture *background; 
+    SDL_Texture *bouton; 
+} Image;
 
 //Bool is_in(Point point, Rect rectangle);
 
