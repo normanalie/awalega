@@ -106,8 +106,35 @@ SDL_Texture *loadImage(const char path[])
 }
 
 void init_Images(Image *Images){
-    Images->background.menu=loadImage("images/fondecran.bmp");
+    Images->background.menu=loadImage("images/menu_bg.bmp");
+    Images->background.game=loadImage("images/game_bg.bmp");
     Images->button.play=loadImage("images/play.bmp");
+    Images->button.about=loadImage("images/about.bmp");
+    Images->button.leaderboard=loadImage("images/leaderboard.bmp");
+    Images->button.leave=loadImage("images/leave.bmp");
+    Images->awale.one_seed=loadImage("images/one_seed.bmp");
+    Images->awale.two_seed=loadImage("images/two_seeds.bmp");
+    Images->awale.three_seed=loadImage("images/three_seeds.bmp");
+    Images->awale.four_seed=loadImage("images/four_seeds.bmp");
+    Images->awale.deck=loadImage("images/deck.bmp");
+    Images->misc.playerVSia=loadImage("images/playerVSia.bmp");
+    Images->misc.pvp=loadImage("images/pvp.bmp");
+}
+
+void destroy_Images(Image *Images){
+    SDL_DestroyTexture(Images->background.menu);
+    SDL_DestroyTexture(Images->background.game);
+    SDL_DestroyTexture(Images->button.play);
+    SDL_DestroyTexture(Images->button.about);
+    SDL_DestroyTexture(Images->button.leaderboard);
+    SDL_DestroyTexture(Images->button.leave);
+    SDL_DestroyTexture(Images->awale.one_seed);
+    SDL_DestroyTexture(Images->awale.two_seed);
+    SDL_DestroyTexture(Images->awale.three_seed);
+    SDL_DestroyTexture(Images->awale.four_seed);
+    SDL_DestroyTexture(Images->awale.deck);
+    SDL_DestroyTexture(Images->misc.playerVSia);
+    SDL_DestroyTexture(Images->misc.pvp);
 }
 
 void present_image(SDL_Texture *image, Rect destination)

@@ -33,8 +33,7 @@ int main(void)
         }
     }
 
-    SDL_DestroyTexture(Images.background.menu);
-    SDL_DestroyTexture(Images.button.play);
+    destroy_Images(&Images);
     destroy_window();
 
     return 0;
