@@ -3,7 +3,6 @@
 
 #include "graphic_lib/graphic_lib.h"
 #include "graphic_lib/shapes.h"
-#include "graphic_lib/images_struct.h"
 
 int main(void)
 {
@@ -11,11 +10,8 @@ int main(void)
     create_window(1280, 720, "Awaléga");
 
     Image Images;
-
-    Images.background.menu=NULL;
-    Images.background.menu=loadImage("images/fondecran.bmp");
-    Images.button.play=loadImage("images/play.bmp");
-
+    init_Images(&Images);
+    
     Rect menu_rect; Rect play_rect;
     menu_rect.topleft.x=0; menu_rect.topleft.y=0; menu_rect.w=1280; menu_rect.h=720;
     play_rect.topleft.x=400; play_rect.topleft.y=300; play_rect.w=500; play_rect.h=200;

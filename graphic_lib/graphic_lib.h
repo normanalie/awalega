@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdbool.h>
 
+#include "images_struct.h"
 #include "shapes.h"
 
 int graphic_init();
@@ -17,6 +18,7 @@ void graphic_update();
 SDL_Event graphic_get_event();
 SDL_Texture *loadImage(const char path[]);
 void present_image(SDL_Texture *image, Rect destination);
+void init_Images(Image *Images);
 //  void draw_rect_by_center(int cx, int cy, int w, int h);
 
 // is_mouse_in()

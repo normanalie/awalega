@@ -105,6 +105,11 @@ SDL_Texture *loadImage(const char path[])
     return texture;
 }
 
+void init_Images(Image *Images){
+    Images->background.menu=loadImage("images/fondecran.bmp");
+    Images->button.play=loadImage("images/play.bmp");
+}
+
 void present_image(SDL_Texture *image, Rect destination)
 {
     SDL_Rect src = {0, 0, 0, 0};
