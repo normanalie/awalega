@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-Wall -Wextra
-LIBS=-lSDL2-2.0
+LIBS=-lSDL2-2.0 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
 main: clean dir build
 	rm -f bin/awalega.out
