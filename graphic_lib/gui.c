@@ -18,12 +18,12 @@ void showMenu(Images Images, Containers Rectangles)
     present_image(Images.button.leave, Rectangles.button.leave);
 }
 
-void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P2)
+void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P2, GameStatusVar GameStatus)
 {
     present_image(Images.background.game, Rectangles.bg.game);
     present_image(Images.awale.deck, Rectangles.awale.deck);
 
-    // Signs Players
+    //Signs Players
     present_image(Images.misc.sign, Rectangles.awale.p1.sign);
     present_image(Images.misc.sign, Rectangles.awale.p2.sign);
 
@@ -77,13 +77,12 @@ void showLeaderboard(Images Images, Containers Rectangles, GameStatusVar GameSta
     Score.x = 650;
     Moves.x = 800;
 
-    for (int i = 0; i < 5; i++)
-    {
-        Name.y = FIRST_NAME_POS_Y + LEADERBOARD_SEPARATION * i;
-        Score.y = FIRST_NAME_POS_Y + LEADERBOARD_SEPARATION * i;
-        Moves.y = FIRST_NAME_POS_Y + LEADERBOARD_SEPARATION * i;
+    for(int i=0; i<5; i++){
+        Name.y=FIRST_NAME_POS_Y + LEADERBOARD_SEPARATION *i;
+        Score.y=FIRST_NAME_POS_Y + LEADERBOARD_SEPARATION *i;
+        Moves.y=FIRST_NAME_POS_Y + LEADERBOARD_SEPARATION *i;
         char s[5];
-        draw_text(RecordedScores[i].name, Name, 24, Black);
+        draw_text(RecordedScores[i].name,Name,24, Black);
         sprintf(s, "%.2d", RecordedScores[i].score);
         draw_text(s, Score, 24, Black);
         sprintf(s, "%.2d", RecordedScores[i].moves);

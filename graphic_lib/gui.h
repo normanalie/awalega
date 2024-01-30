@@ -8,7 +8,7 @@
 #include "../score_handler.h"
 void initGui(Images *pImages, Containers *pRectangles);
 void showMenu(Images Images, Containers Rectangles);
-void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P2);
+void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P2, GameStatusVar GameStatus);
 void showLeaderboard(Images Images, Containers Rectangles, GameStatusVar GameStatus);
 void destroyGui(Images *pImages);
 

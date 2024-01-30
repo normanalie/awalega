@@ -13,8 +13,13 @@ int main(void)
 
     PlayerInfo P1;
     PlayerInfo P2;
+    P1.harvestedSeeds=0;
+    P2.harvestedSeeds=0;
+
     GameStatusVar GameStatus;
-    GameStatus.isGameJustEnded = 0;
+    GameStatus.isGameJustEnded=0;
+    GameStatus.totalMoves=0;
+    GameStatus.moveCountdown=20;
 
     for (int i = 0; i < HOLES_PER_PLAYER; i++)
     {
@@ -22,9 +27,9 @@ int main(void)
         P2.seeds[i] = SEEDS_PER_HOLE;
     }
 
-    showMenu(images, imgsContainers);
-    // showAwale(images, imgsContainers, P1, P2);
-    // showLeaderboard(images, imgsContainers, GameStatus);
+    //showMenu(images, imgsContainers);
+    // showAwale(images, imgsContainers, P1, P2, GameStatus);
+    // //showLeaderboard(images, imgsContainers, GameStatus);
 
     char quit = 0;
     SDL_Event event;
