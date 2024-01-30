@@ -13,7 +13,6 @@ typedef struct
     SDL_Texture *leaderboard;
     SDL_Texture *about;
 } Background;
-
 typedef struct
 {
     SDL_Texture *play;
@@ -25,7 +24,6 @@ typedef struct
     SDL_Texture *unmute;
     SDL_Texture *replay;
 } Button;
-
 typedef struct
 {
     SDL_Texture *deck;
@@ -34,16 +32,17 @@ typedef struct
     SDL_Texture *three_seed;
     SDL_Texture *four_seed;
 } Awale;
-
 typedef struct
 {
     SDL_Texture *title;
     SDL_Texture *playerVSia;
     SDL_Texture *pvp;
-    SDL_Texture *sign;
+    SDL_Texture *pseudo_sign;
     SDL_Texture *sign_leaderboard;
+    SDL_Texture *seed_number_sign;
+    SDL_Texture *square_sign;
+    SDL_Texture *sign_about[2];
 } Misc;
-
 typedef struct
 {
     Background background;
@@ -51,15 +50,14 @@ typedef struct
     Awale awale;
     Misc misc;
 } Images;
-
+// STRUCTURES DES RECTANGLES POUR GERER L'AFFICHAGE DES IMAGES
 typedef struct
 {
     Rect menu;
     Rect game;
     Rect leaderboard;
     Rect about;
-} Container_bg;
-
+} Containers_bg;
 typedef struct
 {
     Rect play;
@@ -70,41 +68,45 @@ typedef struct
     Rect mute;
     Rect unmute;
     Rect replay;
-} Container_button;
-
+} Containers_button;
 typedef struct
 {
     Rect seeds[HOLES_PER_PLAYER];
-    Rect sign;
-} Container_awale_player1;
-
+    Rect pseudo_sign;
+    Rect score_sign;
+    Rect seed_number_sign;
+    Rect moves_sign;
+} Containers_awale_player1;
 typedef struct
 {
     Rect seeds[HOLES_PER_PLAYER];
-    Rect sign;
-} Container_awale_player2;
-
+    Rect pseudo_sign;
+    Rect score_sign;
+    Rect seed_number_sign;
+    Rect moves_sign;
+} Containers_awale_player2;
 typedef struct
 {
-    Container_awale_player1 p1;
-    Container_awale_player2 p2;
+    Containers_awale_player1 p1;
+    Containers_awale_player2 p2;
     Rect deck;
-} Container_awale;
-
+    Rect total_moves;
+    Rect move_countdown;
+} Containers_awale;
 typedef struct
 {
     Rect playerVSplayer;
     Rect pvp;
     Rect title;
     Rect sign_leaderboard;
-} Container_misc;
-
+    Rect sign_about;
+} Containers_misc;
 typedef struct
 {
-    Container_awale awale;
-    Container_button button;
-    Container_misc misc;
-    Container_bg bg;
+    Containers_awale awale;
+    Containers_button button;
+    Containers_misc misc;
+    Containers_bg bg;
 } Containers;
 
 void init_Images(Images *pImages);

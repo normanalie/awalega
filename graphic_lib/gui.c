@@ -23,9 +23,9 @@ void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P
     present_image(Images.background.game, Rectangles.bg.game);
     present_image(Images.awale.deck, Rectangles.awale.deck);
 
-    //Signs Players
-    present_image(Images.misc.sign, Rectangles.awale.p1.sign);
-    present_image(Images.misc.sign, Rectangles.awale.p2.sign);
+    // Signs Players
+    present_image(Images.misc.pseudo_sign, Rectangles.awale.p1.pseudo_sign);
+    present_image(Images.misc.pseudo_sign, Rectangles.awale.p2.pseudo_sign);
 
     // Seeds Player 1
     for (int i = 0; i < HOLES_PER_PLAYER; i++)
@@ -77,12 +77,13 @@ void showLeaderboard(Images Images, Containers Rectangles, GameStatusVar GameSta
     Score.x = 650;
     Moves.x = 800;
 
-    for(int i=0; i<5; i++){
-        Name.y=FIRST_NAME_POS_Y + LEADERBOARD_SEPARATION *i;
-        Score.y=FIRST_NAME_POS_Y + LEADERBOARD_SEPARATION *i;
-        Moves.y=FIRST_NAME_POS_Y + LEADERBOARD_SEPARATION *i;
+    for (int i = 0; i < 5; i++)
+    {
+        Name.y = FIRST_NAME_POS_Y + LEADERBOARD_SEPARATION * i;
+        Score.y = FIRST_NAME_POS_Y + LEADERBOARD_SEPARATION * i;
+        Moves.y = FIRST_NAME_POS_Y + LEADERBOARD_SEPARATION * i;
         char s[5];
-        draw_text(RecordedScores[i].name,Name,24, Black);
+        draw_text(RecordedScores[i].name, Name, 24, Black);
         sprintf(s, "%.2d", RecordedScores[i].score);
         draw_text(s, Score, 24, Black);
         sprintf(s, "%.2d", RecordedScores[i].moves);
@@ -96,20 +97,12 @@ void destroyGui(Images *pImages)
     destroy_window();
 }
 
-void showAbout(Image Images, Rectangle Rectangles, int currentPage){
+void showAbout(Images Images, Containers Rectangles, int currentPage)
+{
     present_image(Images.background.about, Rectangles.bg.menu);
     present_image(Images.misc.sign_about[currentPage], Rectangles.misc.sign_about);
 }
 
-void showGameModeSelection(Image Images, Rectangle Rectangles){
-    
-}
-
-void showAbout(Image Images, Rectangle Rectangles, int currentPage){
-    present_image(Images.background.about, Rectangles.bg.menu);
-    present_image(Images.misc.sign_about[currentPage], Rectangles.misc.sign_about);
-}
-
-void showGameModeSelection(Image Images, Rectangle Rectangles){
-    
+void showGameModeSelection(Images Images, Containers Rectangles)
+{
 }

@@ -7,10 +7,12 @@
 #include "../awale_game_macros_structs.h"
 #include "../score_handler.h"
 
-void showMenu(Image Images, Rectangle Rectangles);
-void showAwale(Image Images, Rectangle Rectangles, PlayerInfo P1, PlayerInfo P2, GameStatusVar GameStatus);
-void showLeaderboard(Image Images, Rectangle Rectangles, GameStatusVar GameStatus);
-void showAbout(Image Images, Rectangle Rectangles, int currentPage);
-void showGameModeSelection(Image Images, Rectangle Rectangles);
+void initGui(Images *pImages, Containers *pRectangles);
+void showMenu(Images Images, Containers Rectangles);
+void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P2, GameStatusVar GameStatus);
+void showLeaderboard(Images Images, Containers Rectangles, GameStatusVar GameStatus);
+void showAbout(Images Images, Containers Rectangles, int currentPage);
+void showGameModeSelection(Images Images, Containers Rectangles);
+void destroyGui(Images *pImages);
 
 #endif
