@@ -16,6 +16,12 @@
 #define AWALE_P2_1ST_SEED_POS_Y 405
 #define SEED_SEPARATION 100
 
+//Macro POS_NUMBER_OF_SEED
+#define POS_X_1ST_NUMBER_OF_SEED 385
+#define SEPARATION_NUMBER_OF_SEED 98
+#define POS_Y_NUMBER_OF_SEED_PLAYER1 173
+#define POS_Y_NUMBER_OF_SEED_PLAYER2 523
+
 typedef struct {
     SDL_Texture *menu; 
     SDL_Texture *game; 
@@ -46,8 +52,10 @@ typedef struct {
     SDL_Texture *title;
     SDL_Texture *playerVSia;
     SDL_Texture *pvp;
-    SDL_Texture *sign;
+    SDL_Texture *pseudo_sign;
     SDL_Texture *sign_leaderboard;
+    SDL_Texture *seed_number_sign;
+    SDL_Texture *square_sign;
 } Misc;
 
 typedef struct {
@@ -79,18 +87,26 @@ typedef struct {
 
 typedef struct {
     Rect seeds[HOLES_PER_PLAYER];
-    Rect sign;
+    Rect  pseudo_sign;
+    Rect score_sign;
+    Rect seed_number_sign;
+    Rect moves_sign;
 } Rect_awale_player1;
 
 typedef struct{
     Rect seeds[HOLES_PER_PLAYER];
-    Rect sign;
+    Rect  pseudo_sign;
+    Rect score_sign;
+    Rect seed_number_sign;
+    Rect moves_sign;
 } Rect_awale_player2;
 
 typedef struct {
     Rect_awale_player1 p1;
     Rect_awale_player2 p2;
     Rect deck;
+    Rect total_moves;
+    Rect move_countdown;
 } Rect_awale;
 
 typedef struct {

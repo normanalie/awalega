@@ -9,7 +9,7 @@
 #include "../score_handler.h"
 
 void showMenu(Image Images, Rectangle Rectangles);
-void showAwale(Image Images, Rectangle Rectangles, PlayerInfo P1, PlayerInfo P2);
+void showAwale(Image Images, Rectangle Rectangles, PlayerInfo P1, PlayerInfo P2, GameStatusVar GameStatus);
 void showLeaderboard(Image Images, Rectangle Rectangles, GameStatusVar GameStatus);
 
 #endif

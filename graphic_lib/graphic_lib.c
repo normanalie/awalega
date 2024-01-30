@@ -125,17 +125,15 @@ void init_Images(Image *Images){
     Images->awale.deck=loadImage("images/deck.bmp");
     Images->misc.playerVSia=loadImage("images/playerVSia.bmp");
     Images->misc.pvp=loadImage("images/pvp.bmp");
-    Images->misc.sign=loadImage("images/sign.bmp");
+    Images->misc.pseudo_sign=loadImage("images/pseudo_sign.bmp");
+    Images->misc.seed_number_sign=loadImage("images/seed_number_sign.bmp");
+    Images->misc.square_sign=loadImage("images/square_sign.bmp");
     Images->misc.sign_leaderboard=loadImage("images/sign_leaderboard.bmp");
     Images->button.menu=loadImage("images/menu.bmp");
     Images->button.mute=loadImage("images/mute.bmp");
     Images->button.unmute=loadImage("images/unmute.bmp");
     Images->button.replay=loadImage("images/replay.bmp");
 }
-
-
-
-
 
 void init_Rectangle(Rectangle *Rectangles){
     //MENU
@@ -148,13 +146,21 @@ void init_Rectangle(Rectangle *Rectangles){
     //AWALE
     Rectangles->bg.game.topleft.x=0; Rectangles->bg.game.topleft.y=0; Rectangles->bg.game.w=1280; Rectangles->bg.game.h=720;
     Rectangles->awale.deck.topleft.x=340; Rectangles->awale.deck.topleft.y=235; Rectangles->awale.deck.w=620; Rectangles->awale.deck.h=250; 
+    Rectangles->awale.total_moves.topleft.x= 1060; Rectangles->awale.total_moves.topleft.y= 320; Rectangles->awale.total_moves.w=120; Rectangles->awale.total_moves.h= 90;
+    Rectangles->awale.move_countdown.topleft.x=125; Rectangles->awale.move_countdown.topleft.y= 320; Rectangles->awale.move_countdown.w=120; Rectangles->awale.move_countdown.h=90;
 
-    //PSEUDO Player 1
-    Rectangles->awale.p1.sign.topleft.x=500; Rectangles->awale.p1.sign.topleft.y=40; Rectangles->awale.p1.sign.w= 300; Rectangles->awale.p1.sign.h=90;
+    //Sign Player 1
+    Rectangles->awale.p1.pseudo_sign.topleft.x=500; Rectangles->awale.p1.pseudo_sign.topleft.y=40; Rectangles->awale.p1.pseudo_sign.w= 300; Rectangles->awale.p1.pseudo_sign.h=90;
+    Rectangles->awale.p1.seed_number_sign.topleft.x= 340; Rectangles->awale.p1.seed_number_sign.topleft.y=140; Rectangles->awale.p1.seed_number_sign.w=620; Rectangles->awale.p1.seed_number_sign.h=90;
+    Rectangles->awale.p1.moves_sign.topleft.x= 820 ; Rectangles->awale.p1.moves_sign.topleft.y= 40; Rectangles->awale.p1.moves_sign.w= 120 ; Rectangles->awale.p1.moves_sign.h= 90;
+    Rectangles->awale.p1.score_sign.topleft.x= 355 ; Rectangles->awale.p1.score_sign.topleft.y= 40; Rectangles->awale.p1.score_sign.w= 120 ; Rectangles->awale.p1.score_sign.h= 90;
 
-    //PSEUDO Player 2
-    Rectangles->awale.p2.sign.topleft.x=500; Rectangles->awale.p2.sign.topleft.y=585; Rectangles->awale.p2.sign.w= 300; Rectangles->awale.p2.sign.h=90;
-
+    //Sign Player 2
+    Rectangles->awale.p2.pseudo_sign.topleft.x=500; Rectangles->awale.p2.pseudo_sign.topleft.y=590; Rectangles->awale.p2.pseudo_sign.w= 300; Rectangles->awale.p2.pseudo_sign.h=90;
+    Rectangles->awale.p2.seed_number_sign.topleft.x= 340; Rectangles->awale.p2.seed_number_sign.topleft.y=490; Rectangles->awale.p2.seed_number_sign.w=620; Rectangles->awale.p2.seed_number_sign.h=90;
+    Rectangles->awale.p2.moves_sign.topleft.x= 820 ; Rectangles->awale.p2.moves_sign.topleft.y= 590; Rectangles->awale.p2.moves_sign.w= 120 ; Rectangles->awale.p2.moves_sign.h= 90;
+    Rectangles->awale.p2.score_sign.topleft.x= 355 ; Rectangles->awale.p2.score_sign.topleft.y= 590; Rectangles->awale.p2.score_sign.w= 120 ; Rectangles->awale.p2.score_sign.h= 90;
+    
     //Seeds Player 1
     for(int i=0; i<HOLES_PER_PLAYER; i++){
         Rectangles->awale.p1.seeds[i].topleft.x=AWALE_1ST_SEED_POS_X + i*SEED_SEPARATION; 
