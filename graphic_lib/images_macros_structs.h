@@ -1,8 +1,8 @@
 #ifndef IMAGE_STRUCTH
 #define IMAGE_STRUCTH
 
-#include <SDL2/SDL.h>
 #include "shapes.h"
+#include "../awale_game_macros_structs.h"
 
 typedef struct {
     SDL_Texture *menu; 
@@ -56,10 +56,16 @@ typedef struct {
 } Rect_button;
 
 typedef struct {
-    Rect one_seed;
-    Rect two_seed;
-    Rect three_seed;
-    Rect four_seed;
+    Rect seeds[HOLES_PER_PLAYER];
+} Rect_awale_player1;
+
+typedef struct{
+    Rect seeds[HOLES_PER_PLAYER];
+} Rect_awale_player2;
+
+typedef struct {
+    Rect_awale_player1 p1;
+    Rect_awale_player2 p2;
     Rect deck;
 } Rect_awale;
 

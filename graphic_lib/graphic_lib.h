@@ -8,7 +8,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "images_struct.h"
+#include "images_macros_structs.h"
 #include "shapes.h"
 
 int graphic_init();

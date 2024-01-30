@@ -121,12 +121,44 @@ void init_Images(Image *Images){
     Images->misc.pvp=loadImage("images/pvp.bmp");
 }
 
+
+#define SEED_WIDTH 50
+#define SEED_HEIGHT 50
+#define AWALE_1ST_SEED_POS_X 375
+#define AWALE_P1_1ST_SEED_POS_Y 285
+#define AWALE_P2_1ST_SEED_POS_Y 415
+#define SEED_SEPARATION 100
+
 void init_Rectangle(Rectangle *Rectangles){
+    //MENU
     Rectangles->bg.menu.topleft.x=0; Rectangles->bg.menu.topleft.y=0; Rectangles->bg.menu.w=1280; Rectangles->bg.menu.h=720;
-    Rectangles->button.play.topleft.x=560; Rectangles->button.play.topleft.y=300; Rectangles->button.play.w=180; Rectangles->button.play.h=45;
-    Rectangles->button.leaderboard.topleft.x=560; Rectangles->button.leaderboard.topleft.y=350; Rectangles->button.leaderboard.w=180; Rectangles->button.leaderboard.h=45;
-    Rectangles->button.about.topleft.x=560; Rectangles->button.about.topleft.y=400; Rectangles->button.about.w=180; Rectangles->button.about.h=45;
-    Rectangles->button.leave.topleft.x =1090; Rectangles->button.leave.topleft.y=665; Rectangles->button.leave.w=180; Rectangles->button.leave.h= 45;
+    Rectangles->button.play.topleft.x=560; Rectangles->button.play.topleft.y=300; Rectangles->button.play.w=240; Rectangles->button.play.h=65;
+    Rectangles->button.leaderboard.topleft.x=560; Rectangles->button.leaderboard.topleft.y=365; Rectangles->button.leaderboard.w=240; Rectangles->button.leaderboard.h=65;
+    Rectangles->button.about.topleft.x=560; Rectangles->button.about.topleft.y=430; Rectangles->button.about.w=240; Rectangles->button.about.h=65;
+    Rectangles->button.leave.topleft.x =1030; Rectangles->button.leave.topleft.y=645; Rectangles->button.leave.w=240; Rectangles->button.leave.h= 65;
+
+    //AWALE
+    Rectangles->bg.game.topleft.x=0; Rectangles->bg.game.topleft.y=0; Rectangles->bg.game.w=1280; Rectangles->bg.game.h=720;
+    Rectangles->awale.deck.topleft.x=340; Rectangles->awale.deck.topleft.y=250; Rectangles->awale.deck.w=620; Rectangles->awale.deck.h=250; 
+
+    //Seeds Player 1
+    for(int i=0; i<HOLES_PER_PLAYER; i++){
+        Rectangles->awale.p1.seeds[i].topleft.x=AWALE_1ST_SEED_POS_X + i*SEED_SEPARATION; 
+        Rectangles->awale.p1.seeds[i].topleft.y=AWALE_P1_1ST_SEED_POS_Y; 
+        Rectangles->awale.p1.seeds[i].w=SEED_WIDTH; 
+        Rectangles->awale.p1.seeds[i].h=SEED_HEIGHT;
+    }
+
+    //Seeds Player 2
+    for(int i=0; i<HOLES_PER_PLAYER; i++){
+        Rectangles->awale.p2.seeds[i].topleft.x=AWALE_1ST_SEED_POS_X + i*SEED_SEPARATION; 
+        Rectangles->awale.p2.seeds[i].topleft.y=AWALE_P2_1ST_SEED_POS_Y; 
+        Rectangles->awale.p2.seeds[i].w=SEED_WIDTH; 
+        Rectangles->awale.p2.seeds[i].h=SEED_HEIGHT;
+    }
+
+    
+    
 }
 
 void destroy_Images(Image *Images){
