@@ -3,6 +3,7 @@
 #include "graphic_lib/graphic_lib.h"
 #include "graphic_lib/shapes.h"
 #include "graphic_lib/gui.h"
+#include "score_handler.h"
 
 int main(void)
 {
@@ -17,6 +18,8 @@ int main(void)
 
     PlayerInfo P1;
     PlayerInfo P2;
+    GameStatusVar GameStatus;
+    GameStatus.isGameJustEnded=0;
 
     for(int i=0; i<HOLES_PER_PLAYER; i++){
         P1.seeds[i]=SEEDS_PER_HOLE;
@@ -25,6 +28,7 @@ int main(void)
     
     showMenu(Images, Rectangles);
     showAwale(Images, Rectangles, P1, P2);
+    showLeaderboard(Images, Rectangles, GameStatus);
     
     char quit = 0;
     SDL_Event event;

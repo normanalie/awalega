@@ -125,15 +125,17 @@ void init_Images(Image *Images){
     Images->awale.deck=loadImage("images/deck.bmp");
     Images->misc.playerVSia=loadImage("images/playerVSia.bmp");
     Images->misc.pvp=loadImage("images/pvp.bmp");
+    Images->misc.sign=loadImage("images/sign.bmp");
+    Images->misc.sign_leaderboard=loadImage("images/sign_leaderboard.bmp");
+    Images->button.menu=loadImage("images/menu.bmp");
+    Images->button.mute=loadImage("images/mute.bmp");
+    Images->button.unmute=loadImage("images/unmute.bmp");
+    Images->button.replay=loadImage("images/replay.bmp");
 }
 
 
-#define SEED_WIDTH 50
-#define SEED_HEIGHT 50
-#define AWALE_1ST_SEED_POS_X 375
-#define AWALE_P1_1ST_SEED_POS_Y 285
-#define AWALE_P2_1ST_SEED_POS_Y 415
-#define SEED_SEPARATION 100
+
+
 
 void init_Rectangle(Rectangle *Rectangles){
     //MENU
@@ -145,7 +147,13 @@ void init_Rectangle(Rectangle *Rectangles){
 
     //AWALE
     Rectangles->bg.game.topleft.x=0; Rectangles->bg.game.topleft.y=0; Rectangles->bg.game.w=1280; Rectangles->bg.game.h=720;
-    Rectangles->awale.deck.topleft.x=340; Rectangles->awale.deck.topleft.y=250; Rectangles->awale.deck.w=620; Rectangles->awale.deck.h=250; 
+    Rectangles->awale.deck.topleft.x=340; Rectangles->awale.deck.topleft.y=235; Rectangles->awale.deck.w=620; Rectangles->awale.deck.h=250; 
+
+    //PSEUDO Player 1
+    Rectangles->awale.p1.sign.topleft.x=500; Rectangles->awale.p1.sign.topleft.y=40; Rectangles->awale.p1.sign.w= 300; Rectangles->awale.p1.sign.h=90;
+
+    //PSEUDO Player 2
+    Rectangles->awale.p2.sign.topleft.x=500; Rectangles->awale.p2.sign.topleft.y=585; Rectangles->awale.p2.sign.w= 300; Rectangles->awale.p2.sign.h=90;
 
     //Seeds Player 1
     for(int i=0; i<HOLES_PER_PLAYER; i++){
@@ -163,8 +171,8 @@ void init_Rectangle(Rectangle *Rectangles){
         Rectangles->awale.p2.seeds[i].h=SEED_HEIGHT;
     }
 
-    
-    
+    //Sign Leaderboard
+    Rectangles->misc.sign_leaderboard.topleft.x= 340; Rectangles->misc.sign_leaderboard.topleft.y= 110 ; Rectangles->misc.sign_leaderboard.w= 600; Rectangles->misc.sign_leaderboard.h= 495;
 }
 
 void destroy_Images(Image *Images){
