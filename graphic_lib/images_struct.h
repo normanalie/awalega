@@ -4,21 +4,21 @@
 #include <SDL2/SDL.h>
 #include "shapes.h"
 
-typedef struct background{
+typedef struct {
     SDL_Texture *menu; 
     SDL_Texture *game; 
     SDL_Texture *leaderboard;
     SDL_Texture *about;
 } Background;
 
-typedef struct button{
+typedef struct {
     SDL_Texture *play;
     SDL_Texture *about;
     SDL_Texture *leaderboard;
     SDL_Texture *leave;
 } Button;
 
-typedef struct awale{
+typedef struct {
     SDL_Texture *deck;
     SDL_Texture *one_seed;
     SDL_Texture *two_seed;
@@ -26,13 +26,13 @@ typedef struct awale{
     SDL_Texture *four_seed;
 } Awale;
 
-typedef struct misc{
+typedef struct {
     SDL_Texture *title;
     SDL_Texture *playerVSia;
     SDL_Texture *pvp;
 } Misc;
 
-typedef struct image{
+typedef struct {
     Background background;
     Button button;
     Awale awale;
@@ -41,21 +41,21 @@ typedef struct image{
 
 // STRUCTURES DES RECTANGLES POUR GERER L'AFFICHAGE DES IMAGES
 
-typedef struct rect_bg{
+typedef struct {
     Rect menu;
     Rect game;
     Rect leaderboard;
     Rect about;
 } Rect_bg;
 
-typedef struct rect_button{
+typedef struct {
     Rect play;
     Rect about;
     Rect leaderboard;
     Rect leave;
 } Rect_button;
 
-typedef struct rect_awale{
+typedef struct {
     Rect one_seed;
     Rect two_seed;
     Rect three_seed;
@@ -63,13 +63,13 @@ typedef struct rect_awale{
     Rect deck;
 } Rect_awale;
 
-typedef struct rect_misc{
+typedef struct {
     Rect playerVSplayer;
     Rect pvp;
     Rect title;
 } Rect_misc;
 
-typedef struct rectangle_image{
+typedef struct {
     Rect_awale awale;
     Rect_button button;
     Rect_misc misc;

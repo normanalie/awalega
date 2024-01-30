@@ -3,6 +3,7 @@
 
 #include "graphic_lib/graphic_lib.h"
 #include "graphic_lib/shapes.h"
+#include "graphic_lib/gui.h"
 
 int main(void)
 {
@@ -15,11 +16,7 @@ int main(void)
     Rectangle Rectangles;
     init_Rectangle(&Rectangles);
     
-    present_image(Images.background.menu,Rectangles.bg.menu);
-    present_image(Images.button.play,Rectangles.button.play);
-    present_image(Images.button.leaderboard,Rectangles.button.leaderboard);
-    present_image(Images.button.about,Rectangles.button.about);
-    present_image(Images.button.leave,Rectangles.button.leave);
+    showMenu(Images, Rectangles);
 
     char quit = 0;
     SDL_Event event;
