@@ -16,7 +16,7 @@ typedef struct vect
 {
     int xstart, ystart;
     int xend, yend;
-}v;
+} v;
 
 typedef struct vector
 {
@@ -43,7 +43,11 @@ typedef struct circle
     Color fill;
 } Circle;
 
-//Bool is_in(Point point, Rect rectangle);
+Rect rect_by_center(Point center, int w, int h, Color color);
+
+Point center_of_rect(Rect rectangle);
+
+bool is_in(Point point, Rect rectangle);
 
 /*Bool is_in_circle(Point point, Circle c)
 {

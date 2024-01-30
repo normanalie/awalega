@@ -32,9 +32,9 @@ int main(void)
     }
 
     // showAbout(images, imgsContainers, currentPage);
-    // showMenu(images, imgsContainers);
-    showAwale(images, imgsContainers, P1, P2, GameStatus);
-    // showLeaderboard(images, imgsContainers, GameStatus);
+    showMenu(images, imgsContainers);
+    // showAwale(images, imgsContainers, P1, P2, GameStatus);
+    //  showLeaderboard(images, imgsContainers, GameStatus);
 
     char quit = 0;
     SDL_Event event;
@@ -48,6 +48,12 @@ int main(void)
         case SDL_QUIT:
             quit = 1;
             break;
+        case SDL_MOUSEBUTTONUP:
+            if (event.button.button == SDL_BUTTON_LEFT)
+            {
+                Point cursor = {event.button.x, event.button.y};
+                updateMenu(imgsContainers, cursor);
+            }
         }
     }
     destroyGui(&images);
