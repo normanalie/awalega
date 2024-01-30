@@ -12,6 +12,12 @@ int graphic_init()
         printf("Échec de l'initialisation de la SDL (%s)\n", SDL_GetError());
         return -1;
     }
+
+    if (TTF_Init() < 0)
+    {
+        printf("Echec de l'initialisation de SDL/TTF\n");
+        return -1;
+    }
     return 0;
 }
 
@@ -201,6 +207,7 @@ void draw_text(const char *text, Point topleft, int fontsize, Color textcolor)
     if (!font)
     {
         printf("[Graphic Lib] - Can't load font\n");
+        printf("%s",  TTF_GetError());
         return;
     }
 

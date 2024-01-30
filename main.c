@@ -24,8 +24,8 @@ int main(void)
     }
     
     showMenu(Images, Rectangles);
-    //showAwale(Images, Rectangles, P1, P2);
-
+    showAwale(Images, Rectangles, P1, P2);
+    
     char quit = 0;
     SDL_Event event;
     while (!quit)
