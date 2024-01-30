@@ -43,7 +43,7 @@ typedef struct {
     int selectedHole;      // Trou sélectionné à jouer
     int endgameType;       // Voir Macros "Endgame Types"
     int totalMoves;        // Nombre de coup totaux
-    int moveCountdown;      // Décompte le nombre de coup avant l'arrêt du jeu
+    int moveCountdown;     // Décompte le nombre de coup avant l'arrêt du jeu
 } GameStatusVar;
 
 // Info Joueur
