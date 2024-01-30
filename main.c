@@ -26,13 +26,16 @@ int main(void)
     GameStatus.totalMoves=0;
     GameStatus.moveCountdown=20;
 
+    int currentPage=0;
+
     for(int i=0; i<HOLES_PER_PLAYER; i++){
         P1.seeds[i]=SEEDS_PER_HOLE;
         P2.seeds[i]=SEEDS_PER_HOLE;
     }
     
+    //showAbout(Images, Rectangles, currentPage);
     //showMenu(Images, Rectangles);
-    showAwale(Images, Rectangles, P1, P2, GameStatus);
+    //showAwale(Images, Rectangles, P1, P2, GameStatus);
     //showLeaderboard(Images, Rectangles, GameStatus);
     
     char quit = 0;

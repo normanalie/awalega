@@ -56,6 +56,7 @@ typedef struct {
     SDL_Texture *sign_leaderboard;
     SDL_Texture *seed_number_sign;
     SDL_Texture *square_sign;
+    SDL_Texture *sign_about[2];
 } Misc;
 
 typedef struct {
@@ -114,6 +115,7 @@ typedef struct {
     Rect pvp;
     Rect title;
     Rect sign_leaderboard;
+    Rect sign_about;
 } Rect_misc;
 
 typedef struct {

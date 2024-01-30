@@ -33,7 +33,6 @@
 #define ENDGAME_NO_SEEDS_TO_MOVE 3       // Un joueur ne peux pas remplir les cases vides du joueur adverse
 #define ENDGAME_FORCED 99                // Abandon d'une partie
 
-
 // Variable de status du jeu
 typedef struct {
     int selectedMenu;      // Menu dans lequel on se trouve
@@ -44,6 +43,7 @@ typedef struct {
     int endgameType;       // Voir Macros "Endgame Types"
     int totalMoves;        // Nombre de coup totaux
     int moveCountdown;     // Décompte le nombre de coup avant l'arrêt du jeu
+    int isSoundON;         // *NEW*  Variable son -> On=1 / Off=0
 } GameStatusVar;
 
 // Info Joueur

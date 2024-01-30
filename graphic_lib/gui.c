@@ -123,3 +123,12 @@ void showLeaderboard(Image Images, Rectangle Rectangles, GameStatusVar GameStatu
         draw_text(s,Moves,24, Black);
     }  
 }
+
+void showAbout(Image Images, Rectangle Rectangles, int currentPage){
+    present_image(Images.background.about, Rectangles.bg.menu);
+    present_image(Images.misc.sign_about[currentPage], Rectangles.misc.sign_about);
+}
+
+void showGameModeSelection(Image Images, Rectangle Rectangles){
+    
+}

@@ -114,6 +114,7 @@ SDL_Texture *loadImage(const char path[])
 void init_Images(Image *Images){
     Images->background.menu=loadImage("images/menu_bg.bmp");
     Images->background.game=loadImage("images/game_bg.bmp");
+    Images->background.about=loadImage("images/menu_bg.bmp");
     Images->button.play=loadImage("images/play.bmp");
     Images->button.about=loadImage("images/about.bmp");
     Images->button.leaderboard=loadImage("images/leaderboard.bmp");
@@ -133,6 +134,8 @@ void init_Images(Image *Images){
     Images->button.mute=loadImage("images/mute.bmp");
     Images->button.unmute=loadImage("images/unmute.bmp");
     Images->button.replay=loadImage("images/replay.bmp");
+    Images->misc.sign_about[0]=loadImage("images/sign_about1.bmp");
+    Images->misc.sign_about[1]=loadImage("images/sign_about2.bmp");
 }
 
 void init_Rectangle(Rectangle *Rectangles){
@@ -142,6 +145,9 @@ void init_Rectangle(Rectangle *Rectangles){
     Rectangles->button.leaderboard.topleft.x=560; Rectangles->button.leaderboard.topleft.y=365; Rectangles->button.leaderboard.w=240; Rectangles->button.leaderboard.h=65;
     Rectangles->button.about.topleft.x=560; Rectangles->button.about.topleft.y=430; Rectangles->button.about.w=240; Rectangles->button.about.h=65;
     Rectangles->button.leave.topleft.x =1030; Rectangles->button.leave.topleft.y=645; Rectangles->button.leave.w=240; Rectangles->button.leave.h= 65;
+
+    //ABOUT
+    Rectangles->misc.sign_about.topleft.x= 340; Rectangles->misc.sign_about.topleft.y= 90; Rectangles->misc.sign_about.w= 650; Rectangles->misc.sign_about.h= 535;
 
     //AWALE
     Rectangles->bg.game.topleft.x=0; Rectangles->bg.game.topleft.y=0; Rectangles->bg.game.w=1280; Rectangles->bg.game.h=720;

@@ -11,5 +11,7 @@
 void showMenu(Image Images, Rectangle Rectangles);
 void showAwale(Image Images, Rectangle Rectangles, PlayerInfo P1, PlayerInfo P2, GameStatusVar GameStatus);
 void showLeaderboard(Image Images, Rectangle Rectangles, GameStatusVar GameStatus);
+void showAbout(Image Images, Rectangle Rectangles, int currentPage);
+void showGameModeSelection(Image Images, Rectangle Rectangles);
 
 #endif
