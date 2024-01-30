@@ -15,6 +15,8 @@ int main(void)
     PlayerInfo P2;
     P1.harvestedSeeds = 0;
     P2.harvestedSeeds = 0;
+    P1.moves = 0;
+    P2.moves = 0;
 
     GameStatusVar GameStatus;
     GameStatus.isGameJustEnded = 0;
