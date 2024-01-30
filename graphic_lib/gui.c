@@ -192,3 +192,28 @@ void updateMenu(Containers Rectangles, Point cursor)
         printf("Click leave\n");
     }
 }
+
+void updateLeaderboard(Containers Rectangles, Point cursor)
+{
+    // No button in leaderboard ??
+}
+
+void updateAbout(Containers Rectangles, Point cursor)
+{
+    // No button in leaderboard ??
+}
+
+void updateAwale(Containers Rectangles, Point cursor)
+{
+    for (int i = 0; i < HOLES_PER_PLAYER; i++)
+    {
+        if (is_in(cursor, Rectangles.awale.p1.seeds[i]))
+        {
+            printf("Click Player1 - Seeds %d\n", i);
+        }
+        if (is_in(cursor, Rectangles.awale.p2.seeds[i]))
+        {
+            printf("Click Player2 - Seeds %d\n", i);
+        }
+    }
+}
