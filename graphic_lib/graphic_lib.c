@@ -81,7 +81,7 @@ void draw_rect(Rect rectangle)
 void graphic_update()
 {
     SDL_RenderPresent(pRenderer);
-    //SDL_UpdateWindowSurface(pWindow); 
+    // SDL_UpdateWindowSurface(pWindow);
 }
 
 SDL_Event graphic_get_event()
@@ -111,86 +111,6 @@ SDL_Texture *loadImage(const char path[])
     return texture;
 }
 
-void init_Images(Image *Images){
-    Images->background.menu=loadImage("images/menu_bg.bmp");
-    Images->background.game=loadImage("images/game_bg.bmp");
-    Images->button.play=loadImage("images/play.bmp");
-    Images->button.about=loadImage("images/about.bmp");
-    Images->button.leaderboard=loadImage("images/leaderboard.bmp");
-    Images->button.leave=loadImage("images/leave.bmp");
-    Images->awale.one_seed=loadImage("images/one_seed.bmp");
-    Images->awale.two_seed=loadImage("images/two_seeds.bmp");
-    Images->awale.three_seed=loadImage("images/three_seeds.bmp");
-    Images->awale.four_seed=loadImage("images/four_seeds.bmp");
-    Images->awale.deck=loadImage("images/deck.bmp");
-    Images->misc.playerVSia=loadImage("images/playerVSia.bmp");
-    Images->misc.pvp=loadImage("images/pvp.bmp");
-    Images->misc.sign=loadImage("images/sign.bmp");
-    Images->misc.sign_leaderboard=loadImage("images/sign_leaderboard.bmp");
-    Images->button.menu=loadImage("images/menu.bmp");
-    Images->button.mute=loadImage("images/mute.bmp");
-    Images->button.unmute=loadImage("images/unmute.bmp");
-    Images->button.replay=loadImage("images/replay.bmp");
-}
-
-
-
-
-
-void init_Rectangle(Rectangle *Rectangles){
-    //MENU
-    Rectangles->bg.menu.topleft.x=0; Rectangles->bg.menu.topleft.y=0; Rectangles->bg.menu.w=1280; Rectangles->bg.menu.h=720;
-    Rectangles->button.play.topleft.x=560; Rectangles->button.play.topleft.y=300; Rectangles->button.play.w=240; Rectangles->button.play.h=65;
-    Rectangles->button.leaderboard.topleft.x=560; Rectangles->button.leaderboard.topleft.y=365; Rectangles->button.leaderboard.w=240; Rectangles->button.leaderboard.h=65;
-    Rectangles->button.about.topleft.x=560; Rectangles->button.about.topleft.y=430; Rectangles->button.about.w=240; Rectangles->button.about.h=65;
-    Rectangles->button.leave.topleft.x =1030; Rectangles->button.leave.topleft.y=645; Rectangles->button.leave.w=240; Rectangles->button.leave.h= 65;
-
-    //AWALE
-    Rectangles->bg.game.topleft.x=0; Rectangles->bg.game.topleft.y=0; Rectangles->bg.game.w=1280; Rectangles->bg.game.h=720;
-    Rectangles->awale.deck.topleft.x=340; Rectangles->awale.deck.topleft.y=235; Rectangles->awale.deck.w=620; Rectangles->awale.deck.h=250; 
-
-    //PSEUDO Player 1
-    Rectangles->awale.p1.sign.topleft.x=500; Rectangles->awale.p1.sign.topleft.y=40; Rectangles->awale.p1.sign.w= 300; Rectangles->awale.p1.sign.h=90;
-
-    //PSEUDO Player 2
-    Rectangles->awale.p2.sign.topleft.x=500; Rectangles->awale.p2.sign.topleft.y=585; Rectangles->awale.p2.sign.w= 300; Rectangles->awale.p2.sign.h=90;
-
-    //Seeds Player 1
-    for(int i=0; i<HOLES_PER_PLAYER; i++){
-        Rectangles->awale.p1.seeds[i].topleft.x=AWALE_1ST_SEED_POS_X + i*SEED_SEPARATION; 
-        Rectangles->awale.p1.seeds[i].topleft.y=AWALE_P1_1ST_SEED_POS_Y; 
-        Rectangles->awale.p1.seeds[i].w=SEED_WIDTH; 
-        Rectangles->awale.p1.seeds[i].h=SEED_HEIGHT;
-    }
-
-    //Seeds Player 2
-    for(int i=0; i<HOLES_PER_PLAYER; i++){
-        Rectangles->awale.p2.seeds[i].topleft.x=AWALE_1ST_SEED_POS_X + i*SEED_SEPARATION; 
-        Rectangles->awale.p2.seeds[i].topleft.y=AWALE_P2_1ST_SEED_POS_Y; 
-        Rectangles->awale.p2.seeds[i].w=SEED_WIDTH; 
-        Rectangles->awale.p2.seeds[i].h=SEED_HEIGHT;
-    }
-
-    //Sign Leaderboard
-    Rectangles->misc.sign_leaderboard.topleft.x= 340; Rectangles->misc.sign_leaderboard.topleft.y= 110 ; Rectangles->misc.sign_leaderboard.w= 600; Rectangles->misc.sign_leaderboard.h= 495;
-}
-
-void destroy_Images(Image *Images){
-    SDL_DestroyTexture(Images->background.menu);
-    SDL_DestroyTexture(Images->background.game);
-    SDL_DestroyTexture(Images->button.play);
-    SDL_DestroyTexture(Images->button.about);
-    SDL_DestroyTexture(Images->button.leaderboard);
-    SDL_DestroyTexture(Images->button.leave);
-    SDL_DestroyTexture(Images->awale.one_seed);
-    SDL_DestroyTexture(Images->awale.two_seed);
-    SDL_DestroyTexture(Images->awale.three_seed);
-    SDL_DestroyTexture(Images->awale.four_seed);
-    SDL_DestroyTexture(Images->awale.deck);
-    SDL_DestroyTexture(Images->misc.playerVSia);
-    SDL_DestroyTexture(Images->misc.pvp);
-}
-
 void present_image(SDL_Texture *image, Rect destination)
 {
     SDL_Rect src = {0, 0, 0, 0};
@@ -215,7 +135,7 @@ void draw_text(const char *text, Point topleft, int fontsize, Color textcolor)
     if (!font)
     {
         printf("[Graphic Lib] - Can't load font\n");
-        printf("%s",  TTF_GetError());
+        printf("%s", TTF_GetError());
         return;
     }
 

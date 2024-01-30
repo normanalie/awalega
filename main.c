@@ -7,29 +7,25 @@
 
 int main(void)
 {
-    graphic_init();
-    create_window(1280, 720, "Awaléga");
-
-    Image Images;
-    init_Images(&Images);
-
-    Rectangle Rectangles;
-    init_Rectangle(&Rectangles);
+    Images images;
+    Containers imgsContainers;
+    initGui(&images, &imgsContainers);
 
     PlayerInfo P1;
     PlayerInfo P2;
     GameStatusVar GameStatus;
-    GameStatus.isGameJustEnded=0;
+    GameStatus.isGameJustEnded = 0;
 
-    for(int i=0; i<HOLES_PER_PLAYER; i++){
-        P1.seeds[i]=SEEDS_PER_HOLE;
-        P2.seeds[i]=SEEDS_PER_HOLE;
+    for (int i = 0; i < HOLES_PER_PLAYER; i++)
+    {
+        P1.seeds[i] = SEEDS_PER_HOLE;
+        P2.seeds[i] = SEEDS_PER_HOLE;
     }
-    
-    showMenu(Images, Rectangles);
-    showAwale(Images, Rectangles, P1, P2);
-    showLeaderboard(Images, Rectangles, GameStatus);
-    
+
+    showMenu(images, imgsContainers);
+    // showAwale(images, imgsContainers, P1, P2);
+    // showLeaderboard(images, imgsContainers, GameStatus);
+
     char quit = 0;
     SDL_Event event;
     while (!quit)
@@ -44,9 +40,6 @@ int main(void)
             break;
         }
     }
-
-    destroy_Images(&Images);
-    destroy_window();
-
+    destroyGui(&images);
     return 0;
 }
