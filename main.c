@@ -7,19 +7,14 @@
 
 int main(void)
 {
-    graphic_init();
-    create_window(1280, 720, "Awaléga");
-
-    Image Images;
-    init_Images(&Images);
-
-    Rectangle Rectangles;
-    init_Rectangle(&Rectangles);
+    Images images;
+    Containers imgsContainers;
+    initGui(&images, &imgsContainers);
 
     PlayerInfo P1;
     PlayerInfo P2;
-    P1.harvestedSeeds=0;
-    P2.harvestedSeeds=0;
+    P1.harvestedSeeds = 0;
+    P2.harvestedSeeds = 0;
 
     GameStatusVar GameStatus;
     GameStatus.isGameJustEnded=0;
@@ -28,9 +23,10 @@ int main(void)
 
     int currentPage=0;
 
-    for(int i=0; i<HOLES_PER_PLAYER; i++){
-        P1.seeds[i]=SEEDS_PER_HOLE;
-        P2.seeds[i]=SEEDS_PER_HOLE;
+    for (int i = 0; i < HOLES_PER_PLAYER; i++)
+    {
+        P1.seeds[i] = SEEDS_PER_HOLE;
+        P2.seeds[i] = SEEDS_PER_HOLE;
     }
     
     //showAbout(Images, Rectangles, currentPage);
@@ -52,9 +48,6 @@ int main(void)
             break;
         }
     }
-
-    destroy_Images(&Images);
-    destroy_window();
-
+    destroyGui(&images);
     return 0;
 }

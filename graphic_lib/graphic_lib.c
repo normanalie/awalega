@@ -81,7 +81,7 @@ void draw_rect(Rect rectangle)
 void graphic_update()
 {
     SDL_RenderPresent(pRenderer);
-    //SDL_UpdateWindowSurface(pWindow); 
+    // SDL_UpdateWindowSurface(pWindow);
 }
 
 SDL_Event graphic_get_event()
@@ -227,7 +227,7 @@ void draw_text(const char *text, Point topleft, int fontsize, Color textcolor)
     if (!font)
     {
         printf("[Graphic Lib] - Can't load font\n");
-        printf("%s",  TTF_GetError());
+        printf("%s", TTF_GetError());
         return;
     }
 

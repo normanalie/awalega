@@ -10,7 +10,7 @@ dir:
 	mkdir -p build
 	mkdir -p bin
 
-build: graphic_lib.o shapes.o colors.o score_handler.o gui.o main.o
+build: shapes.o colors.o images.o score_handler.o graphic_lib.o gui.o main.o
 
 main.o: main.c
 	$(CC) $(CFLAGS) -c main.c -o build/main.o $(LIBS)
@@ -20,6 +20,9 @@ shapes.o: graphic_lib/shapes.c graphic_lib/shapes.h
 
 colors.o: graphic_lib/colors.c graphic_lib/colors.h
 	$(CC) $(CFLAGS) -c graphic_lib/colors.c -o build/colors.o $(LIBS)
+
+images.o: graphic_lib/images.c graphic_lib/images.h graphic_lib/images_config.h
+	$(CC) $(CFLAGS) -c graphic_lib/images.c -o build/images.o $(LIBS)
 
 graphic_lib.o: graphic_lib/graphic_lib.c graphic_lib/graphic_lib.h
 	$(CC) $(CFLAGS) -c graphic_lib/graphic_lib.c -o build/graphic_lib.o $(LIBS)

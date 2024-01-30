@@ -1,6 +1,16 @@
 #include "gui.h"
 
-void showMenu(Image Images, Rectangle Rectangles){
+void initGui(Images *pImages, Containers *pRectangles)
+{
+    graphic_init();
+    create_window(1280, 720, "Awaléga");
+    init_Images(pImages);
+    init_Images_Containers(pRectangles);
+    return;
+}
+
+void showMenu(Images Images, Containers Rectangles)
+{
     present_image(Images.background.menu, Rectangles.bg.menu);
     present_image(Images.button.play, Rectangles.button.play);
     present_image(Images.button.leaderboard, Rectangles.button.leaderboard);
@@ -8,120 +18,91 @@ void showMenu(Image Images, Rectangle Rectangles){
     present_image(Images.button.leave, Rectangles.button.leave);
 }
 
-void showAwale(Image Images, Rectangle Rectangles, PlayerInfo P1, PlayerInfo P2, GameStatusVar GameStatus){
+void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P2, GameStatusVar GameStatus)
+{
     present_image(Images.background.game, Rectangles.bg.game);
     present_image(Images.awale.deck, Rectangles.awale.deck);
 
     //Signs Players
-    present_image(Images.misc.pseudo_sign, Rectangles.awale.p1.pseudo_sign);
-    present_image(Images.misc.pseudo_sign, Rectangles.awale.p2.pseudo_sign);
-    present_image(Images.misc.seed_number_sign, Rectangles.awale.p1.seed_number_sign);
-    present_image(Images.misc.seed_number_sign, Rectangles.awale.p2.seed_number_sign);
-    present_image(Images.misc.square_sign, Rectangles.awale.p1.score_sign);
-    present_image(Images.misc.square_sign, Rectangles.awale.p2.score_sign);
-    present_image(Images.misc.square_sign, Rectangles.awale.p1.moves_sign);
-    present_image(Images.misc.square_sign, Rectangles.awale.p2.moves_sign);
+    present_image(Images.misc.sign, Rectangles.awale.p1.sign);
+    present_image(Images.misc.sign, Rectangles.awale.p2.sign);
 
-    //OTHERS SIGNS
-    present_image(Images.misc.square_sign, Rectangles.awale.total_moves);
-    present_image(Images.misc.square_sign, Rectangles.awale.move_countdown);
-    Point total_moves; Point move_countdown;
-    total_moves.x = 1103; total_moves.y= 350; move_countdown.x= 168; move_countdown.y= 350;
-    char moves[3];
-    char countdown[3];
-    sprintf(moves, "%.2d", GameStatus.totalMoves);
-    draw_text(moves,total_moves,32, Black);
-    sprintf(countdown, "%.2d", GameStatus.moveCountdown);
-    draw_text(countdown,move_countdown,32, Black);
+    // Seeds Player 1
+    for (int i = 0; i < HOLES_PER_PLAYER; i++)
+    {
 
-
-    //NOMBRE DE GRAINES PAR TROU
-    Point Player1_lign; Point Player2_lign;
-    Player1_lign.y = POS_Y_NUMBER_OF_SEED_PLAYER1; Player2_lign.y = POS_Y_NUMBER_OF_SEED_PLAYER2;
-    for(int i=0; i<6; i++){
-        Player1_lign.x= POS_X_1ST_NUMBER_OF_SEED+ SEPARATION_NUMBER_OF_SEED*i;
-        Player2_lign.x= POS_X_1ST_NUMBER_OF_SEED + SEPARATION_NUMBER_OF_SEED*i;
-        char seeds[3];
-        sprintf(seeds, "%.2d", P1.seeds[i]);
-        draw_text(seeds,Player1_lign,32, Black);
-        sprintf(seeds, "%.2d", P2.seeds[i]);
-        draw_text(seeds,Player2_lign,32, Black);
-    }
-
-    //NOMBRE DE COUPS DES JOUEURS
-    Point Player1_moves; Point Player2_moves;
-    Player1_moves.x= 860; Player2_moves.x= 860; Player1_moves.y=68; Player2_moves.y=618;
-    char moves1[3];
-    char moves2[3];
-    sprintf(moves1, "%.2d", P1.moves);
-    draw_text(moves1,Player1_moves,36, Black);
-    sprintf(moves2, "%.2d", P2.moves);
-    draw_text(moves2,Player2_moves,36, Black);
-
-    //SCORE DES JOUEURS
-    Point Player1_score; Point Player2_score;
-    Player1_score.x= 395; Player2_score.x= 395; Player1_score.y=68; Player2_score.y=618;
-    char score1[3];
-    char score2[3];
-    sprintf(score1, "%.2d", P1.harvestedSeeds);
-    draw_text(score1,Player1_score,36, Black);
-    sprintf(score2, "%.2d", P2.harvestedSeeds);
-    draw_text(score2,Player2_score,36, Black);
-
-    //Seeds Player 1
-    for(int i=0; i<HOLES_PER_PLAYER; i++){
-
-        if(P1.seeds[i]==1)
+        if (P1.seeds[i] == 1)
             present_image(Images.awale.one_seed, Rectangles.awale.p1.seeds[i]);
 
-        else if(P1.seeds[i]==2)
+        else if (P1.seeds[i] == 2)
             present_image(Images.awale.two_seed, Rectangles.awale.p1.seeds[i]);
 
-        else if(P1.seeds[i]==3)
+        else if (P1.seeds[i] == 3)
             present_image(Images.awale.three_seed, Rectangles.awale.p1.seeds[i]);
 
-        else if(P1.seeds[i]>=4)
+        else if (P1.seeds[i] >= 4)
             present_image(Images.awale.four_seed, Rectangles.awale.p1.seeds[i]);
     }
 
-    //Seeds Player 2
-    for(int i=0; i<HOLES_PER_PLAYER; i++){
+    // Seeds Player 2
+    for (int i = 0; i < HOLES_PER_PLAYER; i++)
+    {
 
-        if(P2.seeds[i]==1)
+        if (P2.seeds[i] == 1)
             present_image(Images.awale.one_seed, Rectangles.awale.p2.seeds[i]);
 
-        else if(P2.seeds[i]==2)
+        else if (P2.seeds[i] == 2)
             present_image(Images.awale.two_seed, Rectangles.awale.p2.seeds[i]);
 
-        else if(P2.seeds[i]==3)
+        else if (P2.seeds[i] == 3)
             present_image(Images.awale.three_seed, Rectangles.awale.p2.seeds[i]);
 
-        else if(P2.seeds[i]>=4)
+        else if (P2.seeds[i] >= 4)
             present_image(Images.awale.four_seed, Rectangles.awale.p2.seeds[i]);
     }
 }
 
-void showLeaderboard(Image Images, Rectangle Rectangles, GameStatusVar GameStatus){
+void showLeaderboard(Images Images, Containers Rectangles, GameStatusVar GameStatus)
+{
     PlayerScore RecordedScores[5];
     readScores(RecordedScores);
     present_image(Images.background.menu, Rectangles.bg.menu);
     present_image(Images.misc.sign_leaderboard, Rectangles.misc.sign_leaderboard);
 
-    Point Name; Point Score; Point Moves;
+    Point Name;
+    Point Score;
+    Point Moves;
 
-    Name.x=495; Score.x=650; Moves.x=800;
+    Name.x = 495;
+    Score.x = 650;
+    Moves.x = 800;
 
     for(int i=0; i<5; i++){
         Name.y=FIRST_NAME_POS_Y + LEADERBOARD_SEPARATION *i;
         Score.y=FIRST_NAME_POS_Y + LEADERBOARD_SEPARATION *i;
         Moves.y=FIRST_NAME_POS_Y + LEADERBOARD_SEPARATION *i;
-        char s[6];
+        char s[5];
         draw_text(RecordedScores[i].name,Name,24, Black);
         sprintf(s, "%.2d", RecordedScores[i].score);
-        draw_text(s,Score,24, Black);
+        draw_text(s, Score, 24, Black);
         sprintf(s, "%.2d", RecordedScores[i].moves);
-        draw_text(s,Moves,24, Black);
-    }  
+        draw_text(s, Moves, 24, Black);
+    }
+}
+
+void destroyGui(Images *pImages)
+{
+    destroy_Images(pImages);
+    destroy_window();
+}
+
+void showAbout(Image Images, Rectangle Rectangles, int currentPage){
+    present_image(Images.background.about, Rectangles.bg.menu);
+    present_image(Images.misc.sign_about[currentPage], Rectangles.misc.sign_about);
+}
+
+void showGameModeSelection(Image Images, Rectangle Rectangles){
+    
 }
 
 void showAbout(Image Images, Rectangle Rectangles, int currentPage){

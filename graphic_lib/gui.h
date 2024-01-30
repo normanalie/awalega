@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "shapes.h"
 #include "graphic_lib.h"
 #include "../awale_game_macros_structs.h"
 #include "../score_handler.h"
