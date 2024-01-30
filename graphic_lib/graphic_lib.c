@@ -123,10 +123,10 @@ void init_Images(Image *Images){
 
 void init_Rectangle(Rectangle *Rectangles){
     Rectangles->bg.menu.topleft.x=0; Rectangles->bg.menu.topleft.y=0; Rectangles->bg.menu.w=1280; Rectangles->bg.menu.h=720;
-    Rectangles->button.play.topleft.x=560; Rectangles->button.play.topleft.y=300; Rectangles->button.play.w=180; Rectangles->button.play.h=60;
-    Rectangles->button.leaderboard.topleft.x=560; Rectangles->button.leaderboard.topleft.y=345; Rectangles->button.leaderboard.w=180; Rectangles->button.leaderboard.h=60;
-    Rectangles->button.about.topleft.x=560; Rectangles->button.about.topleft.y=390; Rectangles->button.about.w=180; Rectangles->button.about.h=60;
-    Rectangles->button.leave.topleft.x =1100; Rectangles->button.leave.topleft.y=660; Rectangles->button.leave.w=180; Rectangles->button.leave.h= 60;
+    Rectangles->button.play.topleft.x=560; Rectangles->button.play.topleft.y=300; Rectangles->button.play.w=180; Rectangles->button.play.h=45;
+    Rectangles->button.leaderboard.topleft.x=560; Rectangles->button.leaderboard.topleft.y=350; Rectangles->button.leaderboard.w=180; Rectangles->button.leaderboard.h=45;
+    Rectangles->button.about.topleft.x=560; Rectangles->button.about.topleft.y=400; Rectangles->button.about.w=180; Rectangles->button.about.h=45;
+    Rectangles->button.leave.topleft.x =1090; Rectangles->button.leave.topleft.y=665; Rectangles->button.leave.w=180; Rectangles->button.leave.h= 45;
 }
 
 void destroy_Images(Image *Images){
@@ -152,4 +152,49 @@ void present_image(SDL_Texture *image, Rect destination)
     SDL_QueryTexture(image, NULL, NULL, &src.w, &src.h);
     SDL_RenderCopy(pRenderer, image, &src, &dst);
     SDL_RenderPresent(pRenderer);
+}
+
+void draw_text(const char *text, Point topleft, int fontsize, Color textcolor)
+{
+    if (!fontsize)
+    {
+
+        fontsize = 12;
+    }
+    if (!textcolor)
+    {
+        textcolor = White;
+    }
+    TTF_Font *font = TTF_OpenFont("./fonts/PUSAB.ttf", fontsize);
+    if (!font)
+    {
+        printf("[Graphic Lib] - Can't load font\n");
+        return;
+    }
+
+    ColorRGB c = hex_to_rgb(textcolor);
+    SDL_Color color = {c.r, c.g, c.b, 255};
+
+    SDL_Surface *surfaceMessage =
+        TTF_RenderText_Solid(font, text, color);
+
+    SDL_Texture *Message = SDL_CreateTextureFromSurface(pRenderer, surfaceMessage);
+
+    // Obtenir les dimensions du texte rendu
+    int textWidth, textHeight;
+    TTF_SizeText(font, text, &textWidth, &textHeight);
+
+    // Ajuster le rectangle contenant le texte en fonction de ses dimensions
+    SDL_Rect Message_rect;
+    Message_rect.x = topleft.x;
+    Message_rect.y = topleft.y;
+    Message_rect.w = textWidth;
+    Message_rect.h = textHeight;
+
+    SDL_RenderCopy(pRenderer, Message, NULL, &Message_rect);
+    SDL_RenderPresent(pRenderer);
+
+    SDL_FreeSurface(surfaceMessage);
+    SDL_DestroyTexture(Message);
+    return;
 }
