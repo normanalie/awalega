@@ -9,13 +9,14 @@ void initGui(Images *pImages, Containers *pRectangles)
     return;
 }
 
-void showMenu(Images Images, Containers Rectangles)
+void showMenu(Images Images, Containers Rectangles, GameStatusVar GameStatus)
 {
     present_image(Images.background.menu, Rectangles.bg.menu);
     present_image(Images.button.play, Rectangles.button.play);
     present_image(Images.button.leaderboard, Rectangles.button.leaderboard);
     present_image(Images.button.about, Rectangles.button.about);
     present_image(Images.button.leave, Rectangles.button.leave);
+    showVolumeButton(Images, Rectangles, GameStatus);
     graphic_update();
 }
 
@@ -149,6 +150,8 @@ void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P
     // Player_win_sign
     if (GameStatus.isGameJustEnded == 1)
         present_image(Images.misc.player_win_sign, Rectangles.misc.player_win_sign);
+    showVolumeButton(Images, Rectangles, GameStatus);
+    showMenuButton(Images, Rectangles);
     graphic_update();
 }
 
@@ -180,40 +183,45 @@ void showLeaderboard(Images Images, Containers Rectangles, GameStatusVar GameSta
         draw_text(s, Moves, 24, Black);
     }
 
-    showReplayButton(Images, Rectangles, GameStatus);
+    showVolumeButton(Images, Rectangles, GameStatus);
+    showMenuButton(Images, Rectangles);
     graphic_update();
 }
 
-void showAbout(Images Images, Containers Rectangles, int currentPage)
+void showAbout(Images Images, Containers Rectangles, GameStatusVar GameStatus, int currentPage)
 {
     present_image(Images.background.about, Rectangles.bg.menu);
     present_image(Images.misc.sign_about[currentPage], Rectangles.misc.sign_about);
     present_image(Images.misc.RL_button[currentPage], Rectangles.misc.RL_button[currentPage]);
+    showVolumeButton(Images, Rectangles, GameStatus);
+    showMenuButton(Images, Rectangles);
     graphic_update();
 }
 
-void showGameModeSelection(Images Images, Containers Rectangles)
+void showGameModeSelection(Images Images, Containers Rectangles, GameStatusVar GameStatus)
 {
     present_image(Images.background.game, Rectangles.bg.game);
     present_image(Images.misc.pvp, Rectangles.misc.pvp);
     present_image(Images.misc.playerVSia, Rectangles.misc.playerVSia);
     present_image(Images.button.playerVSia, Rectangles.button.playerVSia);
     present_image(Images.button.pvp, Rectangles.button.pvp);
+    showVolumeButton(Images, Rectangles, GameStatus);
+    showMenuButton(Images, Rectangles);
     graphic_update();
 }
 
-void showInitPlayer(Images Images, Containers Rectangles, int currentPlayer)
+void showInitPlayer(Images Images, Containers Rectangles, GameStatusVar GameStatus, int currentPlayer)
 {
     present_image(Images.background.game, Rectangles.bg.game);
     present_image(Images.misc.enter_name[currentPlayer - 1], Rectangles.misc.enter_name);
+    showMenuButton(Images, Rectangles);
+    showVolumeButton(Images, Rectangles, GameStatus);
     graphic_update();
 }
 
-void showMenuButton(Images Images, Containers Rectangles, GameStatusVar GameStatus)
+void showMenuButton(Images Images, Containers Rectangles)
 {
-    if (GameStatus.selectedMenu != SECTION_HOME)
-        present_image(Images.button.menu, Rectangles.button.menu);
-    graphic_update();
+    present_image(Images.button.menu, Rectangles.button.menu);
 }
 
 void showVolumeButton(Images Images, Containers Rectangles, GameStatusVar GameStatus)
@@ -222,16 +230,11 @@ void showVolumeButton(Images Images, Containers Rectangles, GameStatusVar GameSt
         present_image(Images.button.volume[1], Rectangles.button.volume);
     else
         present_image(Images.button.volume[0], Rectangles.button.volume);
-    graphic_update();
 }
 
-void showReplayButton(Images Images, Containers Rectangles, GameStatusVar GameStatus)
+void showReplayButton(Images Images, Containers Rectangles)
 {
-    if (GameStatus.isGameJustEnded == 1)
-    {
-        present_image(Images.button.replay, Rectangles.button.replay);
-    }
-    graphic_update();
+    present_image(Images.button.replay, Rectangles.button.replay);
 }
 
 void destroyGui(Images *pImages)
@@ -317,6 +320,7 @@ void guiClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
     {
     case SECTION_HOME:
         menuClickHandler(Rectangles, cursor, pSelectedMenu);
+        
         break;
     case SECTION_SCORE:
         leaderboardClickHandler(Rectangles, cursor, pSelectedMenu);

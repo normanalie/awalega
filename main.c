@@ -16,6 +16,7 @@ void initGameStatus(GameStatusVar *pGameStatus)
     pGameStatus->endgameType = NO_ENDGAME;          // Voir Macros "Endgame Types"
     pGameStatus->totalMoves = 0;                    // Nombre de coups totaux
     pGameStatus->moveCountdown = MOVES_BEFORE_STOP; // Décompte le nombre de coup avant l'arrêt du jeu
+    pGameStatus->isSoundON = 1;
     for (int i = 0; i < HOLES_PER_PLAYER; i++)
     {
         pGameStatus->validHoles[i] = 1;
@@ -50,7 +51,7 @@ int main(void)
             if (redraw)
             {
                 redraw = false;
-                showMenu(images, imgsContainers);
+                showMenu(images, imgsContainers, GameStatus);
             }
             GameStatus.isGameJustEnded = 0;
             break;
@@ -95,14 +96,18 @@ int main(void)
                 redraw = false;
                 showLeaderboard(images, imgsContainers, GameStatus);
             }
-            // showScoreSectionMenuSelection(&GameStatus);
+            if (GameStatus.isGameJustEnded)
+            {
+                showReplayButton(images, imgsContainers);
+                graphic_update();
+            }
             break;
 
         case SECTION_ABOUT: // Affichage "A propos du jeu"
             if (redraw)
             {
                 redraw = false;
-                showAbout(images, imgsContainers, aboutCurrentPage);
+                showAbout(images, imgsContainers, GameStatus, aboutCurrentPage);
             }
             break;
 
