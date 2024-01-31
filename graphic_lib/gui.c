@@ -33,41 +33,49 @@ void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P
     present_image(Images.misc.square_sign, Rectangles.awale.p1.moves_sign);
     present_image(Images.misc.square_sign, Rectangles.awale.p2.moves_sign);
 
-    //TEXTES
+    // TEXTES
     present_image(Images.misc.moves_before_stop_text, Rectangles.awale.moves_before_stop_text);
     present_image(Images.misc.total_moves_text, Rectangles.awale.total_moves_text);
 
-    //OTHERS SIGNS
+    // OTHERS SIGNS
     present_image(Images.misc.square_sign, Rectangles.awale.total_moves_sign);
     present_image(Images.misc.square_sign, Rectangles.awale.move_countdown_sign);
-    Point total_moves; Point move_countdown;
-    total_moves.x = 1103; total_moves.y= 350; move_countdown.x= 168; move_countdown.y= 350;
+    Point total_moves;
+    Point move_countdown;
+    total_moves.x = 1103;
+    total_moves.y = 350;
+    move_countdown.x = 168;
+    move_countdown.y = 350;
 
     char moves[3];
     char countdown[3];
     sprintf(moves, "%.2d", GameStatus.totalMoves);
     draw_text(moves, total_moves, 32, Black);
     sprintf(countdown, "%.2d", GameStatus.moveCountdown);
-    draw_text(countdown,move_countdown,32, Black);
+    draw_text(countdown, move_countdown, 32, Black);
 
     // TOUR DES JOUEURS
-    if(GameStatus.playerTurn==1){
+    if (GameStatus.playerTurn == 1)
+    {
         present_image(Images.misc.player_turn_radio[0], Rectangles.awale.p1.player_turn_radio);
         present_image(Images.misc.player_turn_radio[1], Rectangles.awale.p2.player_turn_radio);
     }
 
-    else{
+    else
+    {
         present_image(Images.misc.player_turn_radio[1], Rectangles.awale.p1.player_turn_radio);
         present_image(Images.misc.player_turn_radio[0], Rectangles.awale.p2.player_turn_radio);
     }
 
-
-    //NOMBRE DE GRAINES PAR TROU
-    Point Player1_lign; Point Player2_lign;
-    Player2_lign.y = POS_Y_NUMBER_OF_SEED_PLAYER2; Player1_lign.y = POS_Y_NUMBER_OF_SEED_PLAYER1;
-    for(int i=0; i<6; i++){
-        Player1_lign.x= POS_X_1ST_NUMBER_OF_SEED+ SEPARATION_NUMBER_OF_SEED*i;
-        Player2_lign.x= POS_X_1ST_NUMBER_OF_SEED + SEPARATION_NUMBER_OF_SEED*i;
+    // NOMBRE DE GRAINES PAR TROU
+    Point Player1_lign;
+    Point Player2_lign;
+    Player2_lign.y = POS_Y_NUMBER_OF_SEED_PLAYER2;
+    Player1_lign.y = POS_Y_NUMBER_OF_SEED_PLAYER1;
+    for (int i = 0; i < 6; i++)
+    {
+        Player1_lign.x = POS_X_1ST_NUMBER_OF_SEED + SEPARATION_NUMBER_OF_SEED * i;
+        Player2_lign.x = POS_X_1ST_NUMBER_OF_SEED + SEPARATION_NUMBER_OF_SEED * i;
         char seeds[3];
         sprintf(seeds, "%.2d", P1.seeds[i]);
         draw_text(seeds, Player1_lign, 32, Black);
@@ -75,9 +83,13 @@ void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P
         draw_text(seeds, Player2_lign, 32, Black);
     }
 
-    //NOMBRE DE COUPS DES JOUEURS
-    Point Player1_moves; Point Player2_moves;
-    Player1_moves.x= 860; Player2_moves.x= 860; Player2_moves.y=68; Player1_moves.y=618;
+    // NOMBRE DE COUPS DES JOUEURS
+    Point Player1_moves;
+    Point Player2_moves;
+    Player1_moves.x = 860;
+    Player2_moves.x = 860;
+    Player2_moves.y = 68;
+    Player1_moves.y = 618;
     char moves1[3];
     char moves2[3];
     sprintf(moves1, "%.2d", P1.moves);
@@ -85,9 +97,13 @@ void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P
     sprintf(moves2, "%.2d", P2.moves);
     draw_text(moves2, Player2_moves, 36, Black);
 
-    //SCORE DES JOUEURS
-    Point Player1_score; Point Player2_score;
-    Player1_score.x= 395; Player2_score.x= 395; Player2_score.y=68; Player1_score.y=618;
+    // SCORE DES JOUEURS
+    Point Player1_score;
+    Point Player2_score;
+    Player1_score.x = 395;
+    Player2_score.x = 395;
+    Player2_score.y = 68;
+    Player1_score.y = 618;
     char score1[3];
     char score2[3];
     sprintf(score1, "%.2d", P1.harvestedSeeds);
@@ -129,8 +145,8 @@ void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P
             present_image(Images.awale.four_seed, Rectangles.awale.p2.seeds[i]);
     }
 
-    //Player_win_sign
-    if(GameStatus.isGameJustEnded==1)
+    // Player_win_sign
+    if (GameStatus.isGameJustEnded == 1)
         present_image(Images.misc.player_win_sign, Rectangles.misc.player_win_sign);
 }
 
@@ -162,7 +178,7 @@ void showLeaderboard(Images Images, Containers Rectangles, GameStatusVar GameSta
         draw_text(s, Moves, 24, Black);
     }
 
-    showReplayButton(Images,  Rectangles, GameStatus);
+    showReplayButton(Images, Rectangles, GameStatus);
 }
 
 void showAbout(Images Images, Containers Rectangles, int currentPage)
@@ -181,25 +197,30 @@ void showGameModeSelection(Images Images, Containers Rectangles)
     present_image(Images.button.pvp, Rectangles.button.pvp);
 }
 
-void showInitPlayer(Images Images, Containers Rectangles, int currentPlayer){
+void showInitPlayer(Images Images, Containers Rectangles, int currentPlayer)
+{
     present_image(Images.background.game, Rectangles.bg.game);
-    present_image(Images.misc.enter_name[currentPlayer-1], Rectangles.misc.enter_name);
+    present_image(Images.misc.enter_name[currentPlayer - 1], Rectangles.misc.enter_name);
 }
 
-void showMenuButton(Images Images, Containers Rectangles, GameStatusVar GameStatus){
-    if(GameStatus.selectedMenu!=SECTION_HOME)
+void showMenuButton(Images Images, Containers Rectangles, GameStatusVar GameStatus)
+{
+    if (GameStatus.selectedMenu != SECTION_HOME)
         present_image(Images.button.menu, Rectangles.button.menu);
 }
 
-void showVolumeButton(Images Images, Containers Rectangles, GameStatusVar GameStatus){
-    if(GameStatus.isSoundON==1)
+void showVolumeButton(Images Images, Containers Rectangles, GameStatusVar GameStatus)
+{
+    if (GameStatus.isSoundON == 1)
         present_image(Images.button.volume[1], Rectangles.button.volume);
     else
         present_image(Images.button.volume[0], Rectangles.button.volume);
 }
 
-void showReplayButton(Images Images, Containers Rectangles, GameStatusVar GameStatus){
-    if(GameStatus.isGameJustEnded==1){
+void showReplayButton(Images Images, Containers Rectangles, GameStatusVar GameStatus)
+{
+    if (GameStatus.isGameJustEnded == 1)
+    {
         present_image(Images.button.replay, Rectangles.button.replay);
     }
 }
@@ -254,6 +275,7 @@ void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, Pl
     {
         if (is_in(cursor, Rectangles.awale.p1.seeds[i]))
         {
+            printf("Click\n");
             if (pGameStatus->playerTurn == 1)
             {
                 playMove(pP1, pP2, pGameStatus);
@@ -261,6 +283,7 @@ void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, Pl
         }
         if (is_in(cursor, Rectangles.awale.p2.seeds[i]))
         {
+            printf("Click\n");
             if (pGameStatus->playerTurn == 2)
             {
                 playMove(pP1, pP2, pGameStatus);

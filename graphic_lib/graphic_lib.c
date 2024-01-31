@@ -117,7 +117,7 @@ void present_image(SDL_Texture *image, Rect destination)
     SDL_Rect dst = {destination.topleft.x, destination.topleft.y, destination.w, destination.h};
     SDL_QueryTexture(image, NULL, NULL, &src.w, &src.h);
     SDL_RenderCopy(pRenderer, image, &src, &dst);
-    SDL_RenderPresent(pRenderer);
+    // SDL_RenderPresent(pRenderer);
 }
 
 void draw_text(const char *text, Point topleft, int fontsize, Color textcolor)
@@ -159,7 +159,7 @@ void draw_text(const char *text, Point topleft, int fontsize, Color textcolor)
     Message_rect.h = textHeight;
 
     SDL_RenderCopy(pRenderer, Message, NULL, &Message_rect);
-    SDL_RenderPresent(pRenderer);
+    // SDL_RenderPresent(pRenderer);
 
     SDL_FreeSurface(surfaceMessage);
     SDL_DestroyTexture(Message);

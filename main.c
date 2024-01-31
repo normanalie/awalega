@@ -94,14 +94,12 @@ int main(void)
             break;
         }
 
-        graphic_update();
         event = graphic_get_event();
 
         switch (event.type)
         {
         case SDL_QUIT:
             GameStatus.selectedMenu = SECTION_EXIT;
-            break;
         case SDL_MOUSEBUTTONUP:
             if (event.button.button == SDL_BUTTON_LEFT)
             {
@@ -116,6 +114,9 @@ int main(void)
                     guiClickHandler(imgsContainers, cursor, &GameStatus.selectedMenu);
                 }
             }
+        default:
+            graphic_update();
+            break;
         }
 
     } while (GameStatus.selectedMenu != SECTION_EXIT);
