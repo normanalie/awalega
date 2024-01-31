@@ -178,7 +178,7 @@ void menuClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
     if (is_in(cursor, Rectangles.button.play))
     {
         printf("Click play\n");
-        *pSelectedMenu = SECTION_GAME;
+        *pSelectedMenu = SECTION_NEW_GAME;
         return;
     }
     if (is_in(cursor, Rectangles.button.leaderboard))
@@ -219,14 +219,14 @@ void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, Pl
         {
             if (pGameStatus->playerTurn == 1)
             {
-                pGameStatus->playerTurn = playMove(pP1, pP2, i, pGameStatus);
+                playMove(pP1, pP2, pGameStatus);
             }
         }
         if (is_in(cursor, Rectangles.awale.p2.seeds[i]))
         {
             if (pGameStatus->playerTurn == 2)
             {
-                pGameStatus->playerTurn = playMove(pP1, pP2, i, pGameStatus);
+                playMove(pP1, pP2, pGameStatus);
             }
         }
     }

@@ -6,6 +6,7 @@
 #include "graphic_lib.h"
 #include "../awale_game_macros_structs.h"
 #include "../score_handler.h"
+#include "../awale_game.h"
 
 void initGui(Images *pImages, Containers *pRectangles);
 void showMenu(Images Images, Containers Rectangles);

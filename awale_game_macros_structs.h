@@ -2,11 +2,12 @@
 #define AWALE_GAME_MACROS_STRUCTS
 
 // Macros Sections Jeu
-#define SECTION_HOME 0        // Menu principal
-#define SECTION_GAME 1        // Section de jeu
-#define SECTION_SCORE 2       // Tableau des scores
-#define SECTION_ABOUT 3       // Section "A propos & règles"
-#define SECTION_EXIT_SCREEN 4 // Ecran de femreture du jeu
+#define SECTION_HOME 0 // Menu principal
+#define SECTION_NEW_GAME 1
+#define SECTION_GAME 2        // Section de jeu
+#define SECTION_SCORE 3       // Tableau des scores
+#define SECTION_ABOUT 4       // Section "A propos & règles"
+#define SECTION_EXIT_SCREEN 5 // Ecran de femreture du jeu
 #define SECTION_EXIT 99       // Fermeture du jeu
 
 // Paramètres Graines & Tablier
@@ -32,23 +33,6 @@
 #define ENDGAME_NO_SEEDS_TO_MOVE 3 // Un joueur ne peux pas remplir les cases vides du joueur adverse
 #define ENDGAME_FORCED 99          // Abandon d'une partie
 
-// Variable de status du jeu
-typedef struct
-{
-    int selectedMenu;    // Menu dans lequel on se trouve
-    int isGameJustEnded; // Utile quand on a besoin de savoir si dans le menu des scores, on vient de sortir d'une partie ou non pour avoir la possibilité d'en relancer une
-    int gameMode;        // Mode de jeu dans lequel on se trouve
-    int playerTurn;      // Tour actuel du joueur
-    int selectedHole;    // Trou sélectionné à jouer
-    int validHoles[HOLES_PER_PLAYER];   // Trou possible à jouer
-    int endgameType;     // Voir Macros "Endgame Types"
-    int totalMoves;      // Nombre de coup totaux
-    int moveCountdown;   // Décompte le nombre de coup avant l'arrêt du jeu
-    PlayerInfo * endingPlayer; // Joueur qui cause la fin du jeu
-    PlayerInfo * winner;          // Gagnant de la partie
-    int isSoundON;       // *NEW*  Variable son -> On=1 / Off=0
-} GameStatusVar;
-
 // Info Joueur
 typedef struct
 {
@@ -58,5 +42,22 @@ typedef struct
     int moves;                   // Nombre de coups réalisés
     int isBot;                   //  0 : Ce joueur n'est pas un bot || 1 : Est un bot (Facile) || (Unused) 2 : Est un bot (Difficile)
 } PlayerInfo;
+
+// Variable de status du jeu
+typedef struct
+{
+    int selectedMenu;                 // Menu dans lequel on se trouve
+    int isGameJustEnded;              // Utile quand on a besoin de savoir si dans le menu des scores, on vient de sortir d'une partie ou non pour avoir la possibilité d'en relancer une
+    int gameMode;                     // Mode de jeu dans lequel on se trouve
+    int playerTurn;                   // Tour actuel du joueur
+    int selectedHole;                 // Trou sélectionné à jouer
+    int validHoles[HOLES_PER_PLAYER]; // Trou possible à jouer
+    int endgameType;                  // Voir Macros "Endgame Types"
+    int totalMoves;                   // Nombre de coup totaux
+    int moveCountdown;                // Décompte le nombre de coup avant l'arrêt du jeu
+    PlayerInfo *endingPlayer;         // Joueur qui cause la fin du jeu
+    PlayerInfo *winner;               // Gagnant de la partie
+    int isSoundON;                    // *NEW*  Variable son -> On=1 / Off=0
+} GameStatusVar;
 
 #endif /* AWALE_GAME_MACROS_STRUCTS */
