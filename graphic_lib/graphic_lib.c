@@ -120,17 +120,6 @@ void present_image(SDL_Texture *image, Rect destination)
     // SDL_RenderPresent(pRenderer);
 }
 
-TTF_font *load_font()
-{
-    TTF_Font *font = TTF_OpenFont("./fonts/PUSAB.ttf", fontsize);
-    if (!font)
-    {
-        printf("[Graphic Lib] - Can't load font\n");
-        printf("Error: %s\n", TTF_GetError());
-        return;
-    }
-}
-
 void draw_text(const char *text, Point topleft, int fontsize, Color textcolor)
 {
     if (!fontsize)
@@ -138,7 +127,14 @@ void draw_text(const char *text, Point topleft, int fontsize, Color textcolor)
     if (!textcolor)
         textcolor = White;
 
-    TTF_font *font = load_font();
+    TTF_Font *font = TTF_OpenFont("./fonts/PUSAB.ttf", fontsize);
+    if (!font)
+    {
+        printf("[Graphic Lib] - Can't load font\n");
+        printf("Error: %s\n", TTF_GetError());
+        return;
+    }
+
     ColorRGB c = hex_to_rgb(textcolor);
     SDL_Color color = {c.r, c.g, c.b, 255};
 
@@ -160,7 +156,6 @@ void draw_text(const char *text, Point topleft, int fontsize, Color textcolor)
 
     SDL_RenderCopy(pRenderer, Message, NULL, &Message_rect);
 
-    free(font);
     SDL_FreeSurface(surfaceMessage);
     SDL_DestroyTexture(Message);
     return;
