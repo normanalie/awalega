@@ -40,6 +40,7 @@ int main(void)
     initGui(&images, &imgsContainers);
 
     bool redraw = true;
+    int aboutCurrentPage = 0;
     SDL_Event event;
     do
     {
@@ -101,7 +102,7 @@ int main(void)
             if (redraw)
             {
                 redraw = false;
-                showAbout(images, imgsContainers, 0);
+                showAbout(images, imgsContainers, aboutCurrentPage);
             }
             break;
 
@@ -122,14 +123,18 @@ int main(void)
             {
                 redraw = true;
                 Point cursor = {event.button.x, event.button.y};
-                if (GameStatus.selectedMenu == SECTION_GAME)
+                switch (GameStatus.selectedMenu)
                 {
+                case SECTION_GAME:
                     inGameClickHandler(imgsContainers, cursor, &P1, &P2, &GameStatus);
-                }
-                else
-                {
+                    break;
+                case SECTION_ABOUT:
+                    aboutClickHandler(imgsContainers, cursor, &GameStatus.selectedMenu, &aboutCurrentPage);
+                    break;
 
+                default:
                     guiClickHandler(imgsContainers, cursor, &GameStatus.selectedMenu);
+                    break;
                 }
             }
             break;

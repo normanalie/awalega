@@ -186,7 +186,6 @@ void showLeaderboard(Images Images, Containers Rectangles, GameStatusVar GameSta
 
 void showAbout(Images Images, Containers Rectangles, int currentPage)
 {
-    printf("Current page: %d\n", currentPage);
     present_image(Images.background.about, Rectangles.bg.menu);
     present_image(Images.misc.sign_about[currentPage], Rectangles.misc.sign_about);
     present_image(Images.misc.RL_button[currentPage], Rectangles.misc.RL_button[currentPage]);
@@ -274,9 +273,19 @@ void leaderboardClickHandler(Containers Rectangles, Point cursor, int *pSelected
     // No button in leaderboard ??
 }
 
-void aboutClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
+void aboutClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu, int *pCurrentPage)
 {
-    // No button in leaderboard ??
+    if (is_in(cursor, Rectangles.misc.RL_button[*pCurrentPage]))
+    {
+        if (*pCurrentPage == 0)
+        {
+            *pCurrentPage = 1;
+        }
+        else
+        {
+            *pCurrentPage = 0;
+        }
+    }
 }
 
 void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, PlayerInfo *pP2, GameStatusVar *pGameStatus)
@@ -311,9 +320,6 @@ void guiClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
         break;
     case SECTION_SCORE:
         leaderboardClickHandler(Rectangles, cursor, pSelectedMenu);
-        break;
-    case SECTION_ABOUT:
-        aboutClickHandler(Rectangles, cursor, pSelectedMenu);
         break;
     case SECTION_EXIT_SCREEN:
         *pSelectedMenu = SECTION_EXIT;
