@@ -40,9 +40,12 @@ typedef struct
     int gameMode;        // Mode de jeu dans lequel on se trouve
     int playerTurn;      // Tour actuel du joueur
     int selectedHole;    // Trou sélectionné à jouer
+    int validHoles[HOLES_PER_PLAYER];   // Trou possible à jouer
     int endgameType;     // Voir Macros "Endgame Types"
     int totalMoves;      // Nombre de coup totaux
     int moveCountdown;   // Décompte le nombre de coup avant l'arrêt du jeu
+    PlayerInfo * endingPlayer; // Joueur qui cause la fin du jeu
+    PlayerInfo * winner;          // Gagnant de la partie
     int isSoundON;       // *NEW*  Variable son -> On=1 / Off=0
 } GameStatusVar;
 

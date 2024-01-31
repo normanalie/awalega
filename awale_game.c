@@ -147,7 +147,7 @@ void waitBeforeBotPlay(PlayerInfo P2, GameStatusVar GameStatus)
     return;
 }
 
-void holeSelector(PlayerInfo P1, PlayerInfo P2, GameStatusVar *GameStatus)
+/*void holeSelector(PlayerInfo P1, PlayerInfo P2, GameStatusVar *GameStatus)
 {
 
     int selectedHole;
@@ -187,26 +187,36 @@ void holeSelector(PlayerInfo P1, PlayerInfo P2, GameStatusVar *GameStatus)
     GameStatus->selectedHole = selectedHole;
 
     return;
-}
+}*/
 
-int isActionValid(PlayerInfo Player, int selectedHole)
+int isActionValid(PlayerInfo Player, GameStatusVar GameStatus)
 {
 
-    if (selectedHole < 1 || selectedHole > HOLES_PER_PLAYER)
+    if (GameStatus.selectedHole < 1 || GameStatus.selectedHole > HOLES_PER_PLAYER)
     {
 
         if (!Player.isBot)
         {
-            printf("[%s] Action impossible! Le trou %d n'existe pas!\n", Player.name, selectedHole);
+            printf("[%s] Action impossible! Le trou %d n'existe pas!\n", Player.name, GameStatus.selectedHole);
         }
         return 0;
     }
-    else if (Player.seeds[selectedHole - 1] == 0)
+
+    else if (GameStatus.validHoles[GameStatus.selectedHole - 1] == 0)
+    {
+        if (!Player.isBot)
+        {
+            printf("[%s] Action impossible! Une graine du trou %d n'arrivera pas jusqu'à un trou du joueur adverse!\n", Player.name, GameStatus.selectedHole);
+        }
+        return 0; 
+    }
+
+    else if (Player.seeds[GameStatus.selectedHole - 1] == 0)
     {
 
         if (!Player.isBot)
         {
-            printf("[%s] Action impossible! Ton trou %d est vide\n", Player.name, selectedHole);
+            printf("[%s] Action impossible! Ton trou %d est vide\n", Player.name, GameStatus.selectedHole);
         }
         return 0;
     }
@@ -424,6 +434,30 @@ int isForcedActionValid(PlayerInfo Player, int selectedHole, int validHoles[])
     }
 
     return 1;
+}
+
+void whoWon(PlayerInfo * P1, PlayerInfo * P2, GameStatusVar * GameStatus) {
+    
+    if (P1->harvestedSeeds > P2->harvestedSeeds) {
+        printf("%s a gangé !\n", P1->name);
+        GameStatus->winner = P1;
+    } else if (P1->harvestedSeeds < P2->harvestedSeeds) {
+        printf("%s a gangé !\n", P1->name);
+        GameStatus->winner = P2;
+    } else {
+        if (P1->moves < P2->moves) {
+            printf("%s a gangé !\n", P1->name);
+            GameStatus->winner = P1;
+        } else if (P1->moves > P2->moves) {
+            printf("%s a gangé !\n", P1->name);
+            GameStatus->winner = P2;
+        } else {
+            printf("Ex Aequo !\n", P1->name);
+            GameStatus->winner = NULL;
+        }
+    }
+
+    return;
 }
 
 void endgameManager(GameStatusVar *GameStatus, PlayerInfo endingPlayer)
