@@ -16,6 +16,7 @@ void showMenu(Images Images, Containers Rectangles)
     present_image(Images.button.leaderboard, Rectangles.button.leaderboard);
     present_image(Images.button.about, Rectangles.button.about);
     present_image(Images.button.leave, Rectangles.button.leave);
+    graphic_update();
 }
 
 void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P2, GameStatusVar GameStatus)
@@ -148,6 +149,7 @@ void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P
     // Player_win_sign
     if (GameStatus.isGameJustEnded == 1)
         present_image(Images.misc.player_win_sign, Rectangles.misc.player_win_sign);
+    graphic_update();
 }
 
 void showLeaderboard(Images Images, Containers Rectangles, GameStatusVar GameStatus)
@@ -179,6 +181,7 @@ void showLeaderboard(Images Images, Containers Rectangles, GameStatusVar GameSta
     }
 
     showReplayButton(Images, Rectangles, GameStatus);
+    graphic_update();
 }
 
 void showAbout(Images Images, Containers Rectangles, int currentPage)
@@ -186,6 +189,7 @@ void showAbout(Images Images, Containers Rectangles, int currentPage)
     present_image(Images.background.about, Rectangles.bg.menu);
     present_image(Images.misc.sign_about[currentPage], Rectangles.misc.sign_about);
     present_image(Images.misc.RL_button[currentPage], Rectangles.misc.RL_button[currentPage]);
+    graphic_update();
 }
 
 void showGameModeSelection(Images Images, Containers Rectangles)
@@ -195,18 +199,21 @@ void showGameModeSelection(Images Images, Containers Rectangles)
     present_image(Images.misc.playerVSia, Rectangles.misc.playerVSia);
     present_image(Images.button.playerVSia, Rectangles.button.playerVSia);
     present_image(Images.button.pvp, Rectangles.button.pvp);
+    graphic_update();
 }
 
 void showInitPlayer(Images Images, Containers Rectangles, int currentPlayer)
 {
     present_image(Images.background.game, Rectangles.bg.game);
     present_image(Images.misc.enter_name[currentPlayer - 1], Rectangles.misc.enter_name);
+    graphic_update();
 }
 
 void showMenuButton(Images Images, Containers Rectangles, GameStatusVar GameStatus)
 {
     if (GameStatus.selectedMenu != SECTION_HOME)
         present_image(Images.button.menu, Rectangles.button.menu);
+    graphic_update();
 }
 
 void showVolumeButton(Images Images, Containers Rectangles, GameStatusVar GameStatus)
@@ -215,6 +222,7 @@ void showVolumeButton(Images Images, Containers Rectangles, GameStatusVar GameSt
         present_image(Images.button.volume[1], Rectangles.button.volume);
     else
         present_image(Images.button.volume[0], Rectangles.button.volume);
+    graphic_update();
 }
 
 void showReplayButton(Images Images, Containers Rectangles, GameStatusVar GameStatus)
@@ -223,6 +231,7 @@ void showReplayButton(Images Images, Containers Rectangles, GameStatusVar GameSt
     {
         present_image(Images.button.replay, Rectangles.button.replay);
     }
+    graphic_update();
 }
 
 void destroyGui(Images *pImages)

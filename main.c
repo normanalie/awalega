@@ -39,14 +39,18 @@ int main(void)
     Containers imgsContainers;
     initGui(&images, &imgsContainers);
 
+    bool redraw = true;
     SDL_Event event;
     do
     {
         switch (GameStatus.selectedMenu)
         {
-
         case SECTION_HOME:
-            showMenu(images, imgsContainers);
+            if (redraw)
+            {
+                redraw = false;
+                showMenu(images, imgsContainers);
+                        }
             GameStatus.isGameJustEnded = 0;
             break;
 
@@ -58,7 +62,11 @@ int main(void)
             break;
 
         case SECTION_GAME:
-            showAwale(images, imgsContainers, P1, P2, GameStatus);
+            if (redraw)
+            {
+                redraw = false;
+                showAwale(images, imgsContainers, P1, P2, GameStatus);
+            }
 
             if (GameStatus.endgameType != NO_ENDGAME) // Fin de partie
             {
@@ -81,12 +89,20 @@ int main(void)
             break;
 
         case SECTION_SCORE: // Affichage Score
-            showLeaderboard(images, imgsContainers, GameStatus);
+            if (redraw)
+            {
+                redraw = false;
+                showLeaderboard(images, imgsContainers, GameStatus);
+            }
             // showScoreSectionMenuSelection(&GameStatus);
             break;
 
         case SECTION_ABOUT: // Affichage "A propos du jeu"
-            showAbout(images, imgsContainers, GameStatus.playerTurn);
+            if (redraw)
+            {
+                redraw = false;
+                showAbout(images, imgsContainers, GameStatus.playerTurn);
+            }
             break;
 
         case SECTION_EXIT_SCREEN: // Quitter le jeu
@@ -94,7 +110,6 @@ int main(void)
             break;
         }
 
-        graphic_update();
         event = graphic_get_event();
 
         switch (event.type)
@@ -105,6 +120,7 @@ int main(void)
         case SDL_MOUSEBUTTONUP:
             if (event.button.button == SDL_BUTTON_LEFT)
             {
+                redraw = true;
                 Point cursor = {event.button.x, event.button.y};
                 if (GameStatus.selectedMenu == SECTION_GAME)
                 {
