@@ -32,7 +32,7 @@ void rect_destroy(Rect r)
     return sqrt((abs(b.x - a.x) * abs(b.x - a.x) + abs(b.y - a.y) * abs(b.y - a.y)));
 }*/
 
-/*Bool is_in(Point point, Rect rectangle)
+bool is_in(Point point, Rect rectangle)
 {
     Point topleft = rectangle.topleft;
     Point bottomright = {rectangle.topleft.x + rectangle.w, rectangle.topleft.y + rectangle.h};
@@ -41,4 +41,4 @@ void rect_destroy(Rect r)
         return true;
     }
     return false;
-}*/
+}
