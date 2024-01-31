@@ -253,29 +253,10 @@ int main(void)
             {
                 if (GameStatus.selectedMenu == SECTION_NAME_FORM1 && !P2.isBot)
                 {
-
                     if (strlen(P1.name) >= NAME_MIN_LEN)
                     {
-                    case SECTION_NEW_GAME:
-                        newGameClickHandler(imgsContainers, cursor, &GameStatus, &P2);
-                        break;
-                    case SECTION_NAME_FORM1:
-                    case SECTION_NAME_FORM2:
-                        nameFormClickHandler(imgsContainers, cursor, &GameStatus);
-                        break;
-                    case SECTION_GAME:
-                        inGameClickHandler(imgsContainers, cursor, &P1, &P2, &GameStatus);
-                        break;
-                    case SECTION_SCORE:
-                        leaderboardClickHandler(imgsContainers, cursor, &GameStatus);
-                        break;
-                    case SECTION_ABOUT:
-                        aboutClickHandler(imgsContainers, cursor, &GameStatus.selectedMenu, &aboutCurrentPage);
-                        break;
-
-                    default:
-                        guiClickHandler(imgsContainers, cursor, &GameStatus);
-                        break;
+                        GameStatus.selectedMenu = SECTION_NAME_FORM2;
+                        redraw = true;
                     }
                 }
                 else if (GameStatus.selectedMenu == SECTION_NAME_FORM1)
