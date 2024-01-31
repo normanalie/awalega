@@ -199,6 +199,7 @@ int main(void)
                 redraw = true;
                 Point cursor = {event.button.x, event.button.y};
                 volumeButtonClickHandler(imgsContainers, cursor, &GameStatus);
+                playSound(SOUND_STRUCT.mouseClick.numChannel, SOUND_STRUCT.mouseClick.sound, 0);
                 switch (GameStatus.selectedMenu)
                 {
                 case SECTION_HOME:
@@ -232,11 +233,13 @@ int main(void)
 
             if (GameStatus.selectedMenu == SECTION_NAME_FORM1)
             {
+                playSound(SOUND_STRUCT.typing.numChannel, SOUND_STRUCT.typing.sound, 0);
                 addLetterToPseudo(&P1, event.text.text);
                 redraw = true;
             }
             else if (GameStatus.selectedMenu == SECTION_NAME_FORM2 && !P2.isBot)
             {
+                playSound(SOUND_STRUCT.typing.numChannel, SOUND_STRUCT.typing.sound, 0);
                 addLetterToPseudo(&P2, event.text.text);
                 redraw = true;
             }
@@ -280,5 +283,7 @@ int main(void)
 
     } while (GameStatus.selectedMenu != SECTION_EXIT);
 
+    freeAllSounds(&Audio);
+    freeAllMusics(&Audio);
     return 0;
 }

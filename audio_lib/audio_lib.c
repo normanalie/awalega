@@ -218,7 +218,6 @@ void freeSound(Mix_Chunk *chunk)
 
 void freeAllMusics(audio *Audio)
 {
-    freeMusic(Audio->musicSection.music1.music);
     freeMusic(Audio->musicSection.menuMusic.music);
     freeMusic(Audio->musicSection.inGameMusic.music);
     freeMusic(Audio->musicSection.leaderboardMusic.music);
