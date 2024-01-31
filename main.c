@@ -91,19 +91,22 @@ int main(void)
 
             if (GameStatus.endgameType != NO_ENDGAME) // Fin de partie
             {
-                // Afficher le tablier et les infos du jeu une dernière fois avant de quitter afin que les joueurs puisse voir ce qu'il s'est passé
-                showAwale(images, imgsContainers, P1, P2, GameStatus);
-                sleep(3);
 
                 // Gestionnaire de fin de jeu + Afficher message correspondant
                 GameStatus.isGameJustEnded = 1;
                 endgameManager(&GameStatus);
                 whoWon(&P1, &P2, &GameStatus);
 
+                // Afficher le tablier et les infos du jeu une dernière fois avant de quitter afin que les joueurs puisse voir ce qu'il s'est passé
+                showAwale(images, imgsContainers, P1, P2, GameStatus);
+                // FCt() rajout texte par dessus pour donner le gagnant
+                sleep(3);
+
                 // Ecriture des scores
                 if (GameStatus.selectedMenu == SECTION_SCORE)
                 {
                     saveScores(P1, P2);
+                    redraw = true;
                 }
             }
 
@@ -164,17 +167,22 @@ int main(void)
                     case SECTION_NEW_GAME:
                         newGameClickHandler(imgsContainers, cursor, &GameStatus, &P2);
                         break;
+                    case SECTION_NAME_FORM1:
+                    case SECTION_NAME_FORM2:
+                        nameFormClickHandler(imgsContainers, cursor, &GameStatus);
+                        break;
                     case SECTION_GAME:
-                        if (GameStatus.playerTurn == 1) {
-                            inGameClickHandler(imgsContainers, cursor, &P1, &P2, &GameStatus);
-                        }
+                        inGameClickHandler(imgsContainers, cursor, &P1, &P2, &GameStatus);
+                        break;
+                    case SECTION_SCORE:
+                        leaderboardClickHandler(imgsContainers, cursor, &GameStatus);
                         break;
                     case SECTION_ABOUT:
                         aboutClickHandler(imgsContainers, cursor, &GameStatus.selectedMenu, &aboutCurrentPage);
                         break;
 
                     default:
-                        guiClickHandler(imgsContainers, cursor, &GameStatus.selectedMenu);
+                        guiClickHandler(imgsContainers, cursor, &GameStatus);
                         break;
                     }
                 }

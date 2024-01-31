@@ -20,5 +20,8 @@ SDL_Event graphic_get_event();
 SDL_Texture *loadImage(const char path[]);
 void present_image(SDL_Texture *image, Rect destination);
 void draw_text(const char *text, Point topleft, int fontsize, Color textcolor);
+//  void draw_rect_by_center(int cx, int cy, int w, int h);
 
+// is_mouse_in()
+// draw_img()
 #endif

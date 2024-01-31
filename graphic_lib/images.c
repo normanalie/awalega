@@ -37,6 +37,10 @@ void init_Images(Images *pImages)
     pImages->misc.player_turn_radio[0]= loadImage("images/player_turn_radio_on.bmp");
     pImages->misc.player_turn_radio[1]= loadImage("images/player_turn_radio_off.bmp");
     pImages->misc.player_win_sign= loadImage("images/player_win_sign.bmp");
+    pImages->misc.score_text= loadImage("images/score_text.bmp");
+    pImages->misc.moves_text= loadImage("images/moves_text.bmp");
+    pImages->misc.title= loadImage("images/title.bmp");
+
 }
 
 void init_Images_Containers(Containers *pRectangles)
@@ -46,22 +50,31 @@ void init_Images_Containers(Containers *pRectangles)
     pRectangles->bg.menu.topleft.y = 0;
     pRectangles->bg.menu.w = 1280;
     pRectangles->bg.menu.h = 720;
-    pRectangles->button.play.topleft.x = 560;
+
+    pRectangles->button.play.topleft.x = 530;
     pRectangles->button.play.topleft.y = 300;
     pRectangles->button.play.w = 240;
     pRectangles->button.play.h = 65;
-    pRectangles->button.leaderboard.topleft.x = 560;
+
+    pRectangles->button.leaderboard.topleft.x = 530;
     pRectangles->button.leaderboard.topleft.y = 365;
     pRectangles->button.leaderboard.w = 240;
     pRectangles->button.leaderboard.h = 65;
-    pRectangles->button.about.topleft.x = 560;
+
+    pRectangles->button.about.topleft.x = 530;
     pRectangles->button.about.topleft.y = 430;
     pRectangles->button.about.w = 240;
     pRectangles->button.about.h = 65;
+
     pRectangles->button.leave.topleft.x = 1030;
     pRectangles->button.leave.topleft.y = 645;
     pRectangles->button.leave.w = 240;
     pRectangles->button.leave.h = 65;
+
+    pRectangles->misc.title.topleft.x = 450;
+    pRectangles->misc.title.topleft.y = 100;
+    pRectangles->misc.title.w = 400;
+    pRectangles->misc.title.h = 100;
 
     // BUTTON
     pRectangles->button.menu.topleft.x = 15;
@@ -169,10 +182,20 @@ void init_Images_Containers(Containers *pRectangles)
     pRectangles->awale.p2.moves_sign.w = 120;
     pRectangles->awale.p2.moves_sign.h = 90;
 
+    pRectangles->awale.p2.moves_text.topleft.x= 960;
+    pRectangles->awale.p2.moves_text.topleft.y= 65;
+    pRectangles->awale.p2.moves_text.w= 80;
+    pRectangles->awale.p2.moves_text.h= 35;
+
     pRectangles->awale.p2.score_sign.topleft.x = 355;
     pRectangles->awale.p2.score_sign.topleft.y = 40;
     pRectangles->awale.p2.score_sign.w = 120;
     pRectangles->awale.p2.score_sign.h = 90;
+
+    pRectangles->awale.p2.score_text.topleft.x= 260;
+    pRectangles->awale.p2.score_text.topleft.y= 65;
+    pRectangles->awale.p2.score_text.w= 80;
+    pRectangles->awale.p2.score_text.h= 35;
 
     pRectangles->awale.p2.player_turn_radio.topleft.x= 975;
     pRectangles->awale.p2.player_turn_radio.topleft.y= 155;
@@ -205,6 +228,16 @@ void init_Images_Containers(Containers *pRectangles)
     pRectangles->awale.p1.player_turn_radio.topleft.y= 505;
     pRectangles->awale.p1.player_turn_radio.w= 60;
     pRectangles->awale.p1.player_turn_radio.h= 60;
+
+    pRectangles->awale.p1.score_text.topleft.x= 260;
+    pRectangles->awale.p1.score_text.topleft.y= 615;
+    pRectangles->awale.p1.score_text.w= 80;
+    pRectangles->awale.p1.score_text.h= 35;
+
+    pRectangles->awale.p1.moves_text.topleft.x= 960;
+    pRectangles->awale.p1.moves_text.topleft.y= 615;
+    pRectangles->awale.p1.moves_text.w= 80;
+    pRectangles->awale.p1.moves_text.h= 35;
 
     // Seeds Player 2
     for (int i = 0; i < HOLES_PER_PLAYER; i++)
