@@ -293,6 +293,7 @@ void leaderboardClickHandler(Containers Rectangles, Point cursor, int *pSelected
 
 void aboutClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu, int *pCurrentPage)
 {
+    homeClickHandler(Rectangles, cursor, pSelectedMenu);
     if (is_in(cursor, Rectangles.misc.RL_button[*pCurrentPage]))
     {
         if (*pCurrentPage == 0)
@@ -306,8 +307,17 @@ void aboutClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu, 
     }
 }
 
+void homeClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
+{
+    if (is_in(cursor, Rectangles.button.menu))
+    {
+        *pSelectedMenu = SECTION_HOME;
+    }
+}
+
 void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, PlayerInfo *pP2, GameStatusVar *pGameStatus)
 {
+    homeClickHandler(Rectangles, cursor, &pGameStatus->selectedMenu);
     for (int i = 0; i < HOLES_PER_PLAYER; i++)
     {
         if (is_in(cursor, Rectangles.awale.p1.seeds[i]))
@@ -338,6 +348,7 @@ void guiClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
         break;
     case SECTION_SCORE:
         leaderboardClickHandler(Rectangles, cursor, pSelectedMenu);
+        homeClickHandler(Rectangles, cursor, pSelectedMenu);
         break;
     case SECTION_EXIT_SCREEN:
         *pSelectedMenu = SECTION_EXIT;

@@ -21,6 +21,7 @@ void showVolumeButton(Images Images, Containers Rectangles, GameStatusVar GameSt
 void showReplayButton(Images Images, Containers Rectangles);
 
 void volumeButtonClickHandler(Containers Rectangles, Point cursor, GameStatusVar *pGameStatus);
+void homeClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu);
 void leaderboardClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu);
 void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, PlayerInfo *pP2, GameStatusVar *pGameStatus);
 void aboutClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu, int *pCurrentPage);
