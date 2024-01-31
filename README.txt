@@ -36,7 +36,7 @@ Les répertoires suivant, ainsi que leurs contenu, seront supprimés :
     - bin
 
 
-Qu'est-ce que le dosier "audio_lib.unused" ?
+Qu'est-ce que le dossier "audio_lib.unused" ?
 ---------------------------------------------
 
 Ce répertoire contient un fichier .zip contenant toute la bibliothèque audio que nous avons faite.
