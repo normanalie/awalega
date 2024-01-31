@@ -20,9 +20,10 @@ typedef struct
     SDL_Texture *leaderboard;
     SDL_Texture *leave;
     SDL_Texture *menu;
-    SDL_Texture *mute;
-    SDL_Texture *unmute;
+    SDL_Texture *volume[2];
     SDL_Texture *replay;
+    SDL_Texture *pvp;
+    SDL_Texture *playerVSia;
 } Button;
 typedef struct
 {
@@ -42,6 +43,12 @@ typedef struct
     SDL_Texture *seed_number_sign;
     SDL_Texture *square_sign;
     SDL_Texture *sign_about[2];
+    SDL_Texture *RL_button[2];
+    SDL_Texture *total_moves_text;
+    SDL_Texture *moves_before_stop_text;
+    SDL_Texture *enter_name[2];
+    SDL_Texture *player_turn_radio[2];
+    SDL_Texture *player_win_sign;
 } Misc;
 typedef struct
 {
@@ -65,9 +72,10 @@ typedef struct
     Rect leaderboard;
     Rect leave;
     Rect menu;
-    Rect mute;
-    Rect unmute;
+    Rect volume;
     Rect replay;
+    Rect pvp;
+    Rect playerVSia;
 } Containers_button;
 typedef struct
 {
@@ -76,6 +84,7 @@ typedef struct
     Rect score_sign;
     Rect seed_number_sign;
     Rect moves_sign;
+    Rect player_turn_radio;
 } Containers_awale_player1;
 typedef struct
 {
@@ -84,22 +93,29 @@ typedef struct
     Rect score_sign;
     Rect seed_number_sign;
     Rect moves_sign;
+    Rect player_turn_radio;
 } Containers_awale_player2;
 typedef struct
 {
     Containers_awale_player1 p1;
     Containers_awale_player2 p2;
     Rect deck;
-    Rect total_moves;
-    Rect move_countdown;
+    Rect total_moves_sign;
+    Rect move_countdown_sign;
+    Rect total_moves_text;
+    Rect moves_before_stop_text;
 } Containers_awale;
+
 typedef struct
 {
-    Rect playerVSplayer;
     Rect pvp;
     Rect title;
     Rect sign_leaderboard;
     Rect sign_about;
+    Rect RL_button[2];
+    Rect playerVSia;
+    Rect enter_name;
+    Rect player_win_sign;
 } Containers_misc;
 typedef struct
 {
