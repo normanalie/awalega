@@ -135,7 +135,7 @@ void draw_text(const char *text, Point topleft, int fontsize, Color textcolor)
     if (!font)
     {
         printf("[Graphic Lib] - Can't load font\n");
-        printf("%s", TTF_GetError());
+        printf("Error: %s\n", TTF_GetError());
         return;
     }
 
