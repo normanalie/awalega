@@ -30,7 +30,7 @@
 #define NAME_MIN_LEN 3
 
 // Paramètres Bot
-#define WAIT_UNTIL_BOT_PLAYS 3 // Temps d'attente avant que le bot commence à jouer
+#define WAIT_UNTIL_BOT_PLAYS 1 // Temps d'attente avant que le bot commence à jouer
 
 // Paramètres Condition Fin Jeu
 #define SEEDS_TO_WIN ((TOTAL_SEEDS / 2) + 1) // Nombre de graines à obtenir afin de terminer une partie
