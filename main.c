@@ -6,7 +6,7 @@
 #include "awale_game.h"
 #include "score_handler.h"
 #include "utilities.h"
-#include "graphic_lib/graphic_lib.h"
+#include "graphic_lib/gui.h"
 
 int main(void)
 {
@@ -49,17 +49,18 @@ int main(void)
             initPlayers(&P1, &P2, GameStatus);
 
             // Initialisation du jeu & Init du jeu sur CLI (ou GUI) (plateau, jetons, score, etc...)
-            GameStatus.playerTurn = randInt(1, 2);        // Choix du 1er joueur à jouer
+            GameStatus.playerTurn = randInt(1, 2);
             GameStatus.endgameType = NO_ENDGAME;          // Voir Macros "Endgame Types"
             GameStatus.totalMoves = 0;                    // Nombre de coups totaux
             GameStatus.moveCountdown = MOVES_BEFORE_STOP; // Décompte le nombre de coup avant l'arrêt du jeu
             PlayerInfo *endingPlayer = NULL;              // Joueur qui cause la fin du jeu
 
+            showAwale(images, imgsContainers, P1, P2, GameStatus);
+
             do
             { // Boucle de jeu
 
                 // Afficher le jeu
-                showAwale(images, imgsContainers, P1, P2, GameStatus);
 
                 // Changer de joueur  (Mis au début exprès pour réutiliser la var "playerTurn" tel quel pour les autres fonction)
                 switchPlayer(&GameStatus);
@@ -68,8 +69,7 @@ int main(void)
                 waitBeforeBotPlay(P2, GameStatus);
 
                 // Sélection du trou à jouer & Vérification de la légalité
-                holeSelector(P1, P2, &GameStatus);
-
+                // holeSelector(P1, P2, &GameStatus);
                 GameStatus.totalMoves++;
                 GameStatus.moveCountdown--;
 
@@ -140,7 +140,6 @@ int main(void)
 
                     if (selectedUser != NULL)
                     {
-                        showAwale(images, imgsContainers, P1, P2, GameStatus);
                         // Attendre quelques instants pour donner le temps à J1 de voir le résultat lorsqu'il joue contre le bot
                         waitBeforeBotPlay(P2, GameStatus);
 
@@ -187,13 +186,21 @@ int main(void)
         switch (event.type)
         {
         case SDL_QUIT:
-            quit = 1;
+            GameStatus.selectedMenu = SECTION_EXIT;
             break;
         case SDL_MOUSEBUTTONUP:
             if (event.button.button == SDL_BUTTON_LEFT)
             {
                 Point cursor = {event.button.x, event.button.y};
-                guiClickHandler(imgsContainers, cursor, &GameStatus.selectedMenu);
+                if (GameStatus.selectedMenu == SECTION_GAME)
+                {
+                    inGameClickHandler(imgsContainers, cursor, &P1, &P2, &GameStatus);
+                }
+                else
+                {
+
+                    guiClickHandler(imgsContainers, cursor, &GameStatus.selectedMenu);
+                }
             }
         }
 

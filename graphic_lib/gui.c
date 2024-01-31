@@ -211,17 +211,23 @@ void aboutClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
     // No button in leaderboard ??
 }
 
-void awaleClickHandler(Containers Rectangles, Point cursor, int *pSelectedHander)
+void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, PlayerInfo *pP2, GameStatusVar *pGameStatus)
 {
     for (int i = 0; i < HOLES_PER_PLAYER; i++)
     {
         if (is_in(cursor, Rectangles.awale.p1.seeds[i]))
         {
-            printf("Click Player1 - Seeds %d\n", i);
+            if (pGameStatus->playerTurn == 1)
+            {
+                pGameStatus->playerTurn = playMove(pP1, pP2, i, pGameStatus);
+            }
         }
         if (is_in(cursor, Rectangles.awale.p2.seeds[i]))
         {
-            printf("Click Player2 - Seeds %d\n", i);
+            if (pGameStatus->playerTurn == 2)
+            {
+                pGameStatus->playerTurn = playMove(pP1, pP2, i, pGameStatus);
+            }
         }
     }
 }
@@ -232,9 +238,6 @@ void guiClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
     {
     case SECTION_HOME:
         menuClickHandler(Rectangles, cursor, pSelectedMenu);
-        break;
-    case SECTION_GAME:
-        awaleClickHandler(Rectangles, cursor, pSelectedMenu);
         break;
     case SECTION_SCORE:
         leaderboardClickHandler(Rectangles, cursor, pSelectedMenu);
@@ -251,3 +254,20 @@ void guiClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
         break;
     }
 }
+
+/*
+PROTO: playMove(Player1, Player2, trouID, GameStatus) -> nextPlayer{
+    Si illegal{
+        retourne GamesStatus.currentPlayer -> besoin de rejouer
+    }
+    Modifier GameStatus
+    Modifie le plateau
+    Si p2 est bot{
+        attend
+        fais jouer p2
+    }
+    Verifie le plateau
+    Calcule nextplayer
+    retourne nextplayer
+}
+*/
