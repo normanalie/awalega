@@ -20,6 +20,7 @@ void showMenuButton(Images Images, Containers Rectangles);
 void showVolumeButton(Images Images, Containers Rectangles, GameStatusVar GameStatus);
 void showReplayButton(Images Images, Containers Rectangles);
 
+void volumeButtonClickHandler(Containers Rectangles, Point cursor, GameStatusVar *pGameStatus);
 void leaderboardClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu);
 void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, PlayerInfo *pP2, GameStatusVar *pGameStatus);
 void aboutClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu, int *pCurrentPage);

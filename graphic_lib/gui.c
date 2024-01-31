@@ -243,6 +243,21 @@ void destroyGui(Images *pImages)
     destroy_window();
 }
 
+void volumeButtonClickHandler(Containers Rectangles, Point cursor, GameStatusVar *pGameStatus)
+{
+    if (is_in(cursor, Rectangles.button.volume))
+    {
+        if (pGameStatus->isSoundON)
+        {
+            pGameStatus->isSoundON = 0;
+        }
+        else
+        {
+            pGameStatus->isSoundON = 1;
+        }
+    }
+}
+
 void menuClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
 {
     if (is_in(cursor, Rectangles.button.play))
@@ -320,7 +335,6 @@ void guiClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
     {
     case SECTION_HOME:
         menuClickHandler(Rectangles, cursor, pSelectedMenu);
-        
         break;
     case SECTION_SCORE:
         leaderboardClickHandler(Rectangles, cursor, pSelectedMenu);

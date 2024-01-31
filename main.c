@@ -16,7 +16,6 @@ void initGameStatus(GameStatusVar *pGameStatus)
     pGameStatus->endgameType = NO_ENDGAME;          // Voir Macros "Endgame Types"
     pGameStatus->totalMoves = 0;                    // Nombre de coups totaux
     pGameStatus->moveCountdown = MOVES_BEFORE_STOP; // Décompte le nombre de coup avant l'arrêt du jeu
-    pGameStatus->isSoundON = 1;
     for (int i = 0; i < HOLES_PER_PLAYER; i++)
     {
         pGameStatus->validHoles[i] = 1;
@@ -31,6 +30,7 @@ int main(void)
     GameStatusVar GameStatus;
     initGameStatus(&GameStatus);
     GameStatus.selectedMenu = SECTION_HOME;
+    GameStatus.isSoundON = 1;
 
     PlayerInfo P1;
     PlayerInfo P2;
@@ -128,6 +128,7 @@ int main(void)
             {
                 redraw = true;
                 Point cursor = {event.button.x, event.button.y};
+                volumeButtonClickHandler(imgsContainers, cursor, &GameStatus);
                 switch (GameStatus.selectedMenu)
                 {
                 case SECTION_GAME:
