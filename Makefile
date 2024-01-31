@@ -10,7 +10,7 @@ dir:
 	mkdir -p build
 	mkdir -p bin
 
-build: awale_game.o utilities.o shapes.o colors.o images.o score_handler.o graphic_lib.o gui.o main.o
+build: awale_game.o utilities.o shapes.o colors.o images.o score_handler.o graphic_lib.o gui.o audio_lib.o main.o 
 
 main.o: main.c
 	$(CC) $(CFLAGS) -c main.c -o build/main.o $(LIBS)
@@ -38,6 +38,9 @@ awale_game.o: awale_game.c awale_game.h
 
 utilities.o: utilities.c utilities.h
 	$(CC) $(CFLAGS) -c utilities.c -o build/utilities.o $(LIBS)
+
+audio_lib.o: audio_lib/audio_lib.c audio_lib/audio_lib.h
+	$(CC) $(CFLAGS) -c audio_lib/audio_lib.c -o build/audio_lib.o $(LIBS)
 
 clean:
 	rm -rf build

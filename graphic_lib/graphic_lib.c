@@ -123,10 +123,14 @@ void present_image(SDL_Texture *image, Rect destination)
 void draw_text(const char *text, Point topleft, int fontsize, Color textcolor)
 {
     if (!fontsize)
-        fontsize = 12;
-    if (!textcolor)
-        textcolor = White;
+    {
 
+        fontsize = 12;
+    }
+    if (!textcolor)
+    {
+        textcolor = White;
+    }
     TTF_Font *font = TTF_OpenFont("./fonts/PUSAB.ttf", fontsize);
     if (!font)
     {
@@ -155,6 +159,7 @@ void draw_text(const char *text, Point topleft, int fontsize, Color textcolor)
     Message_rect.h = textHeight;
 
     SDL_RenderCopy(pRenderer, Message, NULL, &Message_rect);
+    // SDL_RenderPresent(pRenderer);
 
     SDL_FreeSurface(surfaceMessage);
     SDL_DestroyTexture(Message);

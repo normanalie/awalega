@@ -135,6 +135,15 @@ void waitBeforeBotPlay(PlayerInfo P2, GameStatusVar GameStatus)
 int isActionValid(PlayerInfo Player, GameStatusVar GameStatus)
 {
 
+    if (GameStatus.validHoles[GameStatus.selectedHole - 1] == 0)
+    {
+        if (!Player.isBot)
+        {
+            printf("[%s] Action impossible! Une graine du trou %d n'arrivera pas jusqu'à un trou du joueur adverse!\n", Player.name, GameStatus.selectedHole);
+        }
+        return 0;
+    }
+
     if (GameStatus.selectedHole < 1 || GameStatus.selectedHole > HOLES_PER_PLAYER)
     {
 
@@ -145,14 +154,6 @@ int isActionValid(PlayerInfo Player, GameStatusVar GameStatus)
         return 0;
     }
 
-    else if (GameStatus.validHoles[GameStatus.selectedHole - 1] == 0)
-    {
-        if (!Player.isBot)
-        {
-            printf("[%s] Action impossible! Une graine du trou %d n'arrivera pas jusqu'à un trou du joueur adverse!\n", Player.name, GameStatus.selectedHole);
-        }
-        return 0;
-    }
 
     else if (Player.seeds[GameStatus.selectedHole - 1] == 0)
     {
@@ -508,12 +509,12 @@ void playMove(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar *GameStatus)
     else
     { // 3 : Un joueur peut (ou peut pas) remplir les cases vides d'un joueur adverse
 
-        // int validHoles[HOLES_PER_PLAYER] = {0}; // Au cas où on veut forcer un joueur à jouer sur des cases spécifiques pour remplir les trous de l'adversaire
+        int validHoles[HOLES_PER_PLAYER] = {0}; // Au cas où on veut forcer un joueur à jouer sur des cases spécifiques pour remplir les trous de l'adversaire
         PlayerInfo *selectedUser = NULL;
 
         if (areEveryHolesEmpty(*P1))
         {
-            if (canPlayerFillEmptyHoles(*P2, 2, GameStatus->validHoles))
+            if (canPlayerFillEmptyHoles(*P2, 2, validHoles))
             {
                 selectedUser = P2;
                 GameStatus->playerTurn = 2;
@@ -526,7 +527,7 @@ void playMove(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar *GameStatus)
         }
         else if (areEveryHolesEmpty(*P2))
         {
-            if (canPlayerFillEmptyHoles(*P1, 1, GameStatus->validHoles))
+            if (canPlayerFillEmptyHoles(*P1, 1, validHoles))
             {
                 selectedUser = P1;
                 GameStatus->playerTurn = 1;
@@ -536,6 +537,10 @@ void playMove(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar *GameStatus)
                 GameStatus->endgameType = ENDGAME_NO_SEEDS_TO_MOVE;
                 GameStatus->endingPlayer = P1;
             }
+        }
+
+        for (int i=0; i< HOLES_PER_PLAYER; i++) {
+            GameStatus->validHoles[i] = validHoles[i]; 
         }
 
         if (selectedUser == NULL)

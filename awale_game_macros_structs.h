@@ -43,6 +43,8 @@
 #define ENDGAME_NO_SEEDS_TO_MOVE 3 // Un joueur ne peux pas remplir les cases vides du joueur adverse
 #define ENDGAME_FORCED 99          // Abandon d'une partie
 
+
+
 // Info Joueur
 typedef struct
 {
@@ -68,6 +70,9 @@ typedef struct
     PlayerInfo *endingPlayer;         // Joueur qui cause la fin du jeu
     PlayerInfo *winner;               // Gagnant de la partie
     int isSoundON;                    // *NEW*  Variable son -> On=1 / Off=0
+    int currentMusic;
 } GameStatusVar;
+
+
 
 #endif /* AWALE_GAME_MACROS_STRUCTS */

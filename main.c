@@ -7,6 +7,7 @@
 #include "score_handler.h"
 #include "utilities.h"
 #include "graphic_lib/gui.h"
+#include "audio_lib/audio_lib.h"
 
 void initGameStatus(GameStatusVar *pGameStatus)
 {
@@ -39,6 +40,16 @@ int main(void)
     Images images;
     Containers imgsContainers;
     initGui(&images, &imgsContainers);
+
+    openAudio();
+    openSoundChannels(NUM_CHANNELS);
+    audio Audio;
+    loadAllMusics(&Audio);
+    loadAllSounds(&Audio);
+
+    playAudio(MUSIC_STRUCT.menuMusic.music, REP_INF);
+    int volume = HALF_MAX_VOLUME - AUDIO_INCREMENT;
+    GameStatus.currentMusic = MENU_MUSIC_ID;
 
     bool redraw = true;
     int aboutCurrentPage = 0;
@@ -91,19 +102,22 @@ int main(void)
 
             if (GameStatus.endgameType != NO_ENDGAME) // Fin de partie
             {
-                // Afficher le tablier et les infos du jeu une dernière fois avant de quitter afin que les joueurs puisse voir ce qu'il s'est passé
-                showAwale(images, imgsContainers, P1, P2, GameStatus);
-                sleep(3);
 
                 // Gestionnaire de fin de jeu + Afficher message correspondant
                 GameStatus.isGameJustEnded = 1;
                 endgameManager(&GameStatus);
                 whoWon(&P1, &P2, &GameStatus);
 
+                // Afficher le tablier et les infos du jeu une dernière fois avant de quitter afin que les joueurs puisse voir ce qu'il s'est passé
+                showAwale(images, imgsContainers, P1, P2, GameStatus);
+                // FCt() rajout texte par dessus pour donner le gagnant
+                sleep(3);
+
                 // Ecriture des scores
                 if (GameStatus.selectedMenu == SECTION_SCORE)
                 {
                     saveScores(P1, P2);
+                    redraw = true;
                 }
             }
 
@@ -161,20 +175,47 @@ int main(void)
                     volumeButtonClickHandler(imgsContainers, cursor, &GameStatus);
                     switch (GameStatus.selectedMenu)
                     {
+                    case SECTION_HOME:
+                        if(GameStatus.currentMusic != MENU_MUSIC_ID)
+                        {
+                            GameStatus.currentMusic = MENU_MUSIC_ID;
+                            playAudio(MUSIC_STRUCT.menuMusic.music, -1);
+                        }
+                    break;
                     case SECTION_NEW_GAME:
                         newGameClickHandler(imgsContainers, cursor, &GameStatus, &P2);
                         break;
+                    case SECTION_NAME_FORM1:
+                    case SECTION_NAME_FORM2:
+                        nameFormClickHandler(imgsContainers, cursor, &GameStatus);
+                        break;
                     case SECTION_GAME:
-                        if (GameStatus.playerTurn == 1) {
-                            inGameClickHandler(imgsContainers, cursor, &P1, &P2, &GameStatus);
+                        if(GameStatus.currentMusic != INGAME_MUSIC_ID)
+                        {
+                            GameStatus.currentMusic = INGAME_MUSIC_ID;
+                            playAudio(MUSIC_STRUCT.inGameMusic.music, -1);
                         }
+                        inGameClickHandler(imgsContainers, cursor, &P1, &P2, &GameStatus);
+                        break;
+                    case SECTION_SCORE:
+                        if(GameStatus.currentMusic != LEADERBOARD_MUSIC_ID)
+                        {
+                            GameStatus.currentMusic = LEADERBOARD_MUSIC_ID;
+                            playAudio(MUSIC_STRUCT.leaderboardMusic.music, -1);
+                        }
+                        leaderboardClickHandler(imgsContainers, cursor, &GameStatus);
                         break;
                     case SECTION_ABOUT:
+                        if(GameStatus.currentMusic != ABOUT_MUSIC_ID)
+                        {
+                            GameStatus.currentMusic = ABOUT_MUSIC_ID;
+                            playAudio(MUSIC_STRUCT.aboutMusic.music, -1);
+                        }
                         aboutClickHandler(imgsContainers, cursor, &GameStatus.selectedMenu, &aboutCurrentPage);
                         break;
 
                     default:
-                        guiClickHandler(imgsContainers, cursor, &GameStatus.selectedMenu);
+                        guiClickHandler(imgsContainers, cursor, &GameStatus);
                         break;
                     }
                 }

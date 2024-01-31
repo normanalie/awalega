@@ -5,16 +5,14 @@
 #include <stdint.h>
 #include <string.h>
 
+typedef uint32_t Color;
 typedef struct color_rgb
 {
     int r, g, b;
 } ColorRGB;
 
-typedef uint32_t Color;
-
 Color rgb_to_hex(ColorRGB rgb);
 ColorRGB hex_to_rgb(Color hex);
-
 
 // Red HTML Color Names
 #define IndianRed 0xCD5C5C

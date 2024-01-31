@@ -1,6 +1,6 @@
 #include "colors.h"
 
-// JALBY & Kevin je vous aime <3
+// JALBY & KEvin je vous aime <3
 
 Color rgb_to_hex(ColorRGB rgb)
 {
