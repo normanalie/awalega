@@ -125,7 +125,7 @@ int main(void)
                 // Afficher le tablier et les infos du jeu une dernière fois avant de quitter afin que les joueurs puisse voir ce qu'il s'est passé
                 showAwale(images, imgsContainers, P1, P2, GameStatus);
                 // FCt() rajout texte par dessus pour donner le gagnant
-                sleep(3);
+                SDL_Delay(3000);
 
                 // Ecriture des scores
                 if (GameStatus.selectedMenu == SECTION_SCORE)

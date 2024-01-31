@@ -84,7 +84,7 @@ void waitBeforeBotPlay(PlayerInfo P2, GameStatusVar GameStatus)
 
     if (P2.isBot && GameStatus.playerTurn == 2)
     {
-        sleep(WAIT_UNTIL_BOT_PLAYS);
+        SDL_Delay(WAIT_UNTIL_BOT_PLAYS * 1000);
     }
 
     return;
@@ -441,7 +441,7 @@ void endgameManager(GameStatusVar *GameStatus)
         break;
     }
 
-    sleep(3);
+    SDL_Delay(3000);
 
     return;
 }
