@@ -91,6 +91,9 @@ int main(void)
             {
                 redraw = false;
                 showInitPlayer(images, imgsContainers, GameStatus, 1);
+                Point pseudoPos = {600, 300};
+                draw_text(P1.name, pseudoPos, 52, White);
+                graphic_update();
             }
             break;
 
@@ -99,6 +102,9 @@ int main(void)
             {
                 redraw = false;
                 showInitPlayer(images, imgsContainers, GameStatus, 2);
+                Point pseudoPos = {600, 300};
+                draw_text(P2.name, pseudoPos, 52, White);
+                graphic_update();
             }
             break;
 

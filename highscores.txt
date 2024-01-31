@@ -1,5 +1,5 @@
+fre 16 39
 Fredy 10 20
-Guard 5 84
 Bonni 5 14
 Foxy 5 45
-Chica 3 99
+Guard 5 84
