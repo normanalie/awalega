@@ -10,7 +10,7 @@
 
 //  Game Init
 int gameModeSelector(void);                                                 // Sélection du mode de jeu (Solo OU PvP) & Enregistrement des paramètres
-void initPlayers(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar GameStatus); // Initialisation de joueurs (Nom, Scores, etc.)
+void initPlayers(PlayerInfo *P1, PlayerInfo *P2); // Initialisation de joueurs (Nom, Scores, etc.)
 
 // Game
 void switchPlayer(GameStatusVar *GameStatus);                                                     // Changer de joueur pour le tour

@@ -34,3 +34,11 @@ Utiliser la commande "make clean" dans le répertoire racine du projet.
 Les répertoires suivant, ainsi que leurs contenu, seront supprimés :
     - build
     - bin
+
+
+Qu'est-ce que le dosier "audio_lib.unused" ?
+---------------------------------------------
+
+Ce répertoire contient un fichier .zip contenant toute la bibliothèque audio que nous avons faite.
+Malheureusement, nous n'avons pas eu le temps de l'implémenter. Nous l'avons rajoutée quand même au cas
+où, afin que vous puissiez voir ce qui a pu être fait dedans.

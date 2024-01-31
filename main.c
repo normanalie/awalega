@@ -34,7 +34,7 @@ int main(void)
 
     PlayerInfo P1;
     PlayerInfo P2;
-    initPlayers(&P1, &P2, GameStatus);
+    initPlayers(&P1, &P2);
 
     Images images;
     Containers imgsContainers;
@@ -63,7 +63,7 @@ int main(void)
                 showGameModeSelection(images, imgsContainers, GameStatus);
             }
             initGameStatus(&GameStatus);
-            initPlayers(&P1, &P2, GameStatus);
+            initPlayers(&P1, &P2);
             break;
 
         case SECTION_NAME_FORM1:
@@ -223,7 +223,6 @@ int main(void)
                             redraw = true;
                         }
                     }
-                    printf("Entrée\n");
                 }
                 break;
         }

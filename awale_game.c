@@ -1,7 +1,7 @@
 #include "awale_game.h"
 
 
-void initPlayers(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar GameStatus)
+void initPlayers(PlayerInfo *P1, PlayerInfo *P2)
 {
     // Init Score & Graines
     int i;

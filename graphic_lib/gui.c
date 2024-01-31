@@ -280,25 +280,21 @@ void menuClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
 {
     if (is_in(cursor, Rectangles.button.play))
     {
-        printf("Click play\n");
         *pSelectedMenu = SECTION_NEW_GAME;
         return;
     }
     if (is_in(cursor, Rectangles.button.leaderboard))
     {
-        printf("Click leaderboard\n");
         *pSelectedMenu = SECTION_SCORE;
         return;
     }
     if (is_in(cursor, Rectangles.button.about))
     {
-        printf("Click about\n");
         *pSelectedMenu = SECTION_ABOUT;
         return;
     }
     if (is_in(cursor, Rectangles.button.leave))
     {
-        printf("Click leave\n");
         *pSelectedMenu = SECTION_EXIT;
         return;
     }
@@ -309,7 +305,6 @@ void leaderboardClickHandler(Containers Rectangles, Point cursor, GameStatusVar 
     if (is_in(cursor, Rectangles.button.replay))
     {
         if (pGameStatus->isGameJustEnded) {
-            printf("Click Replay\n");
             pGameStatus->selectedMenu = SECTION_NEW_GAME;
             return;
         }
@@ -346,7 +341,6 @@ void newGameClickHandler(Containers Rectangles, Point cursor, GameStatusVar * pG
 
     if (is_in(cursor, Rectangles.button.playerVSia))
     {
-        printf("Click PvBOT\n");
         pGameStatus->gameMode = GAME_MODE_PVBOT;
         pGameStatus->selectedMenu = SECTION_NAME_FORM1;
         P2->isBot = 1;
@@ -354,7 +348,6 @@ void newGameClickHandler(Containers Rectangles, Point cursor, GameStatusVar * pG
     }
     if (is_in(cursor, Rectangles.button.pvp))
     {
-        printf("Click PvP\n");
         pGameStatus->gameMode = GAME_MODE_PVP;
         pGameStatus->selectedMenu = SECTION_NAME_FORM1;
         P2->isBot = 0;
@@ -379,7 +372,6 @@ void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, Pl
     {
         if (is_in(cursor, Rectangles.awale.p1.seeds[i]))
         {
-            printf("Click\n");
             if (pGameStatus->playerTurn == 1)
             {
                 pGameStatus->selectedHole = i+1;
@@ -388,7 +380,6 @@ void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, Pl
         }
         if (is_in(cursor, Rectangles.awale.p2.seeds[i]))
         {
-            printf("Click\n");
             if (pGameStatus->playerTurn == 2)
             {
                 pGameStatus->selectedHole = i+1;
