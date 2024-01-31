@@ -2,7 +2,7 @@
 
 int openAudio()
 {
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 8192) != 0)  //problem with the output of the sound (jittering and cuts) -> change in the parameters ?
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 8192) != 0) // problem with the output of the sound (jittering and cuts) -> change in the parameters ?
     {
         printf("Erreur lors de l'initialisation de la SDL_Mixer.\n");
         return ERROR;
@@ -12,7 +12,7 @@ int openAudio()
 
 int openSoundChannels(int num_channels)
 {
-    if(Mix_AllocateChannels(num_channels) != num_channels)
+    if (Mix_AllocateChannels(num_channels) != num_channels)
     {
         printf("Erreur lors de l'allocation des canaux requis.\n");
         return ERROR;
@@ -20,11 +20,11 @@ int openSoundChannels(int num_channels)
     return 0;
 }
 
-Mix_Chunk* loadSound(const char path[])
+Mix_Chunk *loadSound(const char path[])
 {
-    Mix_Chunk* chunk_temp = NULL;
+    Mix_Chunk *chunk_temp = NULL;
     chunk_temp = Mix_LoadWAV(path);
-    if(chunk_temp == NULL)
+    if (chunk_temp == NULL)
     {
         printf("Erreur lors de l'importation du son.\n");
         return NULL;
@@ -32,35 +32,36 @@ Mix_Chunk* loadSound(const char path[])
     return chunk_temp;
 }
 
-Mix_Music* loadMusic(const char path[]) 
+Mix_Music *loadMusic(const char path[])
 {
-    Mix_Music* music_temp = NULL;
+    Mix_Music *music_temp = NULL;
     music_temp = Mix_LoadMUS(path);
-    if(music_temp == NULL){
+    if (music_temp == NULL)
+    {
         printf("Erreur lors de l'importation de la musique.\n");
         return NULL;
     }
     return music_temp;
 }
 
-void loadAllMusics(audio* Audio)
+void loadAllMusics(audio *Audio)
 {
 
     PMUSIC_STRUCT.menuMusic.music = NULL;
-    PMUSIC_STRUCT.menuMusic.ID = MENU_MUSIC_ID;
+    PMUSIC_STRUCT.menuMusic.ID = 0;
     PMUSIC_STRUCT.menuMusic.music = loadMusic("./audio_lib/audio/menuMusic.mp3");
     PMUSIC_STRUCT.inGameMusic.music = NULL;
-    PMUSIC_STRUCT.inGameMusic.ID = INGAME_MUSIC_ID;
+    PMUSIC_STRUCT.inGameMusic.ID = 1;
     PMUSIC_STRUCT.inGameMusic.music = loadMusic("./audio_lib/audio/inGameMusic.mp3");
     PMUSIC_STRUCT.leaderboardMusic.music = NULL;
-    PMUSIC_STRUCT.leaderboardMusic.ID = LEADERBOARD_MUSIC_ID;
+    PMUSIC_STRUCT.leaderboardMusic.ID = 2;
     PMUSIC_STRUCT.leaderboardMusic.music = loadMusic("./audio_lib/audio/leaderboardMusic.mp3");
     PMUSIC_STRUCT.aboutMusic.music = NULL;
-    PMUSIC_STRUCT.aboutMusic.ID = ABOUT_MUSIC_ID;
+    PMUSIC_STRUCT.aboutMusic.ID = 3;
     PMUSIC_STRUCT.aboutMusic.music = loadMusic("./audio_lib/audio/aboutMusic.mp3");
 }
 
-void loadAllSounds(audio* Audio)
+void loadAllSounds(audio *Audio)
 {
     PSOUND_STRUCT.mouseClick.sound = NULL;
     PSOUND_STRUCT.mouseClick.numChannel = 0;
@@ -70,13 +71,13 @@ void loadAllSounds(audio* Audio)
     PSOUND_STRUCT.victory.sound = loadSound("./audio_lib/audio/successTrumpets.wav");
     PSOUND_STRUCT.defeat.sound = NULL;
     PSOUND_STRUCT.defeat.numChannel = 2;
-    PSOUND_STRUCT.defeat.sound = loadSound("./audio_lib/audio/loss.wav"); 
+    PSOUND_STRUCT.defeat.sound = loadSound("./audio_lib/audio/loss.wav");
     PSOUND_STRUCT.loading.sound = NULL;
     PSOUND_STRUCT.loading.numChannel = 3;
     PSOUND_STRUCT.loading.sound = loadSound("./audio_lib/audio/collect.wav");
     PSOUND_STRUCT.beanDeposit.sound = NULL;
     PSOUND_STRUCT.beanDeposit.numChannel = 4;
-    PSOUND_STRUCT.beanDeposit.sound = loadSound("./audio_lib/audio/dice.wav"); 
+    PSOUND_STRUCT.beanDeposit.sound = loadSound("./audio_lib/audio/dice.wav");
     PSOUND_STRUCT.buzzWrongAction.sound = NULL;
     PSOUND_STRUCT.buzzWrongAction.numChannel = 5;
     PSOUND_STRUCT.buzzWrongAction.sound = loadSound("./audio_lib/audio/buzzWrongCase.wav");
@@ -85,18 +86,19 @@ void loadAllSounds(audio* Audio)
     PSOUND_STRUCT.typing.sound = loadSound("./audio_lib/audio/keyboardSound.wav");
 }
 
-int playAudio(Mix_Music* music, int loop) 
+int playAudio(Mix_Music *music, int loop)
 {
-    if(Mix_PlayMusic(music, loop) != 0){
+    if (Mix_PlayMusic(music, loop) != 0)
+    {
         printf("Erreur lors du lancement de la musique. \n");
         return ERROR;
     }
     return 0;
 }
 
-int playSound(int num_channel, Mix_Chunk* chunk, int num_reps)
+int playSound(int num_channel, Mix_Chunk *chunk, int num_reps)
 {
-    if(Mix_PlayChannel(num_channel, chunk, num_reps) != num_channel)
+    if (Mix_PlayChannel(num_channel, chunk, num_reps) != num_channel)
     {
         printf("Impossible d'effectuer le lancement du son.\n");
         return ERROR;
@@ -104,34 +106,35 @@ int playSound(int num_channel, Mix_Chunk* chunk, int num_reps)
     return 0;
 }
 
-void pauseAudio() 
+void pauseAudio()
 {
-    if(Mix_PausedMusic() == 1){
-        //printf("Music resumed. \n");
+    if (Mix_PausedMusic() == 1)
+    {
+        // printf("Music resumed. \n");
         Mix_ResumeMusic();
     }
     else
     {
-        //printf("Music paused.\n");
+        // printf("Music paused.\n");
         Mix_PauseMusic();
     }
 }
 
-void rewindAudio() 
+void rewindAudio()
 {
-    //printf("Audio restarted.\n");
+    // printf("Audio restarted.\n");
     Mix_RewindMusic();
 }
 
-void playAudioAgain(Mix_Music* music, int loop) 
+void playAudioAgain(Mix_Music *music, int loop)
 {
     Mix_HaltMusic();
-    //printf("Music stopped. Will replay in 4 seconds.\n");
+    // printf("Music stopped. Will replay in 4 seconds.\n");
     SDL_Delay(4000);
     playAudio(music, loop);
 }
 
-void playSoundAgain(Mix_Chunk* chunk, int num_channel, int num_reps)
+void playSoundAgain(Mix_Chunk *chunk, int num_channel, int num_reps)
 {
     Mix_HaltChannel(num_channel);
     SDL_Delay(2000);
@@ -141,11 +144,12 @@ void playSoundAgain(Mix_Chunk* chunk, int num_channel, int num_reps)
 void soundVolumeUpdate(int num_channel, int volume)
 {
 
-    int val = volume*(0.75);
+    int val = volume * (0.75);
     Mix_Volume(num_channel, val);
-    if(num_channel > 0){
-    //printf("Sound volume on channel %d has been updated to %d.\n", num_channel, val);
-    soundVolumeUpdate(num_channel-1, volume);
+    if (num_channel > 0)
+    {
+        // printf("Sound volume on channel %d has been updated to %d.\n", num_channel, val);
+        soundVolumeUpdate(num_channel - 1, volume);
     }
     else
     {
@@ -156,39 +160,39 @@ void soundVolumeUpdate(int num_channel, int volume)
 void actualAudioVolume(int volume)
 {
     Mix_VolumeMusic(volume);
-    //printf("Volume has been actualised.\n");
+    // printf("Volume has been actualised.\n");
 }
 
-void audioVolumeUpdate(int* volume, int value)
+void audioVolumeUpdate(int *volume, int value)
 {
-    if(*volume == 0 && value == -AUDIO_INCREMENT)
+    if (*volume == 0 && value == -AUDIO_INCREMENT)
     {
-        if(Mix_PausedMusic() == 0)
-        pauseAudio();
+        if (Mix_PausedMusic() == 0)
+            pauseAudio();
         return;
-        //printf("Volume cannot be decreased.\n");
+        // printf("Volume cannot be decreased.\n");
     }
-    else if(*volume == HALF_MAX_VOLUME && value == AUDIO_INCREMENT)
+    else if (*volume == HALF_MAX_VOLUME && value == AUDIO_INCREMENT)
     {
         return;
-        //printf("Volume cannot be increased.\n");
+        // printf("Volume cannot be increased.\n");
     }
-    else 
+    else
     {
-        if(*volume == 0)
+        if (*volume == 0)
         {
-            pauseAudio();            
+            pauseAudio();
         }
-        *volume+=value;
-        //printf("Volume has been updated to %d.\n", *volume);
+        *volume += value;
+        // printf("Volume has been updated to %d.\n", *volume);
         actualAudioVolume(*volume);
         soundVolumeUpdate(NUM_CHANNELS, *volume);
     }
 }
 
-void audioVolumeMuteUnmute(int* volume, int value)
+void audioVolumeMuteUnmute(int *volume, int value)
 {
-    if((*volume == 0 && value == -AUDIO_INCREMENT) || (*volume == HALF_MAX_VOLUME && value == AUDIO_INCREMENT))
+    if ((*volume == 0 && value == -AUDIO_INCREMENT) || (*volume == HALF_MAX_VOLUME && value == AUDIO_INCREMENT))
     {
         audioVolumeUpdate(volume, value);
         return;
@@ -199,20 +203,20 @@ void audioVolumeMuteUnmute(int* volume, int value)
         audioVolumeUpdate(volume, value);
         audioVolumeMuteUnmute(volume, value);
     }
-    //printf("Audio track has been muted.\n");
+    // printf("Audio track has been muted.\n");
 }
 
-void freeMusic(Mix_Music* music)
+void freeMusic(Mix_Music *music)
 {
     Mix_FreeMusic(music);
 }
 
-void freeSound(Mix_Chunk* chunk)
+void freeSound(Mix_Chunk *chunk)
 {
     Mix_FreeChunk(chunk);
 }
 
-void freeAllMusics(audio* Audio)
+void freeAllMusics(audio *Audio)
 {
     freeMusic(Audio->musicSection.music1.music);
     freeMusic(Audio->musicSection.menuMusic.music);
@@ -221,7 +225,7 @@ void freeAllMusics(audio* Audio)
     freeMusic(Audio->musicSection.aboutMusic.music);
 }
 
-void freeAllSounds(audio* Audio)
+void freeAllSounds(audio *Audio)
 {
     freeSound(Audio->soundSection.mouseClick.sound);
     freeSound(Audio->soundSection.victory.sound);
