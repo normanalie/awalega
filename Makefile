@@ -10,7 +10,7 @@ dir:
 	mkdir -p build
 	mkdir -p bin
 
-build: shapes.o colors.o images.o score_handler.o graphic_lib.o gui.o main.o
+build: awale_game.o utilities.o shapes.o colors.o images.o score_handler.o graphic_lib.o gui.o main.o
 
 main.o: main.c
 	$(CC) $(CFLAGS) -c main.c -o build/main.o $(LIBS)
@@ -32,6 +32,12 @@ gui.o: graphic_lib/gui.c graphic_lib/gui.h
 
 score_handler.o: score_handler.c score_handler.h
 	$(CC) $(CFLAGS) -c score_handler.c -o build/score_handler.o $(LIBS)
+
+awale_game.o: awale_game.c awale_game.h
+	$(CC) $(CFLAGS) -c awale_game.c -o build/awale_game.o $(LIBS)
+
+utilities.o: utilities.c utilities.h
+	$(CC) $(CFLAGS) -c utilities.c -o build/utilities.o $(LIBS)
 
 clean:
 	rm -rf build

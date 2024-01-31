@@ -173,37 +173,45 @@ void showGameModeSelection(Images Images, Containers Rectangles)
 {
 }
 
-void updateMenu(Containers Rectangles, Point cursor)
+void menuClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
 {
     if (is_in(cursor, Rectangles.button.play))
     {
         printf("Click play\n");
+        *pSelectedMenu = SECTION_GAME;
+        return;
     }
     if (is_in(cursor, Rectangles.button.leaderboard))
     {
         printf("Click leaderboard\n");
+        *pSelectedMenu = SECTION_SCORE;
+        return;
     }
     if (is_in(cursor, Rectangles.button.about))
     {
         printf("Click about\n");
+        *pSelectedMenu = SECTION_ABOUT;
+        return;
     }
     if (is_in(cursor, Rectangles.button.leave))
     {
         printf("Click leave\n");
+        *pSelectedMenu = SECTION_EXIT;
+        return;
     }
 }
 
-void updateLeaderboard(Containers Rectangles, Point cursor)
+void leaderboardClickHandler(Containers Rectangles, Point cursor, int *pSelectedHander)
 {
     // No button in leaderboard ??
 }
 
-void updateAbout(Containers Rectangles, Point cursor)
+void aboutClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
 {
     // No button in leaderboard ??
 }
 
-void updateAwale(Containers Rectangles, Point cursor)
+void awaleClickHandler(Containers Rectangles, Point cursor, int *pSelectedHander)
 {
     for (int i = 0; i < HOLES_PER_PLAYER; i++)
     {
@@ -215,5 +223,31 @@ void updateAwale(Containers Rectangles, Point cursor)
         {
             printf("Click Player2 - Seeds %d\n", i);
         }
+    }
+}
+
+void guiClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
+{
+    switch (*pSelectedMenu)
+    {
+    case SECTION_HOME:
+        menuClickHandler(Rectangles, cursor, pSelectedMenu);
+        break;
+    case SECTION_GAME:
+        awaleClickHandler(Rectangles, cursor, pSelectedMenu);
+        break;
+    case SECTION_SCORE:
+        leaderboardClickHandler(Rectangles, cursor, pSelectedMenu);
+        break;
+    case SECTION_ABOUT:
+        aboutClickHandler(Rectangles, cursor, pSelectedMenu);
+        break;
+    case SECTION_EXIT_SCREEN:
+        *pSelectedMenu = SECTION_EXIT;
+        break;
+    case SECTION_EXIT:
+        break;
+    default:
+        break;
     }
 }
