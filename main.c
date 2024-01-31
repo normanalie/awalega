@@ -50,7 +50,7 @@ int main(void)
             {
                 redraw = false;
                 showMenu(images, imgsContainers);
-                        }
+            }
             GameStatus.isGameJustEnded = 0;
             break;
 
@@ -101,7 +101,7 @@ int main(void)
             if (redraw)
             {
                 redraw = false;
-                showAbout(images, imgsContainers, GameStatus.playerTurn);
+                showAbout(images, imgsContainers, 0);
             }
             break;
 

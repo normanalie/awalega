@@ -186,6 +186,7 @@ void showLeaderboard(Images Images, Containers Rectangles, GameStatusVar GameSta
 
 void showAbout(Images Images, Containers Rectangles, int currentPage)
 {
+    printf("Current page: %d\n", currentPage);
     present_image(Images.background.about, Rectangles.bg.menu);
     present_image(Images.misc.sign_about[currentPage], Rectangles.misc.sign_about);
     present_image(Images.misc.RL_button[currentPage], Rectangles.misc.RL_button[currentPage]);
