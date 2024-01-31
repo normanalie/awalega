@@ -165,7 +165,11 @@ void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P
 
     // Player_win_sign
     if (GameStatus.endgameType != NO_ENDGAME)
+    {
         present_image(Images.misc.player_win_sign, Rectangles.misc.player_win_sign);
+        Point pseudoPos = {580, 340};
+        draw_text("END", pseudoPos, 52, White);
+    }
     showVolumeButton(Images, Rectangles, GameStatus);
     showMenuButton(Images, Rectangles);
     graphic_update();
