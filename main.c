@@ -13,10 +13,10 @@ int main(void)
 
     PlayerInfo P1;
     PlayerInfo P2;
-    P1.harvestedSeeds = 0;
-    P2.harvestedSeeds = 0;
-    P1.moves = 0;
-    P2.moves = 0;
+    P1.harvestedSeeds = 12;
+    P2.harvestedSeeds = 9;
+    P1.moves = 3;
+    P2.moves = 4;
     P1.isBot= 0;
 
     GameStatusVar GameStatus;
@@ -24,7 +24,8 @@ int main(void)
     GameStatus.totalMoves = 0;
     GameStatus.moveCountdown = 20;
     GameStatus.isSoundON = 1;
-    GameStatus.selectedMenu = 0;
+    GameStatus.selectedMenu = 1;
+    GameStatus.playerTurn = 1;
 
     int currentPage = 1;
     int currentPlayer = 2;
@@ -42,7 +43,7 @@ int main(void)
     //showVolumeButton(images, imgsContainers, GameStatus);
     //showLeaderboard(images, imgsContainers, GameStatus);
     //showGameModeSelection(images, imgsContainers);
-    showInitPlayer(images, imgsContainers, currentPlayer);
+    //showInitPlayer(images, imgsContainers, currentPlayer);
 
     char quit = 0;
     SDL_Event event;

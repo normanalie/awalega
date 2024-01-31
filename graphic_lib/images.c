@@ -34,6 +34,9 @@ void init_Images(Images *pImages)
     pImages->misc.total_moves_text = loadImage("images/total_moves_text.bmp");
     pImages->misc.enter_name[0]= loadImage("images/enter_name1.bmp");
     pImages->misc.enter_name[1]= loadImage("images/enter_name2.bmp");
+    pImages->misc.player_turn_radio[0]= loadImage("images/player_turn_radio_on.bmp");
+    pImages->misc.player_turn_radio[1]= loadImage("images/player_turn_radio_off.bmp");
+    pImages->misc.player_win_sign= loadImage("images/player_win_sign.bmp");
 }
 
 void init_Images_Containers(Containers *pRectangles)
@@ -119,72 +122,89 @@ void init_Images_Containers(Containers *pRectangles)
     pRectangles->bg.game.topleft.y = 0;
     pRectangles->bg.game.w = 1280;
     pRectangles->bg.game.h = 720;
+
     pRectangles->awale.deck.topleft.x = 340;
     pRectangles->awale.deck.topleft.y = 235;
     pRectangles->awale.deck.w = 620;
     pRectangles->awale.deck.h = 250;
+
     pRectangles->awale.total_moves_sign.topleft.x = 1060;
     pRectangles->awale.total_moves_sign.topleft.y = 320;
     pRectangles->awale.total_moves_sign.w = 120;
     pRectangles->awale.total_moves_sign.h = 90;
+
     pRectangles->awale.move_countdown_sign.topleft.x = 125;
     pRectangles->awale.move_countdown_sign.topleft.y = 320;
     pRectangles->awale.move_countdown_sign.w = 120;
     pRectangles->awale.move_countdown_sign.h = 90;
+
     pRectangles->awale.moves_before_stop_text.topleft.x= 75;
     pRectangles->awale.moves_before_stop_text.topleft.y= 275;
     pRectangles->awale.moves_before_stop_text.w= 230;
     pRectangles->awale.moves_before_stop_text.h= 30;
+
     pRectangles->awale.total_moves_text.topleft.x= 1035;
     pRectangles->awale.total_moves_text.topleft.y= 275;
     pRectangles->awale.total_moves_text.w= 170;
     pRectangles->awale.total_moves_text.h= 30;
 
-
-    // Sign Player 1
-    pRectangles->awale.p1.pseudo_sign.topleft.x = 500;
-    pRectangles->awale.p1.pseudo_sign.topleft.y = 40;
-    pRectangles->awale.p1.pseudo_sign.w = 300;
-    pRectangles->awale.p1.pseudo_sign.h = 90;
-    pRectangles->awale.p1.seed_number_sign.topleft.x = 340;
-    pRectangles->awale.p1.seed_number_sign.topleft.y = 140;
-    pRectangles->awale.p1.seed_number_sign.w = 620;
-    pRectangles->awale.p1.seed_number_sign.h = 90;
-    pRectangles->awale.p1.moves_sign.topleft.x = 820;
-    pRectangles->awale.p1.moves_sign.topleft.y = 40;
-    pRectangles->awale.p1.moves_sign.w = 120;
-    pRectangles->awale.p1.moves_sign.h = 90;
-    pRectangles->awale.p1.score_sign.topleft.x = 355;
-    pRectangles->awale.p1.score_sign.topleft.y = 40;
-    pRectangles->awale.p1.score_sign.w = 120;
-    pRectangles->awale.p1.score_sign.h = 90;
+    pRectangles->misc.player_win_sign.topleft.x= 440;
+    pRectangles->misc.player_win_sign.topleft.y= 280;
+    pRectangles->misc.player_win_sign.w= 425;
+    pRectangles->misc.player_win_sign.h= 160;
 
     // Sign Player 2
     pRectangles->awale.p2.pseudo_sign.topleft.x = 500;
-    pRectangles->awale.p2.pseudo_sign.topleft.y = 590;
+    pRectangles->awale.p2.pseudo_sign.topleft.y = 40;
     pRectangles->awale.p2.pseudo_sign.w = 300;
     pRectangles->awale.p2.pseudo_sign.h = 90;
+
     pRectangles->awale.p2.seed_number_sign.topleft.x = 340;
-    pRectangles->awale.p2.seed_number_sign.topleft.y = 490;
+    pRectangles->awale.p2.seed_number_sign.topleft.y = 140;
     pRectangles->awale.p2.seed_number_sign.w = 620;
     pRectangles->awale.p2.seed_number_sign.h = 90;
+
     pRectangles->awale.p2.moves_sign.topleft.x = 820;
-    pRectangles->awale.p2.moves_sign.topleft.y = 590;
+    pRectangles->awale.p2.moves_sign.topleft.y = 40;
     pRectangles->awale.p2.moves_sign.w = 120;
     pRectangles->awale.p2.moves_sign.h = 90;
+
     pRectangles->awale.p2.score_sign.topleft.x = 355;
-    pRectangles->awale.p2.score_sign.topleft.y = 590;
+    pRectangles->awale.p2.score_sign.topleft.y = 40;
     pRectangles->awale.p2.score_sign.w = 120;
     pRectangles->awale.p2.score_sign.h = 90;
 
-    // Seeds Player 1
-    for (int i = 0; i < HOLES_PER_PLAYER; i++)
-    {
-        pRectangles->awale.p1.seeds[i].topleft.x = AWALE_1ST_SEED_POS_X + i * SEED_SEPARATION;
-        pRectangles->awale.p1.seeds[i].topleft.y = AWALE_P1_1ST_SEED_POS_Y;
-        pRectangles->awale.p1.seeds[i].w = SEED_WIDTH;
-        pRectangles->awale.p1.seeds[i].h = SEED_HEIGHT;
-    }
+    pRectangles->awale.p2.player_turn_radio.topleft.x= 975;
+    pRectangles->awale.p2.player_turn_radio.topleft.y= 155;
+    pRectangles->awale.p2.player_turn_radio.w= 60;
+    pRectangles->awale.p2.player_turn_radio.h= 60;
+
+
+    // Sign Player 1
+    pRectangles->awale.p1.pseudo_sign.topleft.x = 500;
+    pRectangles->awale.p1.pseudo_sign.topleft.y = 590;
+    pRectangles->awale.p1.pseudo_sign.w = 300;
+    pRectangles->awale.p1.pseudo_sign.h = 90;
+
+    pRectangles->awale.p1.seed_number_sign.topleft.x = 340;
+    pRectangles->awale.p1.seed_number_sign.topleft.y = 490;
+    pRectangles->awale.p1.seed_number_sign.w = 620;
+    pRectangles->awale.p1.seed_number_sign.h = 90;
+
+    pRectangles->awale.p1.moves_sign.topleft.x = 820;
+    pRectangles->awale.p1.moves_sign.topleft.y = 590;
+    pRectangles->awale.p1.moves_sign.w = 120;
+    pRectangles->awale.p1.moves_sign.h = 90;
+
+    pRectangles->awale.p1.score_sign.topleft.x = 355;
+    pRectangles->awale.p1.score_sign.topleft.y = 590;
+    pRectangles->awale.p1.score_sign.w = 120;
+    pRectangles->awale.p1.score_sign.h = 90;
+
+    pRectangles->awale.p1.player_turn_radio.topleft.x= 975;
+    pRectangles->awale.p1.player_turn_radio.topleft.y= 505;
+    pRectangles->awale.p1.player_turn_radio.w= 60;
+    pRectangles->awale.p1.player_turn_radio.h= 60;
 
     // Seeds Player 2
     for (int i = 0; i < HOLES_PER_PLAYER; i++)
@@ -193,6 +213,15 @@ void init_Images_Containers(Containers *pRectangles)
         pRectangles->awale.p2.seeds[i].topleft.y = AWALE_P2_1ST_SEED_POS_Y;
         pRectangles->awale.p2.seeds[i].w = SEED_WIDTH;
         pRectangles->awale.p2.seeds[i].h = SEED_HEIGHT;
+    }
+
+    // Seeds Player 1
+    for (int i = 0; i < HOLES_PER_PLAYER; i++)
+    {
+        pRectangles->awale.p1.seeds[i].topleft.x = AWALE_1ST_SEED_POS_X + i * SEED_SEPARATION;
+        pRectangles->awale.p1.seeds[i].topleft.y = AWALE_P1_1ST_SEED_POS_Y;
+        pRectangles->awale.p1.seeds[i].w = SEED_WIDTH;
+        pRectangles->awale.p1.seeds[i].h = SEED_HEIGHT;
     }
 
     // Sign Leaderboard

@@ -48,10 +48,21 @@ void showAwale(Images Images, Containers Rectangles , PlayerInfo P1, PlayerInfo 
     sprintf(countdown, "%.2d", GameStatus.moveCountdown);
     draw_text(countdown,move_countdown,32, Black);
 
+    // TOUR DES JOUEURS
+    if(GameStatus.playerTurn==1){
+        present_image(Images.misc.player_turn_radio[0], Rectangles.awale.p1.player_turn_radio);
+        present_image(Images.misc.player_turn_radio[1], Rectangles.awale.p2.player_turn_radio);
+    }
+
+    else{
+        present_image(Images.misc.player_turn_radio[1], Rectangles.awale.p1.player_turn_radio);
+        present_image(Images.misc.player_turn_radio[0], Rectangles.awale.p2.player_turn_radio);
+    }
+
 
     //NOMBRE DE GRAINES PAR TROU
     Point Player1_lign; Point Player2_lign;
-    Player1_lign.y = POS_Y_NUMBER_OF_SEED_PLAYER1; Player2_lign.y = POS_Y_NUMBER_OF_SEED_PLAYER2;
+    Player2_lign.y = POS_Y_NUMBER_OF_SEED_PLAYER2; Player1_lign.y = POS_Y_NUMBER_OF_SEED_PLAYER1;
     for(int i=0; i<6; i++){
         Player1_lign.x= POS_X_1ST_NUMBER_OF_SEED+ SEPARATION_NUMBER_OF_SEED*i;
         Player2_lign.x= POS_X_1ST_NUMBER_OF_SEED + SEPARATION_NUMBER_OF_SEED*i;
@@ -64,7 +75,7 @@ void showAwale(Images Images, Containers Rectangles , PlayerInfo P1, PlayerInfo 
 
     //NOMBRE DE COUPS DES JOUEURS
     Point Player1_moves; Point Player2_moves;
-    Player1_moves.x= 860; Player2_moves.x= 860; Player1_moves.y=68; Player2_moves.y=618;
+    Player1_moves.x= 860; Player2_moves.x= 860; Player2_moves.y=68; Player1_moves.y=618;
     char moves1[3];
     char moves2[3];
     sprintf(moves1, "%.2d", P1.moves);
@@ -74,7 +85,7 @@ void showAwale(Images Images, Containers Rectangles , PlayerInfo P1, PlayerInfo 
 
     //SCORE DES JOUEURS
     Point Player1_score; Point Player2_score;
-    Player1_score.x= 395; Player2_score.x= 395; Player1_score.y=68; Player2_score.y=618;
+    Player1_score.x= 395; Player2_score.x= 395; Player2_score.y=68; Player1_score.y=618;
     char score1[3];
     char score2[3];
     sprintf(score1, "%.2d", P1.harvestedSeeds);
@@ -113,6 +124,10 @@ void showAwale(Images Images, Containers Rectangles , PlayerInfo P1, PlayerInfo 
         else if(P2.seeds[i]>=4)
             present_image(Images.awale.four_seed, Rectangles.awale.p2.seeds[i]);
     }
+
+    //Player_win_sign
+    if(GameStatus.isGameJustEnded==1)
+        present_image(Images.misc.player_win_sign, Rectangles.misc.player_win_sign);
 }
 
 void showLeaderboard(Images Images, Containers Rectangles, GameStatusVar GameStatus)
@@ -164,7 +179,7 @@ void showGameModeSelection(Images Images, Containers Rectangles)
 
 void showInitPlayer(Images Images, Containers Rectangles, int currentPlayer){
     present_image(Images.background.game, Rectangles.bg.game);
-    present_image(Images.misc.enter_name[currentPlayer-1], Rectangles.misc.enter_name);  
+    present_image(Images.misc.enter_name[currentPlayer-1], Rectangles.misc.enter_name);
 }
 
 void showMenuButton(Images Images, Containers Rectangles, GameStatusVar GameStatus){

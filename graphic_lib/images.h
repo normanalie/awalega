@@ -47,6 +47,8 @@ typedef struct
     SDL_Texture *total_moves_text;
     SDL_Texture *moves_before_stop_text;
     SDL_Texture *enter_name[2];
+    SDL_Texture *player_turn_radio[2];
+    SDL_Texture *player_win_sign;
 } Misc;
 typedef struct
 {
@@ -82,6 +84,7 @@ typedef struct
     Rect score_sign;
     Rect seed_number_sign;
     Rect moves_sign;
+    Rect player_turn_radio;
 } Containers_awale_player1;
 typedef struct
 {
@@ -90,6 +93,7 @@ typedef struct
     Rect score_sign;
     Rect seed_number_sign;
     Rect moves_sign;
+    Rect player_turn_radio;
 } Containers_awale_player2;
 typedef struct
 {
@@ -111,6 +115,7 @@ typedef struct
     Rect RL_button[2];
     Rect playerVSia;
     Rect enter_name;
+    Rect player_win_sign;
 } Containers_misc;
 typedef struct
 {

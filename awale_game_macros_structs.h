@@ -55,5 +55,4 @@ typedef struct {
     int isBot;                    //  0 : Ce joueur n'est pas un bot || 1 : Est un bot (Facile) || (Unused) 2 : Est un bot (Difficile)
 } PlayerInfo;
 
-
 #endif /* AWALE_GAME_MACROS_STRUCTS */
