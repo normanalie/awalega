@@ -11,15 +11,16 @@ void initGui(Images *pImages, Containers *pRectangles)
 
 void showMenu(Images Images, Containers Rectangles, GameStatusVar GameStatus)
 {
+
     present_image(Images.background.menu, Rectangles.bg.menu);
     present_image(Images.button.play, Rectangles.button.play);
     present_image(Images.button.leaderboard, Rectangles.button.leaderboard);
     present_image(Images.button.about, Rectangles.button.about);
     present_image(Images.button.leave, Rectangles.button.leave);
+    present_image(Images.misc.title, Rectangles.misc.title);
     showVolumeButton(Images, Rectangles, GameStatus);
     graphic_update();
 }
-
 
 void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P2, GameStatusVar GameStatus)
 {
@@ -99,6 +100,8 @@ void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P
     draw_text(moves1, Player1_moves, 36, Black);
     sprintf(moves2, "%.2d", P2.moves);
     draw_text(moves2, Player2_moves, 36, Black);
+    present_image(Images.misc.moves_text, Rectangles.awale.p1.moves_text);
+    present_image(Images.misc.moves_text, Rectangles.awale.p2.moves_text);
 
     // SCORE DES JOUEURS
     Point Player1_score;
@@ -113,7 +116,8 @@ void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P
     draw_text(score1, Player1_score, 36, Black);
     sprintf(score2, "%.2d", P2.harvestedSeeds);
     draw_text(score2, Player2_score, 36, Black);
-
+    present_image(Images.misc.score_text, Rectangles.awale.p1.score_text);
+    present_image(Images.misc.score_text, Rectangles.awale.p2.score_text);
 
     // NOMS DES JOUEURS
     Point Player1_name;
@@ -160,8 +164,12 @@ void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P
     }
 
     // Player_win_sign
-    if (GameStatus.isGameJustEnded == 1)
+    if (GameStatus.endgameType != NO_ENDGAME)
+    {
         present_image(Images.misc.player_win_sign, Rectangles.misc.player_win_sign);
+        Point pseudoPos = {580, 340};
+        draw_text("END", pseudoPos, 52, White);
+    }
     showVolumeButton(Images, Rectangles, GameStatus);
     showMenuButton(Images, Rectangles);
     graphic_update();
@@ -298,9 +306,18 @@ void menuClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
     }
 }
 
-void leaderboardClickHandler(Containers Rectangles, Point cursor, int *pSelectedHander)
+void leaderboardClickHandler(Containers Rectangles, Point cursor, GameStatusVar *pGameStatus)
 {
-    // No button in leaderboard ??
+    if (is_in(cursor, Rectangles.button.replay))
+    {
+        if (pGameStatus->isGameJustEnded)
+        {
+            printf("Click Replay\n");
+            pGameStatus->selectedMenu = SECTION_NEW_GAME;
+            return;
+        }
+    }
+    homeClickHandler(Rectangles, cursor, &pGameStatus->selectedMenu);
 }
 
 void aboutClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu, int *pCurrentPage)
@@ -327,7 +344,8 @@ void homeClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
     }
 }
 
-void newGameClickHandler(Containers Rectangles, Point cursor, GameStatusVar * pGameStatus, PlayerInfo * P2) {
+void newGameClickHandler(Containers Rectangles, Point cursor, GameStatusVar *pGameStatus, PlayerInfo *P2)
+{
 
     if (is_in(cursor, Rectangles.button.playerVSia))
     {
@@ -348,19 +366,14 @@ void newGameClickHandler(Containers Rectangles, Point cursor, GameStatusVar * pG
     homeClickHandler(Rectangles, cursor, &pGameStatus->selectedMenu);
 }
 
-// void nameFormClickHandler(Containers Rectangles, Point cursor, PlayerInfo * currentPlayer, GameStatusVar *pGameStatus) {
+void nameFormClickHandler(Containers Rectangles, Point cursor, GameStatusVar *pGameStatus)
+{
+    homeClickHandler(Rectangles, cursor, &pGameStatus->selectedMenu);
+}
 
-//     if (!currentPlayer->isBot) {
-//         char name[5];
-
-//         //strcpy()
-//     }
-//     homeClickHandler(Rectangles, cursor, &pGameStatus->selectedMenu);
-// }
-
-
-void addLetterToPseudo(PlayerInfo * Player, const char * letter) {
-    strncat(Player->name, letter, NAME_MAX_LEN - strlen(Player->name) );
+void addLetterToPseudo(PlayerInfo *Player, const char *letter)
+{
+    strncat(Player->name, letter, NAME_MAX_LEN - strlen(Player->name));
 }
 
 void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, PlayerInfo *pP2, GameStatusVar *pGameStatus)
@@ -373,7 +386,7 @@ void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, Pl
             printf("Click\n");
             if (pGameStatus->playerTurn == 1)
             {
-                pGameStatus->selectedHole = i+1;
+                pGameStatus->selectedHole = i + 1;
                 playMove(pP1, pP2, pGameStatus);
             }
         }
@@ -382,26 +395,26 @@ void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, Pl
             printf("Click\n");
             if (pGameStatus->playerTurn == 2)
             {
-                pGameStatus->selectedHole = i+1;
+                pGameStatus->selectedHole = i + 1;
                 playMove(pP1, pP2, pGameStatus);
             }
         }
     }
 }
 
-void guiClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
+void guiClickHandler(Containers Rectangles, Point cursor, GameStatusVar *pGameStatus)
 {
-    switch (*pSelectedMenu)
+    switch (pGameStatus->selectedMenu)
     {
     case SECTION_HOME:
-        menuClickHandler(Rectangles, cursor, pSelectedMenu);
+        menuClickHandler(Rectangles, cursor, &pGameStatus->selectedMenu);
         break;
     case SECTION_SCORE:
-        leaderboardClickHandler(Rectangles, cursor, pSelectedMenu);
-        homeClickHandler(Rectangles, cursor, pSelectedMenu);
+        leaderboardClickHandler(Rectangles, cursor, pGameStatus);
+        homeClickHandler(Rectangles, cursor, &pGameStatus->selectedMenu);
         break;
     case SECTION_EXIT_SCREEN:
-        *pSelectedMenu = SECTION_EXIT;
+        pGameStatus->selectedMenu = SECTION_EXIT;
         break;
     case SECTION_EXIT:
         break;

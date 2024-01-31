@@ -7,6 +7,7 @@
 #include "score_handler.h"
 #include "utilities.h"
 #include "graphic_lib/gui.h"
+#include "audio_lib/audio_lib.h"
 
 void initGameStatus(GameStatusVar *pGameStatus)
 {
@@ -40,11 +41,25 @@ int main(void)
     Containers imgsContainers;
     initGui(&images, &imgsContainers);
 
+    audio Audio;
+    openAudio();
+    openSoundChannels(NUM_CHANNELS);
+
+    loadAllMusics(&Audio);
+    loadAllSounds(&Audio);
+    initAudio();
+    actualAudioVolume(GameStatus.isSoundON ? DEFAULT_VOLUME : 0);
+    GameStatus.currentMusic = MUSIC_STRUCT.menuMusic;
+
+    playAudio(GameStatus.currentMusic.music, REP_INF);
+
     bool redraw = true;
     int aboutCurrentPage = 0;
     SDL_Event event;
     do
     {
+        actualAudioVolume(GameStatus.isSoundON ? DEFAULT_VOLUME : 0);
+        soundVolumeUpdate(NUM_CHANNELS, GameStatus.isSoundON ? DEFAULT_VOLUME : 0);
         switch (GameStatus.selectedMenu)
         {
         case SECTION_HOME:
@@ -52,6 +67,11 @@ int main(void)
             {
                 redraw = false;
                 showMenu(images, imgsContainers, GameStatus);
+                if (GameStatus.currentMusic.ID != MENU_MUSIC.ID)
+                {
+                    GameStatus.currentMusic = MENU_MUSIC;
+                    playAudio(MUSIC_STRUCT.menuMusic.music, REP_INF);
+                }
             }
             GameStatus.isGameJustEnded = 0;
             break;
@@ -71,6 +91,9 @@ int main(void)
             {
                 redraw = false;
                 showInitPlayer(images, imgsContainers, GameStatus, 1);
+                Point pseudoPos = {600, 300};
+                draw_text(P1.name, pseudoPos, 52, White);
+                graphic_update();
             }
             break;
 
@@ -79,6 +102,9 @@ int main(void)
             {
                 redraw = false;
                 showInitPlayer(images, imgsContainers, GameStatus, 2);
+                Point pseudoPos = {600, 300};
+                draw_text(P2.name, pseudoPos, 52, White);
+                graphic_update();
             }
             break;
 
@@ -87,23 +113,31 @@ int main(void)
             {
                 redraw = false;
                 showAwale(images, imgsContainers, P1, P2, GameStatus);
+                if (GameStatus.currentMusic.ID != INGAME_MUSIC.ID)
+                {
+                    GameStatus.currentMusic = INGAME_MUSIC;
+                    playAudio(MUSIC_STRUCT.inGameMusic.music, -1);
+                }
             }
 
             if (GameStatus.endgameType != NO_ENDGAME) // Fin de partie
             {
-                // Afficher le tablier et les infos du jeu une dernière fois avant de quitter afin que les joueurs puisse voir ce qu'il s'est passé
-                showAwale(images, imgsContainers, P1, P2, GameStatus);
-                sleep(3);
 
                 // Gestionnaire de fin de jeu + Afficher message correspondant
                 GameStatus.isGameJustEnded = 1;
                 endgameManager(&GameStatus);
                 whoWon(&P1, &P2, &GameStatus);
 
+                // Afficher le tablier et les infos du jeu une dernière fois avant de quitter afin que les joueurs puisse voir ce qu'il s'est passé
+                showAwale(images, imgsContainers, P1, P2, GameStatus);
+                // FCt() rajout texte par dessus pour donner le gagnant
+                SDL_Delay(1000);
+
                 // Ecriture des scores
                 if (GameStatus.selectedMenu == SECTION_SCORE)
                 {
                     saveScores(P1, P2);
+                    redraw = true;
                 }
             }
 
@@ -114,6 +148,11 @@ int main(void)
             {
                 redraw = false;
                 showLeaderboard(images, imgsContainers, GameStatus);
+                if (GameStatus.currentMusic.ID != LEADERBOARD_MUSIC.ID)
+                {
+                    GameStatus.currentMusic = LEADERBOARD_MUSIC;
+                    playAudio(MUSIC_STRUCT.leaderboardMusic.music, -1);
+                }
             }
             if (GameStatus.isGameJustEnded)
             {
@@ -127,6 +166,11 @@ int main(void)
             {
                 redraw = false;
                 showAbout(images, imgsContainers, GameStatus, aboutCurrentPage);
+                if (GameStatus.currentMusic.ID != ABOUT_MUSIC.ID)
+                {
+                    GameStatus.currentMusic = ABOUT_MUSIC;
+                    playAudio(MUSIC_STRUCT.aboutMusic.music, REP_INF);
+                }
             }
             break;
 
@@ -135,92 +179,114 @@ int main(void)
             break;
         }
 
-
         // Partie BOT
-        if (P2.isBot && GameStatus.playerTurn == 2 && GameStatus.selectedMenu == SECTION_GAME) {
+        if (P2.isBot && GameStatus.playerTurn == 2 && GameStatus.selectedMenu == SECTION_GAME)
+        {
             GameStatus.selectedHole = randInt(1, HOLES_PER_PLAYER);
             playMove(&P1, &P2, &GameStatus);
             showAwale(images, imgsContainers, P1, P2, GameStatus);
         }
 
-
         // Partie SDL
         event = graphic_get_event();
-        
 
         switch (event.type)
         {
-            case SDL_QUIT:
-                GameStatus.selectedMenu = SECTION_EXIT;
-                break;
-            case SDL_MOUSEBUTTONUP:
-                if (event.button.button == SDL_BUTTON_LEFT)
+        case SDL_QUIT:
+            GameStatus.selectedMenu = SECTION_EXIT;
+            break;
+        case SDL_MOUSEBUTTONUP:
+            if (event.button.button == SDL_BUTTON_LEFT)
+            {
+                redraw = true;
+                Point cursor = {event.button.x, event.button.y};
+                volumeButtonClickHandler(imgsContainers, cursor, &GameStatus);
+                SOUND_EFFECTS sound = MOUSECLICK;
+                soundPlayEffect(sound);
+                switch (GameStatus.selectedMenu)
                 {
-                    redraw = true;
-                    Point cursor = {event.button.x, event.button.y};
-                    volumeButtonClickHandler(imgsContainers, cursor, &GameStatus);
-                    switch (GameStatus.selectedMenu)
+                case SECTION_HOME:
+                    guiClickHandler(imgsContainers, cursor, &GameStatus);
+                    break;
+                case SECTION_NEW_GAME:
+                    newGameClickHandler(imgsContainers, cursor, &GameStatus, &P2);
+                    break;
+                case SECTION_NAME_FORM1:
+                case SECTION_NAME_FORM2:
+                    nameFormClickHandler(imgsContainers, cursor, &GameStatus);
+                    break;
+                case SECTION_GAME:
+                    inGameClickHandler(imgsContainers, cursor, &P1, &P2, &GameStatus);
+                    break;
+                case SECTION_SCORE:
+                    leaderboardClickHandler(imgsContainers, cursor, &GameStatus);
+                    break;
+                case SECTION_ABOUT:
+                    aboutClickHandler(imgsContainers, cursor, &GameStatus.selectedMenu, &aboutCurrentPage);
+                    break;
+
+                default:
+                    guiClickHandler(imgsContainers, cursor, &GameStatus);
+                    break;
+                }
+            }
+            break;
+
+        case SDL_TEXTINPUT:
+
+            if (GameStatus.selectedMenu == SECTION_NAME_FORM1)
+            {
+                playSound(SOUND_STRUCT.typing.numChannel, SOUND_STRUCT.typing.sound, 0);
+                addLetterToPseudo(&P1, event.text.text);
+                redraw = true;
+            }
+            else if (GameStatus.selectedMenu == SECTION_NAME_FORM2 && !P2.isBot)
+            {
+                playSound(SOUND_STRUCT.typing.numChannel, SOUND_STRUCT.typing.sound, 0);
+                addLetterToPseudo(&P2, event.text.text);
+                redraw = true;
+            }
+            break;
+
+        case SDL_KEYDOWN:
+            if (event.key.keysym.sym == SDLK_RETURN) // Si "Entrée" est pressé
+            {
+                if (GameStatus.selectedMenu == SECTION_NAME_FORM1 && !P2.isBot)
+                {
+
+                    if (strlen(P1.name) >= NAME_MIN_LEN)
                     {
-                    case SECTION_NEW_GAME:
-                        newGameClickHandler(imgsContainers, cursor, &GameStatus, &P2);
-                        break;
-                    case SECTION_GAME:
-                        if (GameStatus.playerTurn == 1) {
-                            inGameClickHandler(imgsContainers, cursor, &P1, &P2, &GameStatus);
-                        }
-                        break;
-                    case SECTION_ABOUT:
-                        aboutClickHandler(imgsContainers, cursor, &GameStatus.selectedMenu, &aboutCurrentPage);
-                        break;
-
-                    default:
-                        guiClickHandler(imgsContainers, cursor, &GameStatus.selectedMenu);
-                        break;
+                        GameStatus.selectedMenu = SECTION_NAME_FORM2;
+                        redraw = true;
                     }
                 }
-                break;
-
-            case SDL_TEXTINPUT:
-
-                if (GameStatus.selectedMenu == SECTION_NAME_FORM1) {
-                    addLetterToPseudo(&P1, event.text.text);
-                    redraw = true;
-                } else if (GameStatus.selectedMenu == SECTION_NAME_FORM2 && !P2.isBot) {
-                    addLetterToPseudo(&P2, event.text.text);
-                    redraw = true;
-                }
-                break;
-                
-            case SDL_KEYDOWN:
-                if (event.key.keysym.sym == SDLK_RETURN) // Si "Entrée" est pressé
+                else if (GameStatus.selectedMenu == SECTION_NAME_FORM1)
                 {
-                    if (GameStatus.selectedMenu == SECTION_NAME_FORM1 && !P2.isBot) {
 
-                        if (strlen(P1.name) >= NAME_MIN_LEN) {
-                            GameStatus.selectedMenu = SECTION_NAME_FORM2;
-                            redraw = true;
-                        }
-                    } else if (GameStatus.selectedMenu == SECTION_NAME_FORM1) {
-
-                        if (strlen(P1.name) >= NAME_MIN_LEN) {
-                            GameStatus.selectedMenu = SECTION_GAME;
-                            strcpy(P2.name, "Bot");
-                            redraw = true;
-                        }
-                        
-                    } else if (GameStatus.selectedMenu == SECTION_NAME_FORM2) {
-
-                        if (strlen (P2.name) >= NAME_MIN_LEN) {
-                            GameStatus.selectedMenu = SECTION_GAME;
-                            redraw = true;
-                        }
+                    if (strlen(P1.name) >= NAME_MIN_LEN)
+                    {
+                        GameStatus.selectedMenu = SECTION_GAME;
+                        strcpy(P2.name, "Bot");
+                        redraw = true;
                     }
-                    printf("Entrée\n");
                 }
-                break;
+                else if (GameStatus.selectedMenu == SECTION_NAME_FORM2)
+                {
+
+                    if (strlen(P2.name) >= NAME_MIN_LEN)
+                    {
+                        GameStatus.selectedMenu = SECTION_GAME;
+                        redraw = true;
+                    }
+                }
+                printf("Entrée\n");
+            }
+            break;
         }
 
     } while (GameStatus.selectedMenu != SECTION_EXIT);
 
+    freeAllSounds(&Audio);
+    freeAllMusics(&Audio);
     return 0;
 }

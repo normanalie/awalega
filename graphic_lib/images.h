@@ -49,6 +49,8 @@ typedef struct
     SDL_Texture *enter_name[2];
     SDL_Texture *player_turn_radio[2];
     SDL_Texture *player_win_sign;
+    SDL_Texture *score_text;
+    SDL_Texture *moves_text;
 } Misc;
 typedef struct
 {
@@ -85,6 +87,8 @@ typedef struct
     Rect seed_number_sign;
     Rect moves_sign;
     Rect player_turn_radio;
+    Rect score_text;
+    Rect moves_text;
 } Containers_awale_player1;
 typedef struct
 {
@@ -94,6 +98,8 @@ typedef struct
     Rect seed_number_sign;
     Rect moves_sign;
     Rect player_turn_radio;
+    Rect score_text;
+    Rect moves_text;
 } Containers_awale_player2;
 typedef struct
 {
