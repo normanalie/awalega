@@ -32,9 +32,13 @@ void showAwale(Images Images, Containers Rectangles , PlayerInfo P1, PlayerInfo 
     present_image(Images.misc.square_sign, Rectangles.awale.p1.moves_sign);
     present_image(Images.misc.square_sign, Rectangles.awale.p2.moves_sign);
 
+    //TEXTES
+    present_image(Images.misc.moves_before_stop_text, Rectangles.awale.moves_before_stop_text);
+    present_image(Images.misc.total_moves_text, Rectangles.awale.total_moves_text);
+
     //OTHERS SIGNS
-    present_image(Images.misc.square_sign, Rectangles.awale.total_moves);
-    present_image(Images.misc.square_sign, Rectangles.awale.move_countdown);
+    present_image(Images.misc.square_sign, Rectangles.awale.total_moves_sign);
+    present_image(Images.misc.square_sign, Rectangles.awale.move_countdown_sign);
     Point total_moves; Point move_countdown;
     total_moves.x = 1103; total_moves.y= 350; move_countdown.x= 168; move_countdown.y= 350;
     char moves[3];
@@ -150,8 +154,22 @@ void showAbout(Images Images, Containers Rectangles, int currentPage)
 {
     present_image(Images.background.about, Rectangles.bg.menu);
     present_image(Images.misc.sign_about[currentPage], Rectangles.misc.sign_about);
+    present_image(Images.misc.RL_button[currentPage], Rectangles.misc.RL_button[currentPage]);
 }
 
 void showGameModeSelection(Images Images, Containers Rectangles)
 {
 }
+
+void showMenuButton(Images Images, Containers Rectangles, GameStatusVar GameStatus){
+    if(GameStatus.selectedMenu!=0)
+        present_image(Images.button.menu, Rectangles.button.menu);
+}
+
+void showVolumeButton(Images Images, Containers Rectangles, GameStatusVar GameStatus){
+    if(GameStatus.isSoundON==1)
+        present_image(Images.button.volume[1], Rectangles.button.volume);
+    else
+        present_image(Images.button.volume[0], Rectangles.button.volume);
+}
+

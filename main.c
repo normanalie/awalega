@@ -22,8 +22,10 @@ int main(void)
     GameStatus.isGameJustEnded = 0;
     GameStatus.totalMoves = 0;
     GameStatus.moveCountdown = 20;
+    GameStatus.isSoundON = 0;
+    GameStatus.selectedMenu = 1;
 
-    int currentPage = 0;
+    int currentPage = 1;
 
     for (int i = 0; i < HOLES_PER_PLAYER; i++)
     {
@@ -31,10 +33,12 @@ int main(void)
         P2.seeds[i] = SEEDS_PER_HOLE;
     }
 
-    // showAbout(images, imgsContainers, currentPage);
-    // showMenu(images, imgsContainers);
+    //showAbout(images, imgsContainers, currentPage);
+    //showMenu(images, imgsContainers);
     showAwale(images, imgsContainers, P1, P2, GameStatus);
-    // showLeaderboard(images, imgsContainers, GameStatus);
+    showMenuButton(images, imgsContainers, GameStatus);
+    showVolumeButton(images, imgsContainers, GameStatus);
+    //showLeaderboard(images, imgsContainers, GameStatus);
 
     char quit = 0;
     SDL_Event event;

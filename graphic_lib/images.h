@@ -20,8 +20,7 @@ typedef struct
     SDL_Texture *leaderboard;
     SDL_Texture *leave;
     SDL_Texture *menu;
-    SDL_Texture *mute;
-    SDL_Texture *unmute;
+    SDL_Texture *volume[2];
     SDL_Texture *replay;
 } Button;
 typedef struct
@@ -42,6 +41,9 @@ typedef struct
     SDL_Texture *seed_number_sign;
     SDL_Texture *square_sign;
     SDL_Texture *sign_about[2];
+    SDL_Texture *RL_button[2];
+    SDL_Texture *total_moves_text;
+    SDL_Texture *moves_before_stop_text;
 } Misc;
 typedef struct
 {
@@ -65,8 +67,7 @@ typedef struct
     Rect leaderboard;
     Rect leave;
     Rect menu;
-    Rect mute;
-    Rect unmute;
+    Rect volume;
     Rect replay;
 } Containers_button;
 typedef struct
@@ -90,9 +91,12 @@ typedef struct
     Containers_awale_player1 p1;
     Containers_awale_player2 p2;
     Rect deck;
-    Rect total_moves;
-    Rect move_countdown;
+    Rect total_moves_sign;
+    Rect move_countdown_sign;
+    Rect total_moves_text;
+    Rect moves_before_stop_text;
 } Containers_awale;
+
 typedef struct
 {
     Rect playerVSplayer;
@@ -100,6 +104,7 @@ typedef struct
     Rect title;
     Rect sign_leaderboard;
     Rect sign_about;
+    Rect RL_button[2];
 } Containers_misc;
 typedef struct
 {

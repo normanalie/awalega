@@ -21,11 +21,15 @@ void init_Images(Images *pImages)
     pImages->misc.square_sign = loadImage("images/square_sign.bmp");
     pImages->misc.sign_leaderboard = loadImage("images/sign_leaderboard.bmp");
     pImages->button.menu = loadImage("images/menu.bmp");
-    pImages->button.mute = loadImage("images/mute.bmp");
-    pImages->button.unmute = loadImage("images/unmute.bmp");
+    pImages->button.volume[0] = loadImage("images/sound_off.bmp");
+    pImages->button.volume[1] = loadImage("images/sound_on.bmp");
     pImages->button.replay = loadImage("images/replay.bmp");
     pImages->misc.sign_about[0] = loadImage("images/sign_about1.bmp");
     pImages->misc.sign_about[1] = loadImage("images/sign_about2.bmp");
+    pImages->misc.RL_button[0] = loadImage("images/button_right.bmp");
+    pImages->misc.RL_button[1] = loadImage("images/button_left.bmp");
+    pImages->misc.moves_before_stop_text = loadImage("images/moves_before_stop_text.bmp");
+    pImages->misc.total_moves_text = loadImage("images/total_moves_text.bmp");
 }
 
 void init_Images_Containers(Containers *pRectangles)
@@ -52,11 +56,30 @@ void init_Images_Containers(Containers *pRectangles)
     pRectangles->button.leave.w = 240;
     pRectangles->button.leave.h = 65;
 
+    // BUTTON
+    pRectangles->button.menu.topleft.x = 15;
+    pRectangles->button.menu.topleft.y = 15;
+    pRectangles->button.menu.w = 90;
+    pRectangles->button.menu.h = 90;
+
+    pRectangles->button.volume.topleft.x = 1175;
+    pRectangles->button.volume.topleft.y = 15;
+    pRectangles->button.volume.w = 90;
+    pRectangles->button.volume.h = 90;
+
     // ABOUT
-    pRectangles->misc.sign_about.topleft.x = 340;
+    pRectangles->misc.sign_about.topleft.x = 315;
     pRectangles->misc.sign_about.topleft.y = 90;
     pRectangles->misc.sign_about.w = 650;
     pRectangles->misc.sign_about.h = 535;
+    pRectangles->misc.RL_button[0].topleft.x=995;
+    pRectangles->misc.RL_button[0].topleft.y=330;
+    pRectangles->misc.RL_button[0].w=120;
+    pRectangles->misc.RL_button[0].h=90;
+    pRectangles->misc.RL_button[1].topleft.x=170;
+    pRectangles->misc.RL_button[1].topleft.y=330;
+    pRectangles->misc.RL_button[1].w=120;
+    pRectangles->misc.RL_button[1].h=90;
 
     // AWALE
     pRectangles->bg.game.topleft.x = 0;
@@ -67,14 +90,23 @@ void init_Images_Containers(Containers *pRectangles)
     pRectangles->awale.deck.topleft.y = 235;
     pRectangles->awale.deck.w = 620;
     pRectangles->awale.deck.h = 250;
-    pRectangles->awale.total_moves.topleft.x = 1060;
-    pRectangles->awale.total_moves.topleft.y = 320;
-    pRectangles->awale.total_moves.w = 120;
-    pRectangles->awale.total_moves.h = 90;
-    pRectangles->awale.move_countdown.topleft.x = 125;
-    pRectangles->awale.move_countdown.topleft.y = 320;
-    pRectangles->awale.move_countdown.w = 120;
-    pRectangles->awale.move_countdown.h = 90;
+    pRectangles->awale.total_moves_sign.topleft.x = 1060;
+    pRectangles->awale.total_moves_sign.topleft.y = 320;
+    pRectangles->awale.total_moves_sign.w = 120;
+    pRectangles->awale.total_moves_sign.h = 90;
+    pRectangles->awale.move_countdown_sign.topleft.x = 125;
+    pRectangles->awale.move_countdown_sign.topleft.y = 320;
+    pRectangles->awale.move_countdown_sign.w = 120;
+    pRectangles->awale.move_countdown_sign.h = 90;
+    pRectangles->awale.moves_before_stop_text.topleft.x= 75;
+    pRectangles->awale.moves_before_stop_text.topleft.y= 275;
+    pRectangles->awale.moves_before_stop_text.w= 230;
+    pRectangles->awale.moves_before_stop_text.h= 30;
+    pRectangles->awale.total_moves_text.topleft.x= 1035;
+    pRectangles->awale.total_moves_text.topleft.y= 275;
+    pRectangles->awale.total_moves_text.w= 170;
+    pRectangles->awale.total_moves_text.h= 30;
+
 
     // Sign Player 1
     pRectangles->awale.p1.pseudo_sign.topleft.x = 500;

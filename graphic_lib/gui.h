@@ -13,6 +13,8 @@ void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P
 void showLeaderboard(Images Images, Containers Rectangles, GameStatusVar GameStatus);
 void showAbout(Images Images, Containers Rectangles, int currentPage);
 void showGameModeSelection(Images Images, Containers Rectangles);
+void showMenuButton(Images Images, Containers Rectangles, GameStatusVar GameStatus);
+void showVolumeButton(Images Images, Containers Rectangles, GameStatusVar GameStatus);
 void destroyGui(Images *pImages);
 
 #endif
