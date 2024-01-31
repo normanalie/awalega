@@ -21,7 +21,6 @@ void initPlayers(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar GameStatus)
     return;
 }
 
-// Game
 void switchPlayer(GameStatusVar *GameStatus)
 {
 

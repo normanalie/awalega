@@ -21,7 +21,7 @@ int hasNumberHarvestedSeedsChanged(PlayerInfo P1, PlayerInfo P2, int oldP1Seeds,
 int areEveryHolesEmpty(PlayerInfo Player);                                                        // Vérifie si tous les trous sont vides pour un joueur
 int canPlayerFillEmptyHoles(PlayerInfo Player, int playerTurn, int validHoles[]);                 // Vérifie si un joueur peur remplir au moins l'un des trou du joueur adverse et renvoie les cases permettant cela
 void whoWon(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar *GameStatus);                           // Vérifie qui a gangé
-void endgameManager(GameStatusVar *GameStatus);                          // Vérifie pour quelle raison la partie s'est finie et fait une action en fonction
-void playMove(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar *GameStatus);
+void endgameManager(GameStatusVar *GameStatus);                                                   // Vérifie pour quelle raison la partie s'est finie et fait une action en fonction
+void playMove(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar *GameStatus);                         // Fonction contenant tout l'algorithme permettant de gérer le tour de chaque joueur, jouer un trou, semer er récolter & vérifier les conditions de fin
 
 #endif /* AWALE_GAME */
