@@ -2,10 +2,10 @@
 #define AWALE_GAME_MACROS_STRUCTS
 
 // Macros Sections Jeu
-#define SECTION_HOME 0 // Menu principal
-#define SECTION_NEW_GAME 1
-#define SECTION_NAME_FORM1 2
-#define SECTION_NAME_FORM2 3
+#define SECTION_HOME 0        // Menu principal
+#define SECTION_NEW_GAME 1    // Sélection du mode de jeu (PvBot ou PvP)
+#define SECTION_NAME_FORM1 2  // Section entrée de nom (Joueur 1)
+#define SECTION_NAME_FORM2 3  // Section entrée de nom (Joueur 2)
 #define SECTION_GAME 4        // Section de jeu
 #define SECTION_SCORE 5       // Tableau des scores
 #define SECTION_ABOUT 6       // Section "A propos & règles"
