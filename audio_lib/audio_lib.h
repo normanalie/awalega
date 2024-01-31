@@ -45,4 +45,19 @@ void freeAllMusics(audio *Audio);                               // desallocate a
 void freeAllSounds(audio *Audio);                               // desallocate all sounds
 void closeAudio();                                              // close the SDL_mixer audio track
 
+// NEW VERSION
+typedef enum SOUND_EFFECTS
+{
+    MOUSECLICK,
+    VICTORY,
+    DEFEAT,
+    LOADING,
+    BEANDEPOSIT,
+    BUZZWRONGACTION,
+    TYPING
+} SOUND_EFFECTS;
+
+void initAudio();
+void soundPlayEffect(SOUND_EFFECTS name);
+
 #endif

@@ -154,7 +154,6 @@ int isActionValid(PlayerInfo Player, GameStatusVar GameStatus)
         return 0;
     }
 
-
     else if (Player.seeds[GameStatus.selectedHole - 1] == 0)
     {
 
@@ -461,10 +460,14 @@ void playMove(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar *GameStatus)
         pCurrentPlayer = P2;
     }
 
+    SOUND_EFFECTS sound = BEANDEPOSIT;
     if (!isActionValid(*pCurrentPlayer, *GameStatus))
     {
+        sound = BUZZWRONGACTION;
+        soundPlayEffect(sound);
         return;
     }
+    soundPlayEffect(sound);
 
     // Attendre quelques instants pour donner le temps à J1 de voir le résultat lorsqu'il joue contre le bot
     waitBeforeBotPlay(*P2, *GameStatus);
@@ -539,8 +542,9 @@ void playMove(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar *GameStatus)
             }
         }
 
-        for (int i=0; i< HOLES_PER_PLAYER; i++) {
-            GameStatus->validHoles[i] = validHoles[i]; 
+        for (int i = 0; i < HOLES_PER_PLAYER; i++)
+        {
+            GameStatus->validHoles[i] = validHoles[i];
         }
 
         if (selectedUser == NULL)

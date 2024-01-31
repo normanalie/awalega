@@ -23,15 +23,6 @@ void initGameStatus(GameStatusVar *pGameStatus)
     }
 }
 
-void initAudio(audio *pAudio)
-{
-    openAudio();
-    openSoundChannels(NUM_CHANNELS);
-
-    loadAllMusics(pAudio);
-    loadAllSounds(pAudio);
-}
-
 int main(void)
 {
 
@@ -51,7 +42,12 @@ int main(void)
     initGui(&images, &imgsContainers);
 
     audio Audio;
-    initAudio(&Audio);
+    openAudio();
+    openSoundChannels(NUM_CHANNELS);
+
+    loadAllMusics(&Audio);
+    loadAllSounds(&Audio);
+    initAudio();
     actualAudioVolume(GameStatus.isSoundON ? DEFAULT_VOLUME : 0);
     GameStatus.currentMusic = MUSIC_STRUCT.menuMusic;
 
@@ -199,7 +195,8 @@ int main(void)
                 redraw = true;
                 Point cursor = {event.button.x, event.button.y};
                 volumeButtonClickHandler(imgsContainers, cursor, &GameStatus);
-                playSound(SOUND_STRUCT.mouseClick.numChannel, SOUND_STRUCT.mouseClick.sound, 0);
+                SOUND_EFFECTS sound = MOUSECLICK;
+                soundPlayEffect(sound);
                 switch (GameStatus.selectedMenu)
                 {
                 case SECTION_HOME:

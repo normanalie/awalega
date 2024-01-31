@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include "awale_game_macros_structs.h"
 #include "utilities.h"
+#include "audio_lib/audio_lib.h"
 
 // Menu
 int menuSelector(void); // Choix de la section lorsq'on est dans le manu principal
@@ -26,7 +27,7 @@ int canPlayerFillEmptyHoles(PlayerInfo Player, int playerTurn, int validHoles[])
 void forcePlayerToPlay(PlayerInfo Player, int validHoles[], GameStatusVar *GameStatus);           // Force un joueur à jouer lorsque les trous du joueur adverse sont vides
 int isForcedActionValid(PlayerInfo Player, int selectedHole, int validHoles[]);                   // Fonctionne comme "isActionValid()" mais vérifie avec un tableau si le trou choisi permet de remplir au moins un trou du joueur adverse
 void whoWon(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar *GameStatus);                           // Vérifie qui a gangé
-void endgameManager(GameStatusVar *GameStatus);                          // Vérifie pour quelle raison la partie s'est finie et fait une action en fonction
+void endgameManager(GameStatusVar *GameStatus);                                                   // Vérifie pour quelle raison la partie s'est finie et fait une action en fonction
 void playMove(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar *GameStatus);
 
 #endif /* AWALE_GAME */

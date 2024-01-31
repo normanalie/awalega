@@ -238,3 +238,46 @@ void closeAudio()
 {
     Mix_CloseAudio();
 }
+
+// NEW VERSION
+
+audio Audio;
+
+void initAudio()
+{
+    openAudio();
+    openSoundChannels(NUM_CHANNELS);
+
+    loadAllMusics(&Audio);
+    loadAllSounds(&Audio);
+}
+
+void soundPlayEffect(SOUND_EFFECTS name)
+{
+    sound_comp soundToPlay;
+    switch (name)
+    {
+    case MOUSECLICK:
+        soundToPlay = SOUND_STRUCT.mouseClick;
+        break;
+    case VICTORY:
+        soundToPlay = SOUND_STRUCT.victory;
+        break;
+    case DEFEAT:
+        soundToPlay = SOUND_STRUCT.defeat;
+        break;
+    case LOADING:
+        soundToPlay = SOUND_STRUCT.loading;
+        break;
+    case BEANDEPOSIT:
+        soundToPlay = SOUND_STRUCT.beanDeposit;
+        break;
+    case BUZZWRONGACTION:
+        soundToPlay = SOUND_STRUCT.buzzWrongAction;
+        break;
+    case TYPING:
+        soundToPlay = SOUND_STRUCT.typing;
+        break;
+    }
+    Mix_PlayChannel(soundToPlay.numChannel, soundToPlay.sound, 0);
+}
