@@ -32,6 +32,8 @@ void init_Images(Images *pImages)
     pImages->misc.RL_button[1] = loadImage("images/button_left.bmp");
     pImages->misc.moves_before_stop_text = loadImage("images/moves_before_stop_text.bmp");
     pImages->misc.total_moves_text = loadImage("images/total_moves_text.bmp");
+    pImages->misc.enter_name[0]= loadImage("images/enter_name1.bmp");
+    pImages->misc.enter_name[1]= loadImage("images/enter_name2.bmp");
 }
 
 void init_Images_Containers(Containers *pRectangles)
@@ -106,6 +108,11 @@ void init_Images_Containers(Containers *pRectangles)
     pRectangles->misc.pvp.topleft.y=320;
     pRectangles->misc.pvp.w=380;
     pRectangles->misc.pvp.h=240;
+
+    pRectangles->misc.enter_name.topleft.x = 340;
+    pRectangles->misc.enter_name.topleft.y = 110;
+    pRectangles->misc.enter_name.w = 600;
+    pRectangles->misc.enter_name.h = 495;
 
     // AWALE
     pRectangles->bg.game.topleft.x = 0;

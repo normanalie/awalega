@@ -46,6 +46,7 @@ typedef struct
     SDL_Texture *RL_button[2];
     SDL_Texture *total_moves_text;
     SDL_Texture *moves_before_stop_text;
+    SDL_Texture *enter_name[2];
 } Misc;
 typedef struct
 {
@@ -109,7 +110,7 @@ typedef struct
     Rect sign_about;
     Rect RL_button[2];
     Rect playerVSia;
-    
+    Rect enter_name;
 } Containers_misc;
 typedef struct
 {

@@ -17,6 +17,7 @@ int main(void)
     P2.harvestedSeeds = 0;
     P1.moves = 0;
     P2.moves = 0;
+    P1.isBot= 0;
 
     GameStatusVar GameStatus;
     GameStatus.isGameJustEnded = 1;
@@ -26,6 +27,7 @@ int main(void)
     GameStatus.selectedMenu = 0;
 
     int currentPage = 1;
+    int currentPlayer = 2;
 
     for (int i = 0; i < HOLES_PER_PLAYER; i++)
     {
@@ -39,7 +41,8 @@ int main(void)
     //showMenuButton(images, imgsContainers, GameStatus);
     //showVolumeButton(images, imgsContainers, GameStatus);
     //showLeaderboard(images, imgsContainers, GameStatus);
-    showGameModeSelection(images, imgsContainers);
+    //showGameModeSelection(images, imgsContainers);
+    showInitPlayer(images, imgsContainers, currentPlayer);
 
     char quit = 0;
     SDL_Event event;

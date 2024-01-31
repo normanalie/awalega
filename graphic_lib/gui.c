@@ -162,6 +162,11 @@ void showGameModeSelection(Images Images, Containers Rectangles)
     present_image(Images.button.pvp, Rectangles.button.pvp);
 }
 
+void showInitPlayer(Images Images, Containers Rectangles, int currentPlayer){
+    present_image(Images.background.game, Rectangles.bg.game);
+    present_image(Images.misc.enter_name[currentPlayer-1], Rectangles.misc.enter_name);  
+}
+
 void showMenuButton(Images Images, Containers Rectangles, GameStatusVar GameStatus){
     if(GameStatus.selectedMenu!=SECTION_HOME)
         present_image(Images.button.menu, Rectangles.button.menu);
