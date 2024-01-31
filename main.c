@@ -50,6 +50,7 @@ int main(void)
             showMenu(images, imgsContainers);
             GameStatus.isGameJustEnded = 0;
             break;
+
         case SECTION_NEW_GAME:
             initGameStatus(&GameStatus);
             initPlayers(&P1, &P2, GameStatus);
