@@ -142,12 +142,8 @@ void showLeaderboard(Images Images, Containers Rectangles, GameStatusVar GameSta
         sprintf(s, "%.2d", RecordedScores[i].moves);
         draw_text(s, Moves, 24, Black);
     }
-}
 
-void destroyGui(Images *pImages)
-{
-    destroy_Images(pImages);
-    destroy_window();
+    showReplayButton(Images,  Rectangles, GameStatus);
 }
 
 void showAbout(Images Images, Containers Rectangles, int currentPage)
@@ -159,10 +155,15 @@ void showAbout(Images Images, Containers Rectangles, int currentPage)
 
 void showGameModeSelection(Images Images, Containers Rectangles)
 {
+    present_image(Images.background.game, Rectangles.bg.game);
+    present_image(Images.misc.pvp, Rectangles.misc.pvp);
+    present_image(Images.misc.playerVSia, Rectangles.misc.playerVSia);
+    present_image(Images.button.playerVSia, Rectangles.button.playerVSia);
+    present_image(Images.button.pvp, Rectangles.button.pvp);
 }
 
 void showMenuButton(Images Images, Containers Rectangles, GameStatusVar GameStatus){
-    if(GameStatus.selectedMenu!=0)
+    if(GameStatus.selectedMenu!=SECTION_HOME)
         present_image(Images.button.menu, Rectangles.button.menu);
 }
 
@@ -173,3 +174,14 @@ void showVolumeButton(Images Images, Containers Rectangles, GameStatusVar GameSt
         present_image(Images.button.volume[0], Rectangles.button.volume);
 }
 
+void showReplayButton(Images Images, Containers Rectangles, GameStatusVar GameStatus){
+    if(GameStatus.isGameJustEnded==1){
+        present_image(Images.button.replay, Rectangles.button.replay);
+    }
+}
+
+void destroyGui(Images *pImages)
+{
+    destroy_Images(pImages);
+    destroy_window();
+}

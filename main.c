@@ -19,11 +19,11 @@ int main(void)
     P2.moves = 0;
 
     GameStatusVar GameStatus;
-    GameStatus.isGameJustEnded = 0;
+    GameStatus.isGameJustEnded = 1;
     GameStatus.totalMoves = 0;
     GameStatus.moveCountdown = 20;
-    GameStatus.isSoundON = 0;
-    GameStatus.selectedMenu = 1;
+    GameStatus.isSoundON = 1;
+    GameStatus.selectedMenu = 0;
 
     int currentPage = 1;
 
@@ -35,10 +35,11 @@ int main(void)
 
     //showAbout(images, imgsContainers, currentPage);
     //showMenu(images, imgsContainers);
-    showAwale(images, imgsContainers, P1, P2, GameStatus);
-    showMenuButton(images, imgsContainers, GameStatus);
-    showVolumeButton(images, imgsContainers, GameStatus);
+    //showAwale(images, imgsContainers, P1, P2, GameStatus);
+    //showMenuButton(images, imgsContainers, GameStatus);
+    //showVolumeButton(images, imgsContainers, GameStatus);
     //showLeaderboard(images, imgsContainers, GameStatus);
+    showGameModeSelection(images, imgsContainers);
 
     char quit = 0;
     SDL_Event event;

@@ -22,6 +22,8 @@ typedef struct
     SDL_Texture *menu;
     SDL_Texture *volume[2];
     SDL_Texture *replay;
+    SDL_Texture *pvp;
+    SDL_Texture *playerVSia;
 } Button;
 typedef struct
 {
@@ -69,6 +71,8 @@ typedef struct
     Rect menu;
     Rect volume;
     Rect replay;
+    Rect pvp;
+    Rect playerVSia;
 } Containers_button;
 typedef struct
 {
@@ -99,12 +103,13 @@ typedef struct
 
 typedef struct
 {
-    Rect playerVSplayer;
     Rect pvp;
     Rect title;
     Rect sign_leaderboard;
     Rect sign_about;
     Rect RL_button[2];
+    Rect playerVSia;
+    
 } Containers_misc;
 typedef struct
 {

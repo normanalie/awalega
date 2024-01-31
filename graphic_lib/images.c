@@ -24,6 +24,8 @@ void init_Images(Images *pImages)
     pImages->button.volume[0] = loadImage("images/sound_off.bmp");
     pImages->button.volume[1] = loadImage("images/sound_on.bmp");
     pImages->button.replay = loadImage("images/replay.bmp");
+    pImages->button.playerVSia = loadImage("images/sign_1vsbot.bmp");
+    pImages->button.pvp = loadImage("images/sign_1vsplayer.bmp");
     pImages->misc.sign_about[0] = loadImage("images/sign_about1.bmp");
     pImages->misc.sign_about[1] = loadImage("images/sign_about2.bmp");
     pImages->misc.RL_button[0] = loadImage("images/button_right.bmp");
@@ -67,6 +69,20 @@ void init_Images_Containers(Containers *pRectangles)
     pRectangles->button.volume.w = 90;
     pRectangles->button.volume.h = 90;
 
+    pRectangles->button.replay.topleft.x=595;
+    pRectangles->button.replay.topleft.y= 590;
+    pRectangles->button.replay.w=90;
+    pRectangles->button.replay.h=90;
+
+    pRectangles->button.pvp.topleft.x= 755;
+    pRectangles->button.pvp.topleft.y= 165;
+    pRectangles->button.pvp.w= 270;
+    pRectangles->button.pvp.h= 90;
+    pRectangles->button.playerVSia.topleft.x= 255;
+    pRectangles->button.playerVSia.topleft.y= 165;
+    pRectangles->button.playerVSia.w= 270;
+    pRectangles->button.playerVSia.h= 90;
+
     // ABOUT
     pRectangles->misc.sign_about.topleft.x = 315;
     pRectangles->misc.sign_about.topleft.y = 90;
@@ -80,6 +96,16 @@ void init_Images_Containers(Containers *pRectangles)
     pRectangles->misc.RL_button[1].topleft.y=330;
     pRectangles->misc.RL_button[1].w=120;
     pRectangles->misc.RL_button[1].h=90;
+
+    // GameModeSelection
+    pRectangles->misc.playerVSia.topleft.x=200;
+    pRectangles->misc.playerVSia.topleft.y=300;
+    pRectangles->misc.playerVSia.w=380;
+    pRectangles->misc.playerVSia.h=300;
+    pRectangles->misc.pvp.topleft.x=700;
+    pRectangles->misc.pvp.topleft.y=320;
+    pRectangles->misc.pvp.w=380;
+    pRectangles->misc.pvp.h=240;
 
     // AWALE
     pRectangles->bg.game.topleft.x = 0;
