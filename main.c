@@ -57,10 +57,29 @@ int main(void)
             break;
 
         case SECTION_NEW_GAME:
+            if (redraw)
+            {
+                redraw = false;
+                showGameModeSelection(images, imgsContainers, GameStatus);
+            }
             initGameStatus(&GameStatus);
             initPlayers(&P1, &P2, GameStatus);
-            GameStatus.gameMode = 2; // gameModeSelector();
-            GameStatus.selectedMenu = SECTION_GAME;
+            break;
+
+        case SECTION_NAME_FORM1:
+            if (redraw)
+            {
+                redraw = false;
+                showInitPlayer(images, imgsContainers, GameStatus, 1);
+            }
+            break;
+
+        case SECTION_NAME_FORM2:
+            if (redraw)
+            {
+                redraw = false;
+                showInitPlayer(images, imgsContainers, GameStatus, 2);
+            }
             break;
 
         case SECTION_GAME:
@@ -116,34 +135,89 @@ int main(void)
             break;
         }
 
+
+        // Partie BOT
+        if (P2.isBot && GameStatus.playerTurn == 2 && GameStatus.selectedMenu == SECTION_GAME) {
+            GameStatus.selectedHole = randInt(1, HOLES_PER_PLAYER);
+            playMove(&P1, &P2, &GameStatus);
+            showAwale(images, imgsContainers, P1, P2, GameStatus);
+        }
+
+
+        // Partie SDL
         event = graphic_get_event();
+        
 
         switch (event.type)
         {
-        case SDL_QUIT:
-            GameStatus.selectedMenu = SECTION_EXIT;
-            break;
-        case SDL_MOUSEBUTTONUP:
-            if (event.button.button == SDL_BUTTON_LEFT)
-            {
-                redraw = true;
-                Point cursor = {event.button.x, event.button.y};
-                volumeButtonClickHandler(imgsContainers, cursor, &GameStatus);
-                switch (GameStatus.selectedMenu)
+            case SDL_QUIT:
+                GameStatus.selectedMenu = SECTION_EXIT;
+                break;
+            case SDL_MOUSEBUTTONUP:
+                if (event.button.button == SDL_BUTTON_LEFT)
                 {
-                case SECTION_GAME:
-                    inGameClickHandler(imgsContainers, cursor, &P1, &P2, &GameStatus);
-                    break;
-                case SECTION_ABOUT:
-                    aboutClickHandler(imgsContainers, cursor, &GameStatus.selectedMenu, &aboutCurrentPage);
-                    break;
+                    redraw = true;
+                    Point cursor = {event.button.x, event.button.y};
+                    volumeButtonClickHandler(imgsContainers, cursor, &GameStatus);
+                    switch (GameStatus.selectedMenu)
+                    {
+                    case SECTION_NEW_GAME:
+                        newGameClickHandler(imgsContainers, cursor, &GameStatus, &P2);
+                        break;
+                    case SECTION_GAME:
+                        if (GameStatus.playerTurn == 1) {
+                            inGameClickHandler(imgsContainers, cursor, &P1, &P2, &GameStatus);
+                        }
+                        break;
+                    case SECTION_ABOUT:
+                        aboutClickHandler(imgsContainers, cursor, &GameStatus.selectedMenu, &aboutCurrentPage);
+                        break;
 
-                default:
-                    guiClickHandler(imgsContainers, cursor, &GameStatus.selectedMenu);
-                    break;
+                    default:
+                        guiClickHandler(imgsContainers, cursor, &GameStatus.selectedMenu);
+                        break;
+                    }
                 }
-            }
-            break;
+                break;
+
+            case SDL_TEXTINPUT:
+
+                if (GameStatus.selectedMenu == SECTION_NAME_FORM1) {
+                    addLetterToPseudo(&P1, event.text.text);
+                    redraw = true;
+                } else if (GameStatus.selectedMenu == SECTION_NAME_FORM2 && !P2.isBot) {
+                    addLetterToPseudo(&P2, event.text.text);
+                    redraw = true;
+                }
+                break;
+                
+            case SDL_KEYDOWN:
+                if (event.key.keysym.sym == SDLK_RETURN) // Si "Entrée" est pressé
+                {
+                    if (GameStatus.selectedMenu == SECTION_NAME_FORM1 && !P2.isBot) {
+
+                        if (strlen(P1.name) >= NAME_MIN_LEN) {
+                            GameStatus.selectedMenu = SECTION_NAME_FORM2;
+                            redraw = true;
+                        }
+                    } else if (GameStatus.selectedMenu == SECTION_NAME_FORM1) {
+
+                        if (strlen(P1.name) >= NAME_MIN_LEN) {
+                            GameStatus.selectedMenu = SECTION_GAME;
+                            strcpy(P2.name, "Bot");
+                            redraw = true;
+                        }
+                        
+                    } else if (GameStatus.selectedMenu == SECTION_NAME_FORM2) {
+
+                        if (strlen (P2.name) >= NAME_MIN_LEN) {
+                            GameStatus.selectedMenu = SECTION_GAME;
+                            redraw = true;
+                        }
+                    }
+                    printf("Entrée\n");
+                }
+                break;
         }
 
     } while (GameStatus.selectedMenu != SECTION_EXIT);

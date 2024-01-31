@@ -4,11 +4,17 @@
 // Macros Sections Jeu
 #define SECTION_HOME 0 // Menu principal
 #define SECTION_NEW_GAME 1
-#define SECTION_GAME 2        // Section de jeu
-#define SECTION_SCORE 3       // Tableau des scores
-#define SECTION_ABOUT 4       // Section "A propos & règles"
-#define SECTION_EXIT_SCREEN 5 // Ecran de femreture du jeu
+#define SECTION_NAME_FORM1 2
+#define SECTION_NAME_FORM2 3
+#define SECTION_GAME 4        // Section de jeu
+#define SECTION_SCORE 5       // Tableau des scores
+#define SECTION_ABOUT 6       // Section "A propos & règles"
+#define SECTION_EXIT_SCREEN 7 // Ecran de femreture du jeu
 #define SECTION_EXIT 99       // Fermeture du jeu
+
+// Macros GameMode
+#define GAME_MODE_PVBOT 1
+#define GAME_MODE_PVP 2
 
 // Paramètres Graines & Tablier
 #define SEEDS_PER_HOLE 3
@@ -18,6 +24,10 @@
 // Paramètres récolte
 #define REQUIRED_FOR_HARVESTING_1 2 // Nombre de graines qu'il faut dans le trou pour pouvoir récolter (Possibilité 1)
 #define REQUIRED_FOR_HARVESTING_2 3 // Nombre de graines qu'il faut dans le trou pour pouvoir récolter (Possibilité 2)
+
+// Paramètres Joueur
+#define NAME_MAX_LEN 5
+#define NAME_MIN_LEN 3
 
 // Paramètres Bot
 #define WAIT_UNTIL_BOT_PLAYS 3 // Temps d'attente avant que le bot commence à jouer
@@ -36,7 +46,7 @@
 // Info Joueur
 typedef struct
 {
-    char name[5];
+    char name[6];
     int seeds[HOLES_PER_PLAYER]; // Nombre de graines en jeu par trou
     int harvestedSeeds;          // Nombre de graines ramassées
     int moves;                   // Nombre de coups réalisés

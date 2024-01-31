@@ -20,6 +20,7 @@ void showMenu(Images Images, Containers Rectangles, GameStatusVar GameStatus)
     graphic_update();
 }
 
+
 void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P2, GameStatusVar GameStatus)
 {
     present_image(Images.background.game, Rectangles.bg.game);
@@ -112,6 +113,17 @@ void showAwale(Images Images, Containers Rectangles, PlayerInfo P1, PlayerInfo P
     draw_text(score1, Player1_score, 36, Black);
     sprintf(score2, "%.2d", P2.harvestedSeeds);
     draw_text(score2, Player2_score, 36, Black);
+
+
+    // NOMS DES JOUEURS
+    Point Player1_name;
+    Point Player2_name;
+    Player1_name.x = 585;
+    Player2_name.x = 585;
+    Player1_name.y = 618;
+    Player2_name.y = 68;
+    draw_text(P1.name, Player1_name, 50, Black);
+    draw_text(P2.name, Player2_name, 50, Black);
 
     // Seeds Player 1
     for (int i = 0; i < HOLES_PER_PLAYER; i++)
@@ -315,6 +327,42 @@ void homeClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
     }
 }
 
+void newGameClickHandler(Containers Rectangles, Point cursor, GameStatusVar * pGameStatus, PlayerInfo * P2) {
+
+    if (is_in(cursor, Rectangles.button.playerVSia))
+    {
+        printf("Click PvBOT\n");
+        pGameStatus->gameMode = GAME_MODE_PVBOT;
+        pGameStatus->selectedMenu = SECTION_NAME_FORM1;
+        P2->isBot = 1;
+        return;
+    }
+    if (is_in(cursor, Rectangles.button.pvp))
+    {
+        printf("Click PvP\n");
+        pGameStatus->gameMode = GAME_MODE_PVP;
+        pGameStatus->selectedMenu = SECTION_NAME_FORM1;
+        P2->isBot = 0;
+        return;
+    }
+    homeClickHandler(Rectangles, cursor, &pGameStatus->selectedMenu);
+}
+
+// void nameFormClickHandler(Containers Rectangles, Point cursor, PlayerInfo * currentPlayer, GameStatusVar *pGameStatus) {
+
+//     if (!currentPlayer->isBot) {
+//         char name[5];
+
+//         //strcpy()
+//     }
+//     homeClickHandler(Rectangles, cursor, &pGameStatus->selectedMenu);
+// }
+
+
+void addLetterToPseudo(PlayerInfo * Player, const char * letter) {
+    strncat(Player->name, letter, NAME_MAX_LEN - strlen(Player->name) );
+}
+
 void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, PlayerInfo *pP2, GameStatusVar *pGameStatus)
 {
     homeClickHandler(Rectangles, cursor, &pGameStatus->selectedMenu);
@@ -325,6 +373,7 @@ void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, Pl
             printf("Click\n");
             if (pGameStatus->playerTurn == 1)
             {
+                pGameStatus->selectedHole = i+1;
                 playMove(pP1, pP2, pGameStatus);
             }
         }
@@ -333,6 +382,7 @@ void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, Pl
             printf("Click\n");
             if (pGameStatus->playerTurn == 2)
             {
+                pGameStatus->selectedHole = i+1;
                 playMove(pP1, pP2, pGameStatus);
             }
         }
