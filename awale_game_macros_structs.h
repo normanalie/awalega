@@ -30,7 +30,7 @@
 #define NAME_MIN_LEN 3
 
 // Paramètres Bot
-#define WAIT_UNTIL_BOT_PLAYS 3 // Temps d'attente avant que le bot commence à jouer
+#define WAIT_UNTIL_BOT_PLAYS 1 // Temps d'attente avant que le bot commence à jouer
 
 // Paramètres Condition Fin Jeu
 #define SEEDS_TO_WIN ((TOTAL_SEEDS / 2) + 1) // Nombre de graines à obtenir afin de terminer une partie
@@ -42,6 +42,8 @@
 #define ENDGAME_MOVE_LIMIT 2       // Pas de récolte sur les "MOVES_BEFORE_STOP" derniers coups
 #define ENDGAME_NO_SEEDS_TO_MOVE 3 // Un joueur ne peux pas remplir les cases vides du joueur adverse
 #define ENDGAME_FORCED 99          // Abandon d'une partie
+
+#include "audio_lib/soundfile_struct.h"
 
 // Info Joueur
 typedef struct
@@ -68,6 +70,7 @@ typedef struct
     PlayerInfo *endingPlayer;         // Joueur qui cause la fin du jeu
     PlayerInfo *winner;               // Gagnant de la partie
     int isSoundON;                    // *NEW*  Variable son -> On=1 / Off=0
+    music_comp currentMusic;
 } GameStatusVar;
 
 #endif /* AWALE_GAME_MACROS_STRUCTS */

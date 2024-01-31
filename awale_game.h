@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include "awale_game_macros_structs.h"
 #include "utilities.h"
+#include "audio_lib/audio_lib.h"
 
 
 //  Game Init
@@ -23,5 +24,6 @@ int canPlayerFillEmptyHoles(PlayerInfo Player, int playerTurn, int validHoles[])
 void whoWon(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar *GameStatus);                           // Vérifie qui a gangé
 void endgameManager(GameStatusVar *GameStatus);                                                   // Vérifie pour quelle raison la partie s'est finie et fait une action en fonction
 void playMove(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar *GameStatus);                         // Fonction contenant tout l'algorithme permettant de gérer le tour de chaque joueur, jouer un trou, semer er récolter & vérifier les conditions de fin
+
 
 #endif /* AWALE_GAME */
