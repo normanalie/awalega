@@ -1,49 +1,7 @@
 #include "awale_game.h"
 
-// Menu
-int menuSelector(void)
-{
 
-    int userInput;
-    int validChoice = 0;
-
-    do
-    {
-
-        printf("Select what you want :\n");
-        scanf("%d", &userInput);
-
-        switch (userInput)
-        {
-        case SECTION_GAME:        // Jouer
-        case SECTION_SCORE:       // Meilleur Score
-        case SECTION_ABOUT:       // Aide / A propos
-        case SECTION_EXIT_SCREEN: // Quitter
-            validChoice = 1;
-            break;
-        }
-
-    } while (validChoice == 0);
-
-    return userInput;
-}
-
-//  Game Init
-int gameModeSelector(void)
-{
-
-    int gameMode;
-
-    do
-    {
-        printf("Select what you want :\n      - 1. PvBot\n      - 2. PvP\n");
-        scanf(" %d", &gameMode);
-    } while (gameMode != 1 && gameMode != 2);
-
-    return gameMode;
-}
-
-void initPlayers(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar GameStatus)
+void initPlayers(PlayerInfo *P1, PlayerInfo *P2)
 {
     // Init Score & Graines
     int i;
@@ -63,7 +21,6 @@ void initPlayers(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar GameStatus)
     return;
 }
 
-// Game
 void switchPlayer(GameStatusVar *GameStatus)
 {
 
@@ -90,48 +47,6 @@ void waitBeforeBotPlay(PlayerInfo P2, GameStatusVar GameStatus)
     return;
 }
 
-/*void holeSelector(PlayerInfo P1, PlayerInfo P2, GameStatusVar *GameStatus)
-{
-
-    int selectedHole;
-
-    if (GameStatus->playerTurn == 1)
-    { // Si c'est J1
-        do
-        {
-            printf("\n> [%s] Choisi une case que tu veux jouer :\n", P1.name);
-            scanf(" %d", &selectedHole);
-        } while (isActionValid(P1, selectedHole) == 0);
-    }
-    else
-    { // Si c'est J2
-
-        if (!P2.isBot)
-        { // Humain
-            do
-            {
-                printf("\n> [%s] Choisi une case que tu veux jouer :\n", P2.name);
-                scanf(" %d", &selectedHole);
-            } while (isActionValid(P2, selectedHole) == 0);
-        }
-        else
-        { // Bot
-
-            if (P2.isBot == 1)
-            { // Bot facile
-                do
-                {
-                    selectedHole = randInt(1, HOLES_PER_PLAYER);
-                } while (isActionValid(P2, selectedHole) == 0);
-            }
-        }
-    }
-
-    GameStatus->selectedHole = selectedHole;
-
-    return;
-}*/
-
 int isActionValid(PlayerInfo Player, GameStatusVar GameStatus)
 {
 
@@ -153,6 +68,7 @@ int isActionValid(PlayerInfo Player, GameStatusVar GameStatus)
         }
         return 0;
     }
+
 
     else if (Player.seeds[GameStatus.selectedHole - 1] == 0)
     {
@@ -324,61 +240,6 @@ int canPlayerFillEmptyHoles(PlayerInfo Player, int playerTurn, int validHoles[])
     }
 }
 
-void forcePlayerToPlay(PlayerInfo Player, int validHoles[], GameStatusVar *GameStatus)
-{ // Retourne le trou choisi pour jouer
-
-    int selectedHole;
-
-    if (!Player.isBot)
-    { // Si c'est un vrai joueur
-        do
-        {
-            printf("\n> [%s] Les trou de ton adversaire sont vides. Choisi une case qui peut remplir ses trous :\n", Player.name);
-            scanf(" %d", &selectedHole);
-        } while (isForcedActionValid(Player, selectedHole, validHoles) == 0);
-    }
-    else
-    { // Si c'est un bot
-
-        if (Player.isBot == 1)
-        { // Bot facile
-            do
-            {
-                selectedHole = randInt(1, HOLES_PER_PLAYER);
-            } while (isForcedActionValid(Player, selectedHole, validHoles) == 0);
-        }
-    }
-
-    GameStatus->selectedHole = selectedHole;
-
-    return;
-}
-
-int isForcedActionValid(PlayerInfo Player, int selectedHole, int validHoles[])
-{ // Vérifie si l'action forcée est valide
-
-    if (selectedHole < 1 || selectedHole > HOLES_PER_PLAYER)
-    {
-
-        if (!Player.isBot)
-        {
-            printf("[%s] Action impossible! Le trou %d n'existe pas!\n", Player.name, selectedHole);
-        }
-        return 0;
-    }
-    else if (validHoles[selectedHole - 1] == 0)
-    {
-
-        if (!Player.isBot)
-        {
-            printf("[%s] Action impossible! Une graine du trou %d n'arrivera pas jusqu'à un trou du joueur adverse!\n", Player.name, selectedHole);
-        }
-        return 0;
-    }
-
-    return 1;
-}
-
 void whoWon(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar *GameStatus)
 {
 
@@ -542,9 +403,9 @@ void playMove(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar *GameStatus)
             }
         }
 
-        for (int i = 0; i < HOLES_PER_PLAYER; i++)
-        {
-            GameStatus->validHoles[i] = validHoles[i];
+        for (int i=0; i< HOLES_PER_PLAYER; i++) {
+            GameStatus->validHoles[i] = validHoles[i]; 
+
         }
 
         if (selectedUser == NULL)

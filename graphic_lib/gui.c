@@ -11,7 +11,6 @@ void initGui(Images *pImages, Containers *pRectangles)
 
 void showMenu(Images Images, Containers Rectangles, GameStatusVar GameStatus)
 {
-
     present_image(Images.background.menu, Rectangles.bg.menu);
     present_image(Images.button.play, Rectangles.button.play);
     present_image(Images.button.leaderboard, Rectangles.button.leaderboard);
@@ -282,29 +281,26 @@ void menuClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu)
 {
     if (is_in(cursor, Rectangles.button.play))
     {
-        printf("Click play\n");
         *pSelectedMenu = SECTION_NEW_GAME;
         return;
     }
     if (is_in(cursor, Rectangles.button.leaderboard))
     {
-        printf("Click leaderboard\n");
         *pSelectedMenu = SECTION_SCORE;
         return;
     }
     if (is_in(cursor, Rectangles.button.about))
     {
-        printf("Click about\n");
         *pSelectedMenu = SECTION_ABOUT;
         return;
     }
     if (is_in(cursor, Rectangles.button.leave))
     {
-        printf("Click leave\n");
         *pSelectedMenu = SECTION_EXIT;
         return;
     }
 }
+
 
 void leaderboardClickHandler(Containers Rectangles, Point cursor, GameStatusVar *pGameStatus)
 {
@@ -313,6 +309,7 @@ void leaderboardClickHandler(Containers Rectangles, Point cursor, GameStatusVar 
         if (pGameStatus->isGameJustEnded)
         {
             printf("Click Replay\n");
+
             pGameStatus->selectedMenu = SECTION_NEW_GAME;
             return;
         }
@@ -349,7 +346,6 @@ void newGameClickHandler(Containers Rectangles, Point cursor, GameStatusVar *pGa
 
     if (is_in(cursor, Rectangles.button.playerVSia))
     {
-        printf("Click PvBOT\n");
         pGameStatus->gameMode = GAME_MODE_PVBOT;
         pGameStatus->selectedMenu = SECTION_NAME_FORM1;
         P2->isBot = 1;
@@ -357,7 +353,6 @@ void newGameClickHandler(Containers Rectangles, Point cursor, GameStatusVar *pGa
     }
     if (is_in(cursor, Rectangles.button.pvp))
     {
-        printf("Click PvP\n");
         pGameStatus->gameMode = GAME_MODE_PVP;
         pGameStatus->selectedMenu = SECTION_NAME_FORM1;
         P2->isBot = 0;
@@ -366,10 +361,12 @@ void newGameClickHandler(Containers Rectangles, Point cursor, GameStatusVar *pGa
     homeClickHandler(Rectangles, cursor, &pGameStatus->selectedMenu);
 }
 
+
 void nameFormClickHandler(Containers Rectangles, Point cursor, GameStatusVar *pGameStatus)
 {
     homeClickHandler(Rectangles, cursor, &pGameStatus->selectedMenu);
 }
+
 
 void addLetterToPseudo(PlayerInfo *Player, const char *letter)
 {
@@ -383,7 +380,6 @@ void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, Pl
     {
         if (is_in(cursor, Rectangles.awale.p1.seeds[i]))
         {
-            printf("Click\n");
             if (pGameStatus->playerTurn == 1)
             {
                 pGameStatus->selectedHole = i + 1;
@@ -392,7 +388,6 @@ void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, Pl
         }
         if (is_in(cursor, Rectangles.awale.p2.seeds[i]))
         {
-            printf("Click\n");
             if (pGameStatus->playerTurn == 2)
             {
                 pGameStatus->selectedHole = i + 1;
@@ -402,7 +397,7 @@ void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, Pl
     }
 }
 
-void guiClickHandler(Containers Rectangles, Point cursor, GameStatusVar *pGameStatus)
+void guiClickHandler(Containers Rectangles, Point cursor, GameStatusVar * pGameStatus)
 {
     switch (pGameStatus->selectedMenu)
     {
