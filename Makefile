@@ -41,3 +41,4 @@ utilities.o: utilities.c utilities.h
 
 clean:
 	rm -rf build
+	rm -rf bin

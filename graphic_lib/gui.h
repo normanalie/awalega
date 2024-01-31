@@ -23,6 +23,8 @@ void showReplayButton(Images Images, Containers Rectangles);
 void volumeButtonClickHandler(Containers Rectangles, Point cursor, GameStatusVar *pGameStatus);
 void homeClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu);
 void leaderboardClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu);
+void newGameClickHandler(Containers Rectangles, Point cursor, GameStatusVar * pGameStatus, PlayerInfo * P2);
+void addLetterToPseudo(PlayerInfo * Player, const char * letter);
 void inGameClickHandler(Containers Rectangles, Point cursor, PlayerInfo *pP1, PlayerInfo *pP2, GameStatusVar *pGameStatus);
 void aboutClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu, int *pCurrentPage);
 void menuClickHandler(Containers Rectangles, Point cursor, int *pSelectedMenu);

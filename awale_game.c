@@ -53,8 +53,10 @@ void initPlayers(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar GameStatus)
         P2->seeds[i] = SEEDS_PER_HOLE;
     }
 
+    memset(P1->name, 0, NAME_MAX_LEN);
     P1->harvestedSeeds = 0;
     P1->moves = 0;
+    memset(P2->name, 0, NAME_MAX_LEN);
     P2->harvestedSeeds = 0;
     P2->moves = 0;
 
@@ -460,7 +462,7 @@ void playMove(PlayerInfo *P1, PlayerInfo *P2, GameStatusVar *GameStatus)
 
     if (!isActionValid(*pCurrentPlayer, *GameStatus))
     {
-        return; // GameStatus->playerTurn;
+        return;
     }
 
     // Attendre quelques instants pour donner le temps à J1 de voir le résultat lorsqu'il joue contre le bot
